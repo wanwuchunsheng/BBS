@@ -1,0 +1,28 @@
+package com.bbs.service.sys;
+
+import java.util.List;
+
+import com.bbs.model.sys.SysResourceInfo;
+import com.bbs.model.sys.SysUserInfo;
+import com.ibm.framework.dal.pagination.Pagination;
+import com.ibm.framework.dal.pagination.PaginationResult;
+
+public interface ISysUserService {
+
+	//验证用户
+	SysUserInfo verifyUser(SysUserInfo bean);
+    //查询资源
+	List<SysResourceInfo> querySysResource(SysUserInfo bean);
+    //查询用户
+	PaginationResult<List<SysUserInfo>> querySysUserAll(SysUserInfo userInfo,
+			Pagination pagination);
+    //查询用户
+	SysUserInfo querySysUserById(SysUserInfo vo);
+    //添加
+	void addUserById(SysUserInfo vo);
+	//修改
+	void updateUserById(SysUserInfo vo);
+	//删除用户
+	void deleteUSerById(String[] str);
+
+}

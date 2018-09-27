@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="user">
+    
+   <!--  HD 用户登录验证  -->
+   <sql id="verifyUser">
+        <![CDATA[
+           select * from sys_user where uname=:uname and upwd=:upwd and del=0
+        ]]>
+    </sql>
+    
+    <!-- 查询左侧菜单 -->
+    <sql id="querySysResource">
+        <![CDATA[
+            select * from sys_resource where del=0 order by seq asc
+        ]]>
+    </sql>
+    
+    <!-- 查询所有资源 -->
+    <sql id="querySysResourceAll">
+        <![CDATA[
+            select * from sys_user where del=0 
+            <#if dpnum?exists && dpnum!=""> AND dpnum= :dpnum </#if>
+            <#if uname?exists && uname!=""> AND uname like concat('%',:uname,'%')  </#if>
+            <#if phone?exists && phone!=""> AND phone like concat('%',:phone,'%')  </#if>
+        ]]>
+    </sql>
+    
+    <!-- 用户管理-用户查询 -->
+    <sql id="querySysUserById">
+        <![CDATA[
+            select * from sys_user where del=0 
+            <#if id?exists && id!=""> AND id= :id </#if>
+        ]]>
+    </sql>
+    
+    
+     <!-- 用户管理-删除 -->
+    <sql id="deleteUSerById">
+        <![CDATA[
+            delete from sys_user where id=:id and id not in (1)
+        ]]>
+    </sql>
+    
+ 
+    
+</sqlMap>
+
+
+
