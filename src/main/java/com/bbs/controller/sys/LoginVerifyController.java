@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bbs.model.sys.SysUserInfo;
 import com.bbs.service.sys.ISysUserService;
 /**
- * 功能说明：页面登录
- *    用户相关信息
+ * 功能说明：web_data 进入后台登陆页面、登陆验证
  * @author wch
  * */
 @Controller
@@ -25,15 +24,6 @@ public class LoginVerifyController {
 	@Autowired
 	ISysUserService sysUserService;
 
-	/**
-	 * 说明：进入登录页面
-	 * @author Administrator
-	 * */
-	@RequestMapping("main")
-	public String gotoLoginPage(String url){
-		
-		return "/web_data/main/"+url;
-	}
 	
 	/**
 	 * 说明：进入登录页面
@@ -43,6 +33,16 @@ public class LoginVerifyController {
 	public String gotoLoginPage(){
 		
 		return "/web_data/main/login";
+	}
+	
+	/**
+	 * 说明：进入首页
+	 * @author Administrator
+	 * */
+	@RequestMapping("main")
+	public String gotoLoginPage(String url){
+		
+		return "/web_data/main/"+url;
 	}
 	
 	/**

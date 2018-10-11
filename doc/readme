@@ -1,4 +1,12 @@
-
+  框架：SSM  spring+springMVC4.0+mybatis3.0+freemark/JSP + bootstrap  +  maven3.0
+ 
+  运行环境 eclipse + JDK1.7 + tomcat7
+  
+  http://IP:端口/BBS/  用的是rest请求
+  
+  系统用户名密码： admin/admin
+ 
+  GIT地址：https://github.com/wanwuchunsheng/BBS.git
 
 
 --------前端显示

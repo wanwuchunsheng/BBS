@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 前端Index页面
+ * web_view:前端首页
  * 
  * */
 @Controller
