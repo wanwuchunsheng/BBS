@@ -21,7 +21,7 @@ public class UserInterceptor implements HandlerInterceptor{
 			HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session=request.getSession();
 		SysUserInfo userInfo= (SysUserInfo) session.getAttribute("userInfo");
-		//System.out.println("进入拦截器:"+userInfo);
+		System.out.println("进入拦截器:"+userInfo);
 		if(userInfo!=null){
 			return true;
 		}

@@ -13,9 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <script>
    //跳转后端
-   //window.location.href="${path}/login/index";
+   window.location.href="${path}/login/index";
    //跳转前端
-   window.location.href="${path}/view/index";
+   //window.location.href="${path}/view/index";
 </script>
 <body>
 </body>
