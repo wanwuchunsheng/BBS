@@ -63,14 +63,14 @@
   </welcome-file-list>
   <error-page>
     <error-code>404</error-code>
-    <location>/BBS/login/error?url=/web_data/error/ERROR404</location>
+    <location>/login/error?url=/web_data/error/404</location>
   </error-page>
   <error-page>
     <error-code>405</error-code>
-    <location>/BBS/login/error?url=/web_data/error/ERROR405</location>
+    <location>/login/error?url=/web_data/error/405</location>
   </error-page>
   <error-page>
     <error-code>500</error-code>
-    <location>/BBS/login/error?url=/web_data/error/ERROR500</location>
+    <location>/login/error?url=/web_data/error/500</location>
   </error-page>
 </web-app>
