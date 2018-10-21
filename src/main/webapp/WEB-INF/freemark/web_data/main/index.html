@@ -387,7 +387,7 @@
          <!-- END TOP NAVIGATION BAR -->
 		<!-- START 右边内容 -->
 		<div class="page-content">
-		    <iframe id="mainFrame" name="mainFrame"  src="${futRoot}/login/main?url=welcome" frameborder="0" style="padding: 0px; width: 100%; height: 600px;"></iframe>
+		    <iframe id="mainFrame" name="mainFrame"  src="${futRoot}/login/main?url=welcome" frameborder="0" style="padding: 0px; width: 100%; height: 1000px;"></iframe>
 		</div>
 		<!-- END 右边内容 -->
 		</div>
@@ -431,7 +431,7 @@
 				            <#if srl.pid?if_exists==0 && srl.typ?if_exists==0 > <!-- 判断功能,有些功能没有内部菜单-->
 			                    <li class="last ">
 									<a href="${futRoot}/${srl.url?if_exists}" target="mainFrame">
-									<i class="${srl.iconCls}"></i> 
+									<i class="${srl.iconCls?if_exists}"></i> 
 									<span class="title">${srl.text?if_exists}</span>			
 									</a>				
 								</li>
