@@ -1,33 +1,34 @@
-package com.bbs.model.bbs;
+package com.bbs.model.view;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BBSPost {
-    private Integer id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+/**
+ * 子版块
+ * 
+ * */
+@Entity(name = "bbs_small_board")
+public class BBSSmallBoard implements Serializable{
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer bbId;
 
-    private Integer smboId;
+    private Integer num;
 
     private String title;
 
-    private Integer typ;
-
     private Integer contPreview;
-
-    private Integer contReply;
-
-    private Integer contReward;
-
-    private Integer contTop;
-
-    private Integer contRec;
-
-    private Integer contGood;
-
-    private Integer contBad;
-
-    private Integer contStatus;
 
     private String remark;
 
@@ -44,11 +45,13 @@ public class BBSPost {
     private Date updateDate;
 
     private String sbAdmin;
+    private String imgPath;
 
     private Integer del;
 
-    private String content;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
@@ -56,7 +59,7 @@ public class BBSPost {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @Column(name = "bb_id")
     public Integer getBbId() {
         return bbId;
     }
@@ -64,15 +67,15 @@ public class BBSPost {
     public void setBbId(Integer bbId) {
         this.bbId = bbId;
     }
-
-    public Integer getSmboId() {
-        return smboId;
+    @Column(name = "num")
+    public Integer getNum() {
+        return num;
     }
 
-    public void setSmboId(Integer smboId) {
-        this.smboId = smboId;
+    public void setNum(Integer num) {
+        this.num = num;
     }
-
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -80,15 +83,7 @@ public class BBSPost {
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
     }
-
-    public Integer getTyp() {
-        return typ;
-    }
-
-    public void setTyp(Integer typ) {
-        this.typ = typ;
-    }
-
+    @Column(name = "cont_preview")
     public Integer getContPreview() {
         return contPreview;
     }
@@ -96,71 +91,16 @@ public class BBSPost {
     public void setContPreview(Integer contPreview) {
         this.contPreview = contPreview;
     }
-
-    public Integer getContReply() {
-        return contReply;
-    }
-
-    public void setContReply(Integer contReply) {
-        this.contReply = contReply;
-    }
-
-    public Integer getContReward() {
-        return contReward;
-    }
-
-    public void setContReward(Integer contReward) {
-        this.contReward = contReward;
-    }
-
-    public Integer getContTop() {
-        return contTop;
-    }
-
-    public void setContTop(Integer contTop) {
-        this.contTop = contTop;
-    }
-
-    public Integer getContRec() {
-        return contRec;
-    }
-
-    public void setContRec(Integer contRec) {
-        this.contRec = contRec;
-    }
-
-    public Integer getContGood() {
-        return contGood;
-    }
-
-    public void setContGood(Integer contGood) {
-        this.contGood = contGood;
-    }
-
-    public Integer getContBad() {
-        return contBad;
-    }
-
-    public void setContBad(Integer contBad) {
-        this.contBad = contBad;
-    }
-
-    public Integer getContStatus() {
-        return contStatus;
-    }
-
-    public void setContStatus(Integer contStatus) {
-        this.contStatus = contStatus;
-    }
-
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
-
+    
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
 
+    @Column(name = "create_user_id")
     public Integer getCreateUserId() {
         return createUserId;
     }
@@ -168,7 +108,7 @@ public class BBSPost {
     public void setCreateUserId(Integer createUserId) {
         this.createUserId = createUserId;
     }
-
+    @Column(name = "create_user_name")
     public String getCreateUserName() {
         return createUserName;
     }
@@ -176,7 +116,7 @@ public class BBSPost {
     public void setCreateUserName(String createUserName) {
         this.createUserName = createUserName == null ? null : createUserName.trim();
     }
-
+    @Column(name = "create_date")
     public Date getCreateDate() {
         return createDate;
     }
@@ -184,7 +124,7 @@ public class BBSPost {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
+    @Column(name = "update_user_id")
     public Integer getUpdateUserId() {
         return updateUserId;
     }
@@ -192,7 +132,7 @@ public class BBSPost {
     public void setUpdateUserId(Integer updateUserId) {
         this.updateUserId = updateUserId;
     }
-
+    @Column(name = "update_user_name")
     public String getUpdateUserName() {
         return updateUserName;
     }
@@ -200,7 +140,7 @@ public class BBSPost {
     public void setUpdateUserName(String updateUserName) {
         this.updateUserName = updateUserName == null ? null : updateUserName.trim();
     }
-
+    @Column(name = "update_date")
     public Date getUpdateDate() {
         return updateDate;
     }
@@ -208,15 +148,7 @@ public class BBSPost {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
-
-    public String getSbAdmin() {
-        return sbAdmin;
-    }
-
-    public void setSbAdmin(String sbAdmin) {
-        this.sbAdmin = sbAdmin == null ? null : sbAdmin.trim();
-    }
-
+    @Column(name = "del")
     public Integer getDel() {
         return del;
     }
@@ -225,11 +157,23 @@ public class BBSPost {
         this.del = del;
     }
 
-    public String getContent() {
-        return content;
-    }
+    @Column(name = "sb_admin")
+	public String getSbAdmin() {
+		return sbAdmin;
+	}
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
+	public void setSbAdmin(String sbAdmin) {
+		this.sbAdmin = sbAdmin;
+	}
+	@Column(name = "img_path")
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+    
+    
+    
 }

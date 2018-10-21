@@ -1,4 +1,4 @@
-package com.bbs.model.bbs;
+package com.bbs.model.view;
 
 public class BBSReply {
     private Integer id;

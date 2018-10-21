@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="bbsSmallBoard">
+    
+   <!--  查询子版块  -->
+   <sql id="queryBBSSmallBoardAll">
+        <![CDATA[
+           SELECT
+				ID ,
+				 BB_ID ,
+				 NUM ,
+				 TITLE ,
+				 CONT_PREVIEW ,
+				 IMG_PATH ,
+				 REMARK ,
+				 CREATE_USER_ID ,
+				 CREATE_USER_NAME ,
+				 CREATE_DATE ,
+				 UPDATE_USER_ID ,
+				 UPDATE_USER_NAME ,
+				 UPDATE_DATE ,
+				 SB_ADMIN ,
+				 DEL 
+			FROM
+				bbs_small_board
+			WHERE
+				del = 0
+			ORDER BY
+				num ASC 
+        ]]>
+    </sql>
+    
+    
+    
+ 
+    
+</sqlMap>
+
+
+

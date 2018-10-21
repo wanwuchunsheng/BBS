@@ -21,7 +21,7 @@ import com.bbs.service.sys.ISysUserService;
 import com.ibm.framework.dal.pagination.Pagination;
 import com.ibm.framework.dal.pagination.PaginationResult;
 /**
- * 用户管理
+ * web-data用户管理
  * 
  * */
 @Controller

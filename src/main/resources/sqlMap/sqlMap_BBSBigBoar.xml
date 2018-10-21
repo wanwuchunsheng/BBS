@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="bbsBigBoard">
+    
+   <!-- 查询父版块  -->
+   <sql id="queryBBSBigBoardAll">
+        <![CDATA[
+           select 
+             ID ,
+			 NUM ,
+			 TITLE ,
+			 REMARK ,
+			 CREATE_USER_ID ,
+			 CREATE_USER_NAME ,
+			 CREATE_DATE ,
+			 UPDATE_USER_ID ,
+			 UPDATE_USER_NAME ,
+			 UPDATE_DATE ,
+			 DEL 
+           from bbs_big_board 
+           where del=0 order by num asc
+        ]]>
+    </sql>
+    
+    
+    
+ 
+    
+</sqlMap>
+
+
+

@@ -1,4 +1,4 @@
-package com.bbs.model.bbs;
+package com.bbs.model.view;
 
 import java.util.Date;
 

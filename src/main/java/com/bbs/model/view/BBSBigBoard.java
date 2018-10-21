@@ -1,18 +1,30 @@
-package com.bbs.model.bbs;
+package com.bbs.model.view;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BBSSmallBoard {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+/**
+ * 父版块
+ * 
+ * */
+@Entity(name = "bbs_big_board")
+public class BBSBigBoard implements Serializable{
 	
-    private Integer id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private Integer bbId;
-
+	private Integer id;
+	
     private Integer num;
 
     private String title;
-
-    private Integer contPreview;
 
     private String remark;
 
@@ -28,10 +40,11 @@ public class BBSSmallBoard {
 
     private Date updateDate;
 
-    private String sbAdmin;
-
     private Integer del;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
@@ -39,15 +52,7 @@ public class BBSSmallBoard {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public Integer getBbId() {
-        return bbId;
-    }
-
-    public void setBbId(Integer bbId) {
-        this.bbId = bbId;
-    }
-
+    @Column(name = "num")
     public Integer getNum() {
         return num;
     }
@@ -55,7 +60,7 @@ public class BBSSmallBoard {
     public void setNum(Integer num) {
         this.num = num;
     }
-
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -63,15 +68,7 @@ public class BBSSmallBoard {
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
     }
-
-    public Integer getContPreview() {
-        return contPreview;
-    }
-
-    public void setContPreview(Integer contPreview) {
-        this.contPreview = contPreview;
-    }
-
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -79,7 +76,7 @@ public class BBSSmallBoard {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
-
+    @Column(name = "create_user_id")
     public Integer getCreateUserId() {
         return createUserId;
     }
@@ -87,7 +84,7 @@ public class BBSSmallBoard {
     public void setCreateUserId(Integer createUserId) {
         this.createUserId = createUserId;
     }
-
+    @Column(name = "create_user_name")
     public String getCreateUserName() {
         return createUserName;
     }
@@ -95,7 +92,7 @@ public class BBSSmallBoard {
     public void setCreateUserName(String createUserName) {
         this.createUserName = createUserName == null ? null : createUserName.trim();
     }
-
+    @Column(name = "create_date")
     public Date getCreateDate() {
         return createDate;
     }
@@ -103,7 +100,7 @@ public class BBSSmallBoard {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
+    @Column(name = "update_user_id")
     public Integer getUpdateUserId() {
         return updateUserId;
     }
@@ -111,7 +108,7 @@ public class BBSSmallBoard {
     public void setUpdateUserId(Integer updateUserId) {
         this.updateUserId = updateUserId;
     }
-
+    @Column(name = "update_user_name")
     public String getUpdateUserName() {
         return updateUserName;
     }
@@ -119,7 +116,7 @@ public class BBSSmallBoard {
     public void setUpdateUserName(String updateUserName) {
         this.updateUserName = updateUserName == null ? null : updateUserName.trim();
     }
-
+    @Column(name = "update_date")
     public Date getUpdateDate() {
         return updateDate;
     }
@@ -127,15 +124,7 @@ public class BBSSmallBoard {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
-
-    public String getSbAdmin() {
-        return sbAdmin;
-    }
-
-    public void setSbAdmin(String sbAdmin) {
-        this.sbAdmin = sbAdmin == null ? null : sbAdmin.trim();
-    }
-
+    @Column(name = "del")
     public Integer getDel() {
         return del;
     }

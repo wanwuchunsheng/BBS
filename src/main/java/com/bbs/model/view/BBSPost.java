@@ -1,13 +1,33 @@
-package com.bbs.model.bbs;
+package com.bbs.model.view;
 
 import java.util.Date;
 
-public class BBSPostCommend {
+public class BBSPost {
     private Integer id;
 
-    private String code;
+    private Integer bbId;
+
+    private Integer smboId;
 
     private String title;
+
+    private Integer typ;
+
+    private Integer contPreview;
+
+    private Integer contReply;
+
+    private Integer contReward;
+
+    private Integer contTop;
+
+    private Integer contRec;
+
+    private Integer contGood;
+
+    private Integer contBad;
+
+    private Integer contStatus;
 
     private String remark;
 
@@ -27,6 +47,8 @@ public class BBSPostCommend {
 
     private Integer del;
 
+    private String content;
+
     public Integer getId() {
         return id;
     }
@@ -35,12 +57,20 @@ public class BBSPostCommend {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public Integer getBbId() {
+        return bbId;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setBbId(Integer bbId) {
+        this.bbId = bbId;
+    }
+
+    public Integer getSmboId() {
+        return smboId;
+    }
+
+    public void setSmboId(Integer smboId) {
+        this.smboId = smboId;
     }
 
     public String getTitle() {
@@ -49,6 +79,78 @@ public class BBSPostCommend {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public Integer getTyp() {
+        return typ;
+    }
+
+    public void setTyp(Integer typ) {
+        this.typ = typ;
+    }
+
+    public Integer getContPreview() {
+        return contPreview;
+    }
+
+    public void setContPreview(Integer contPreview) {
+        this.contPreview = contPreview;
+    }
+
+    public Integer getContReply() {
+        return contReply;
+    }
+
+    public void setContReply(Integer contReply) {
+        this.contReply = contReply;
+    }
+
+    public Integer getContReward() {
+        return contReward;
+    }
+
+    public void setContReward(Integer contReward) {
+        this.contReward = contReward;
+    }
+
+    public Integer getContTop() {
+        return contTop;
+    }
+
+    public void setContTop(Integer contTop) {
+        this.contTop = contTop;
+    }
+
+    public Integer getContRec() {
+        return contRec;
+    }
+
+    public void setContRec(Integer contRec) {
+        this.contRec = contRec;
+    }
+
+    public Integer getContGood() {
+        return contGood;
+    }
+
+    public void setContGood(Integer contGood) {
+        this.contGood = contGood;
+    }
+
+    public Integer getContBad() {
+        return contBad;
+    }
+
+    public void setContBad(Integer contBad) {
+        this.contBad = contBad;
+    }
+
+    public Integer getContStatus() {
+        return contStatus;
+    }
+
+    public void setContStatus(Integer contStatus) {
+        this.contStatus = contStatus;
     }
 
     public String getRemark() {
@@ -121,5 +223,13 @@ public class BBSPostCommend {
 
     public void setDel(Integer del) {
         this.del = del;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 }

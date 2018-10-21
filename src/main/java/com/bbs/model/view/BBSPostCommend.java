@@ -1,12 +1,11 @@
-package com.bbs.model.bbs;
+package com.bbs.model.view;
 
 import java.util.Date;
 
-public class BBSBigBoard {
-	
+public class BBSPostCommend {
     private Integer id;
 
-    private Integer num;
+    private String code;
 
     private String title;
 
@@ -24,6 +23,8 @@ public class BBSBigBoard {
 
     private Date updateDate;
 
+    private String sbAdmin;
+
     private Integer del;
 
     public Integer getId() {
@@ -34,12 +35,12 @@ public class BBSBigBoard {
         this.id = id;
     }
 
-    public Integer getNum() {
-        return num;
+    public String getCode() {
+        return code;
     }
 
-    public void setNum(Integer num) {
-        this.num = num;
+    public void setCode(String code) {
+        this.code = code == null ? null : code.trim();
     }
 
     public String getTitle() {
@@ -104,6 +105,14 @@ public class BBSBigBoard {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public String getSbAdmin() {
+        return sbAdmin;
+    }
+
+    public void setSbAdmin(String sbAdmin) {
+        this.sbAdmin = sbAdmin == null ? null : sbAdmin.trim();
     }
 
     public Integer getDel() {
