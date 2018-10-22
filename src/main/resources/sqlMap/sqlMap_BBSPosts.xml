@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="bbsPosts">
+    
+   <!--  查询首页站内推荐  -->
+   <sql id="queryBBSPostsAll">
+        <![CDATA[
+           SELECT
+				a.ID,
+				a.BB_ID,
+				a.SMBO_ID,
+				a.TITLE,
+				a.TYP,
+				a.CONTENT,
+				a.CONT_PREVIEW,
+				a.CONT_REPLY,
+				a.CONT_REWARD,
+				a.CONT_TOP,
+				a.CONT_REC,
+				a.CONT_GOOD,
+				a.CONT_BAD,
+				a.CONT_STATUS,
+				a.REMARK,
+				a.CREATE_USER_ID,
+				a.CREATE_USER_NAME,
+				a.CREATE_DATE,
+				a.UPDATE_USER_ID,
+				a.UPDATE_USER_NAME,
+				a.UPDATE_DATE,
+				a.DEL,
+			  b.PHOTO_PATH as imgPath,
+			  b.security_level as securityLevel,
+			  b.nice_name as niceName
+			FROM
+				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
+			WHERE
+				a.del = 0 and b.del=0
+			AND a.cont_rec = 1
+			ORDER BY
+				a.UPDATE_DATE DESC  limit 10
+        ]]>
+    </sql>
+    
+    <!--  查询首页站内推荐  -->
+   <sql id="queryBBSPostsByTyp">
+        <![CDATA[
+           SELECT
+				a.ID,
+				a.BB_ID,
+				a.SMBO_ID,
+				a.TITLE,
+				a.TYP,
+				a.CONTENT,
+				a.CONT_PREVIEW,
+				a.CONT_REPLY,
+				a.CONT_REWARD,
+				a.CONT_TOP,
+				a.CONT_REC,
+				a.CONT_GOOD,
+				a.CONT_BAD,
+				a.CONT_STATUS,
+				a.REMARK,
+				a.CREATE_USER_ID,
+				a.CREATE_USER_NAME,
+				a.CREATE_DATE,
+				a.UPDATE_USER_ID,
+				a.UPDATE_USER_NAME,
+				a.UPDATE_DATE,
+				a.DEL,
+			  b.PHOTO_PATH as imgPath,
+			  b.security_level as securityLevel,
+			  b.nice_name as niceName
+			FROM
+				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
+			WHERE
+				a.del = 0 and b.del=0
+			AND a.typ = 5
+			ORDER BY
+				a.UPDATE_DATE DESC  limit 6
+        ]]>
+    </sql>
+    
+    <!--  查看帖子详细  -->
+   <sql id="queryBBSPostsObjById">
+        <![CDATA[
+          SELECT
+				a.ID,
+				a.BB_ID,
+				a.SMBO_ID,
+				a.TITLE,
+				a.TYP,
+				a.CONTENT,
+				a.CONT_PREVIEW,
+				a.CONT_REPLY,
+				a.CONT_REWARD,
+				a.CONT_TOP,
+				a.CONT_REC,
+				a.CONT_GOOD,
+				a.CONT_BAD,
+				a.CONT_STATUS,
+				a.REMARK,
+				a.CREATE_USER_ID,
+				a.CREATE_USER_NAME,
+				a.CREATE_DATE,
+				a.UPDATE_USER_ID,
+				a.UPDATE_USER_NAME,
+				a.UPDATE_DATE,
+				a.DEL,
+				b.PHOTO_PATH as imgPath,
+				b.security_level as securityLevel,
+				b.nice_name as niceName,
+		        (select title from bbs_big_board where del=0 and id=a.bb_id limit 1) as bbName,
+		        (select title from bbs_small_board where del=0 and id=a.bb_id limit 1) as smboName
+			FROM
+				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id 
+			WHERE
+				a.del = 0 and b.del=0 and a.id=:id
+        ]]>
+    </sql>
+    
+ 
+   <!-- 根据子版块ID，查询综合或者子版块  -->
+   <sql id="queryBBSPostsAllOrBbId">
+        <![CDATA[
+           SELECT
+				a.ID,
+				a.BB_ID,
+				a.SMBO_ID,
+				a.TITLE,
+				a.TYP,
+				a.CONTENT,
+				a.CONT_PREVIEW,
+				a.CONT_REPLY,
+				a.CONT_REWARD,
+				a.CONT_TOP,
+				a.CONT_REC,
+				a.CONT_GOOD,
+				a.CONT_BAD,
+				a.CONT_STATUS,
+				a.REMARK,
+				a.CREATE_USER_ID,
+				a.CREATE_USER_NAME,
+				a.CREATE_DATE,
+				a.UPDATE_USER_ID,
+				a.UPDATE_USER_NAME,
+				a.UPDATE_DATE,
+				a.DEL,
+			  b.PHOTO_PATH as imgPath,
+			  b.security_level as securityLevel,
+			  b.nice_name as niceName,
+			  (select title from bbs_big_board where del=0 and id=a.bb_id limit 1) as bbName,
+		      (select title from bbs_small_board where del=0 and id=a.bb_id limit 1) as smboName
+			FROM
+				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
+			WHERE
+				a.del = 0 and b.del=0
+			    <#if id?exists && id!=""> AND a.smbo_id=:id  </#if>
+			ORDER BY
+				a.UPDATE_DATE DESC 
+        ]]>
+    </sql>
+    
+</sqlMap>
+
+
+

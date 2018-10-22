@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbs.model.view.BBSBigBoard;
+import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.service.view.IIndexService;
 import com.ibm.framework.dal.client.IPaginationDalClient;
@@ -38,6 +39,26 @@ public class IndexServiceImpl implements IIndexService{
 	@Override
 	public List<BBSSmallBoard> querySmallBoardAll() {
 		return dalClient.queryForList("bbsSmallBoard.queryBBSSmallBoardAll", null, BBSSmallBoard.class);
+	}
+	
+	/**
+	 * 说明：查询主页-站内推荐
+	 * @dateTime 2018年10月21日22:30:52
+	 * @author wch
+	 * */
+	@Override
+	public List<BBSPosts> queryPostsAll() {
+		return dalClient.queryForList("bbsPosts.queryBBSPostsAll", null, BBSPosts.class);
+	}
+	
+	/**
+	 * 说明：查询主页-站内新闻
+	 * @dateTime 2018年10月21日22:30:52
+	 * @author wch
+	 * */
+	@Override
+	public List<BBSPosts> queryPostsNews() {
+		return dalClient.queryForList("bbsPosts.queryBBSPostsByTyp", null, BBSPosts.class);
 	}
     
 }

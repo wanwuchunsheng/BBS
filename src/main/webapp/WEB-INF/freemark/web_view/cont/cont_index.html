@@ -4,13 +4,15 @@
 <meta charset="utf-8" />
 <title>海伦社区</title>
 <meta name="keywords" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 "/>
-<meta name="description" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 "/>
-<meta name="author" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 " />
-<meta name="baidu-site-verification" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 " />
+<meta name="description" content="#"/>
+<meta name="author" content="#" />
+<meta name="baidu-site-verification" content="aFLsAOUOUk" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
 <script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
+<!-- layui 2.0 -->
+<script src="${resRoot}/view/js/layui.all.js" ></script>
 
 <!-- icon-font -->
 <link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
@@ -31,26 +33,24 @@
 	  width:140px;
 	  height:40px;
 	  margin-top:1px;
-   }
-   .nav{
-      margin-top:4px; 
-   }
+	  }
+   .nav{margin-top:4px; }
    .flist-avatar-a{
       position: absolute; left: 15px; top: 10px; 
    }
-   .fly-list-avatar-img{
-      border-radius:50%;width:48px;height: 48px;
-   }
+   .fly-list-avatar-img{border-radius:50%;width:48px;height: 48px;}
    .cont-more{
       text-align:center; padding:0px 0px 14px 0px; 
    }
    .fly-list-li-p{
-      margin-top:3px;font-size:14px;
+     margin-top:3px;
+     font-size:14px;
    }
    .layui-badge-ico{
-      margin-top:3px;margin-right:4px;
+     margin-top:3px;
+     margin-right:4px;
    }
-   
+   .iconfont-color{color: gray;}
 </style>
 </head>
 
@@ -62,16 +62,17 @@
 		<a class="logo"  href="#" title="海伦社区">
 		  <img class="logo-img" src="${resultImgPath}/bbs/bbs_icon/logo.png"  />
 		</a>
+       
 		<div class="nav" >
 			<ul>
 			<li>
-			<a href="${futRoot}/view/index" class="nav-this">
+			<a href="${futRoot}/view/index" <#if (bbsSmallBoard)??> class="nav-this" </#if> >
 				<i class="iconfont icon-desktop"></i>首页
 			</a>
 			</li>
 			
 			<li>
-			<a href="${futRoot}/cont/index" class="">
+			<a href="${futRoot}/cont/index" <#if !(bbsSmallBoard)??> class="nav-this" </#if> >
 				<i class="iconfont  icon-leaf"></i>综合区
 			</a>
 			</li>
@@ -95,7 +96,7 @@
 				<a href="#">注册</a>
 			</span> 
 			<p class="out-login">
-			    <a href="#" class="iconfont icon-comments" title="微信登录"></a>
+			    <a href="#" class="iconfont icon-comments-alt" title="微信登录"></a>
 				<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
 			</p> 
 		</div>	
@@ -109,60 +110,59 @@
 <!-- 左边内容 -->
 <div class="wrap">
 	<div class="content">
-		
-        <!-- 幻灯片 -->
-		<div class="layui-carousel fly-panel index-banner" id="index-banner">
-			<div carousel-item>
-				<div>
-				   <a href="#" target="_blank" title="海伦国际"> <img  src="${resultImgPath}/bbs/bbs_img/1516285551.jpg"  /> </a>
-				</div>
-                <div>
-				   <a href="#" target="_blank" title="绿色生活倡导者"> <img  src="${resultImgPath}/bbs/bbs_img/1516285759.jpg"  /> </a>
-				</div>
-                <div>
-				   <a href="#" target="_blank" title="美食"> <img  src="${resultImgPath}/bbs/bbs_img/1516080895.jpg"  /> </a>
-				</div>			
-            </div>
+        <div class="fly-panel">
+			<h3 class="fly-panel-title">
+				<span>
+				   <i class="iconfont-color icon-home"></i>
+				   <#if (bbsSmallBoard)??>
+                      <a href="javascript:;"> 首页  <i class="fly-mid"></i>${bbsSmallBoard.title?if_exists}</a>
+                   <#else>
+                      <a href="javascript:;">综合区</a>
+                   </#if>
+                </span>
+				<a href="#" class="fly-lr layui-btn layui-btn-normal fly-title-btn">
+					 发表新帖
+				</a>			
+		   </h3>
 		</div>
-	    <!-- end -->
+		<div class="fly-tab" >
+			<div class="layui-tab layui-tab-brief">
+				<ul class="layui-tab-title">
+					<li class="layui-this">
+						<a href="#">全部帖</a>
+					</li>
+					<li class="">
+						<a href="#">出售</a>
+					</li>
+					<li class="">
+						<a href="#">求购</a>
+					</li>
+					<li class="">
+						<a href="#">出租</a>
+					</li>
+					<li class="">
+						<a href="#">求租</a>
+					</li>
+					<li class="">
+						<a href="#">周边</a>
+					</li>
+				</ul>
+			</div> 
+		</div>
         
-        <!-- 大分类 -->
-        <#if (bigBoardAll?size > 0)>
-        <#list bigBoardAll as big>
-			<div class="fly-panel near-rank" id="discuzList">
-				<h3 class="fly-panel-title">${big.title?if_exists}</h3> 
-				<dl>
-				<#if (smallBoardAll?size > 0)>
-	              <#list smallBoardAll as small>
-	                 <#if big.id==small.bbId >
-						<dd>
-							<a href="${futRoot}/cont/index?id=${small.id?if_exists}">
-								<img class="avatar" src="${resultImgPath}/bbs/bbs_icon/${small.imgPath?if_exists}" />
-								<cite>${small.title?if_exists}</cite>
-								<i>${small.remark?if_exists}</i> 
-							</a>
-						</dd>
-					 </#if>
-	              </#list>
-	            </#if>	
-	            </dl>
-			</div>
-		</#list>
-        </#if>
-        <!-- end -->
+      
 		
         <!-- 综合发布 -->
 		<div class="fly-panel">
-				<h3 class="fly-panel-title">热门推荐 </h3> 
-				<ul class="fly-panel fly-list">  
-					<#if (spostsAll?size > 0)>
-		            <#list spostsAll as spt>          
+				<ul class="fly-panel fly-list">
+				    <#if (postsAll?size > 0)>
+		            <#list postsAll as spt>
 					<li class="fly-list-li">
-						<a href="javascript:;" class="flist-avatar-a" target="_blank">
+						<a href="#" class="flist-avatar-a" target="_blank">
 							<img class="avatar fly-list-avatar-img" src="${resultImgPath}/bbs/bbs_img/${spt.imgPath?if_exists}"  /> 
 						</a>
 						<h2 class="fly-tip">
-							<a href="${futRoot}/cont/detail?id=${spt.id?if_exists}&smboId=${spt.smboId?if_exists}" >
+							<a href="#" target="_blank">
 								${spt.title?if_exists}
 							</a>
 							<#if spt.contStatus==0>
@@ -194,11 +194,17 @@
 						</p>
 					</li>
 					</#list>
+					<br/>
+					<div class="cont-more" >
+				        <div class="pager page"></div>  
+						<span class="current">1</span>
+						<a class="num" href="#">2</a> 
+						<a class="next" href="#">下页</a>
+				    </div>
 	                </#if>
 			   </ul>
-			   <div class="cont-more">
-					<a  href="${futRoot}/cont/index" class="layui-btn layui-btn-big layui-btn-primary">更多信息在【综合区】预览</a>
-			   </div>
+			   
+			  
 	 </div>
      <!-- end -->
         
@@ -209,21 +215,12 @@
 
 <!-- 右边内容 -->
 <div class="edge">
-	<div class="fly-panel">
-		<div class="fly-panel-title">
-			站内新闻 
-		</div>
-		<ul class="fly-notice">
-			<#if (spostsNews?size > 0)>
-			<#list spostsNews as nw>  
-				<li>
-					<a href="#" target="_blank">${nw.title?if_exists}</a>
-				</li>
-			</#list>
-			</#if>
-         </ul>
-	</div>			
-    
+	
+    <div class="jie-add">
+		<a href="javascript:void();" class="layui-btn layui-btn-normal layui-btn-big">星期一</a>
+		<a href="javascript:layer.msg('尚未开放');" class="layui-btn layui-btn-big layui-btn-normal" style="margin-left: 10px;">签到</a>
+    </div>
+			
     <div class="fly-panel fly-link">
 		<h3 class="fly-panel-title">友情链接</h3> 
 		<dl>
@@ -254,7 +251,7 @@
     <div class="fly-panel fly-wailaa-adver">
         <div class="fly-wailaa-block">
             <img src="${resultImgPath}/bbs/bbs_icon/qrcode_qq.jpg" class="qrcode" style="max-width: 100%;" alt="layui">
-            <p style="position: relative; top: -10px; color: #666;">加入开发群</p>
+            <p style="position: relative; top: -10px; color: #666;">加入开发【QQ群】</p>
         </div>
     </div>
 
@@ -274,26 +271,7 @@
 </div>
 <!-- footer end -->
 
-<!-- layui 2.0 -->
-<script src="${resRoot}/view/js/layui.all.js" ></script>
 
-<script>
-//幻灯片
-layui.use('carousel', function(){
-  var carousel = layui.carousel;
-  //幻灯片 
-  carousel.render({
-    elem: '#index-banner'
-    ,index: 2
-    //,full: true
-    ,arrow: 'always'
-    //,autoplay: false
-    //,indicator: 'outside'
-    //,trigger: 'hover'
-	,width: '100%'
-  });
-});
-</script>
 
 
 

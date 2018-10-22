@@ -2,7 +2,18 @@ package com.bbs.model.view;
 
 import java.util.Date;
 
-public class BBSPost {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+/**
+ * 发帖实体bean
+ * 
+ * */
+@Entity(name = "bbs_posts")
+public class BBSPosts {
+	
     private Integer id;
 
     private Integer bbId;
@@ -48,7 +59,18 @@ public class BBSPost {
     private Integer del;
 
     private String content;
+    
+    //
+    private String imgPath;//用户头像路径
+    //
+    private Integer securityLevel;//用户级别  0-默认用户  1-官网认证
+    private String niceName; //昵称
+    private String bbName;//主版块名称
+    private String smboName;//子版块名称 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
@@ -57,6 +79,7 @@ public class BBSPost {
         this.id = id;
     }
 
+    @Column(name = "bb_id")
     public Integer getBbId() {
         return bbId;
     }
@@ -64,7 +87,7 @@ public class BBSPost {
     public void setBbId(Integer bbId) {
         this.bbId = bbId;
     }
-
+    @Column(name = "smbo_id")
     public Integer getSmboId() {
         return smboId;
     }
@@ -72,7 +95,7 @@ public class BBSPost {
     public void setSmboId(Integer smboId) {
         this.smboId = smboId;
     }
-
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -80,7 +103,7 @@ public class BBSPost {
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
     }
-
+    @Column(name = "typ")
     public Integer getTyp() {
         return typ;
     }
@@ -88,7 +111,7 @@ public class BBSPost {
     public void setTyp(Integer typ) {
         this.typ = typ;
     }
-
+    @Column(name = "cont_preview")
     public Integer getContPreview() {
         return contPreview;
     }
@@ -96,7 +119,7 @@ public class BBSPost {
     public void setContPreview(Integer contPreview) {
         this.contPreview = contPreview;
     }
-
+    @Column(name = "cont_reply")
     public Integer getContReply() {
         return contReply;
     }
@@ -104,7 +127,7 @@ public class BBSPost {
     public void setContReply(Integer contReply) {
         this.contReply = contReply;
     }
-
+    @Column(name = "cont_reward")
     public Integer getContReward() {
         return contReward;
     }
@@ -112,7 +135,7 @@ public class BBSPost {
     public void setContReward(Integer contReward) {
         this.contReward = contReward;
     }
-
+    @Column(name = "cont_top")
     public Integer getContTop() {
         return contTop;
     }
@@ -120,7 +143,7 @@ public class BBSPost {
     public void setContTop(Integer contTop) {
         this.contTop = contTop;
     }
-
+    @Column(name = "cont_rec")
     public Integer getContRec() {
         return contRec;
     }
@@ -128,7 +151,7 @@ public class BBSPost {
     public void setContRec(Integer contRec) {
         this.contRec = contRec;
     }
-
+    @Column(name = "cont_good")
     public Integer getContGood() {
         return contGood;
     }
@@ -136,7 +159,7 @@ public class BBSPost {
     public void setContGood(Integer contGood) {
         this.contGood = contGood;
     }
-
+    @Column(name = "cont_bad")
     public Integer getContBad() {
         return contBad;
     }
@@ -144,7 +167,7 @@ public class BBSPost {
     public void setContBad(Integer contBad) {
         this.contBad = contBad;
     }
-
+    @Column(name = "cont_status")
     public Integer getContStatus() {
         return contStatus;
     }
@@ -152,7 +175,7 @@ public class BBSPost {
     public void setContStatus(Integer contStatus) {
         this.contStatus = contStatus;
     }
-
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -160,7 +183,7 @@ public class BBSPost {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
-
+    @Column(name = "create_user_id")
     public Integer getCreateUserId() {
         return createUserId;
     }
@@ -168,7 +191,7 @@ public class BBSPost {
     public void setCreateUserId(Integer createUserId) {
         this.createUserId = createUserId;
     }
-
+    @Column(name = "create_user_name")
     public String getCreateUserName() {
         return createUserName;
     }
@@ -176,7 +199,7 @@ public class BBSPost {
     public void setCreateUserName(String createUserName) {
         this.createUserName = createUserName == null ? null : createUserName.trim();
     }
-
+    @Column(name = "create_user_date")
     public Date getCreateDate() {
         return createDate;
     }
@@ -184,7 +207,7 @@ public class BBSPost {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
+    @Column(name = "update_user_id")
     public Integer getUpdateUserId() {
         return updateUserId;
     }
@@ -192,7 +215,7 @@ public class BBSPost {
     public void setUpdateUserId(Integer updateUserId) {
         this.updateUserId = updateUserId;
     }
-
+    @Column(name = "update_user_name")
     public String getUpdateUserName() {
         return updateUserName;
     }
@@ -200,7 +223,7 @@ public class BBSPost {
     public void setUpdateUserName(String updateUserName) {
         this.updateUserName = updateUserName == null ? null : updateUserName.trim();
     }
-
+    @Column(name = "update_date")
     public Date getUpdateDate() {
         return updateDate;
     }
@@ -208,7 +231,7 @@ public class BBSPost {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
-
+    @Column(name = "sb_admin")
     public String getSbAdmin() {
         return sbAdmin;
     }
@@ -216,7 +239,7 @@ public class BBSPost {
     public void setSbAdmin(String sbAdmin) {
         this.sbAdmin = sbAdmin == null ? null : sbAdmin.trim();
     }
-
+    @Column(name = "del")
     public Integer getDel() {
         return del;
     }
@@ -224,7 +247,7 @@ public class BBSPost {
     public void setDel(Integer del) {
         this.del = del;
     }
-
+    @Column(name = "content")
     public String getContent() {
         return content;
     }
@@ -232,4 +255,47 @@ public class BBSPost {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+
+	public Integer getSecurityLevel() {
+		return securityLevel;
+	}
+
+	public void setSecurityLevel(Integer securityLevel) {
+		this.securityLevel = securityLevel;
+	}
+
+	public String getNiceName() {
+		return niceName;
+	}
+
+	public void setNiceName(String niceName) {
+		this.niceName = niceName;
+	}
+
+	public String getBbName() {
+		return bbName;
+	}
+
+	public void setBbName(String bbName) {
+		this.bbName = bbName;
+	}
+
+	public String getSmboName() {
+		return smboName;
+	}
+
+	public void setSmboName(String smboName) {
+		this.smboName = smboName;
+	}
+    
+	
+	
 }

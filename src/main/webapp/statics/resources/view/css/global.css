@@ -443,7 +443,7 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px;}
 .fly-list-li .fly-list-avatar{position: absolute; left: 15px; top: 10px;}
 .fly-list-li h2{line-height: 26px; font-size: 0;}
 .fly-list-li h2 *{display: inline-block; *display: inline; *zoom: 1; vertical-align: top;}
-.fly-list-li h2 a{max-width: 86%; margin-right: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px;}
+.fly-list-li h2 a{ max-width: 80%; margin-right: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px;}
 .fly-list-li h2 span{position: relative; top: 3px; margin-left: 5px;}
 
 .fly-list-li a:hover{color: #0f88eb;}
@@ -578,7 +578,7 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px;}
   .nav-user{top: 18px;}
   .nav-user .out-login{display: block; margin-right: 15px;}
   .nav-msg{left: 0;}
-  .fly-list-li h2 a{max-width: 94%;}
+  .fly-list-li h2 a{max-width: 80%;}
   .fly-list-one li{margin: 0 10px;}
   
   .jie-admin-box{display: block; margin: 5px 0 0;}

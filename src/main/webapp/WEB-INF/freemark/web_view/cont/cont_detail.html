@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>海伦社区</title>
+<meta name="keywords" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 "/>
+<meta name="description" content="#"/>
+<meta name="author" content="#" />
+<meta name="baidu-site-verification" content="aFLsAOUOUk" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
+<script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
+<!-- layui 2.0 -->
+<script src="${resRoot}/view/js/layui.all.js" ></script>
+
+<!-- icon-font -->
+<link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
+<!--[if IE 7]>
+<link href="${resRoot}/view/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!-- layui 2.0 -->
+<link rel="stylesheet" href="${resRoot}/view/css/layui.css" />
+<!-- 自定义 -->
+<link rel="stylesheet" href="${resRoot}/view/css/global.css" />
+<link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
+<link rel="stylesheet" href="${resRoot}/view/css/style.css" />
+<link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
+
+<style>
+  .logo-img{
+	  width:140px;
+	  height:40px;
+	  margin-top:1px;
+	  }
+   .nav{margin-top:4px; }
+   .flist-avatar-a{
+      position: absolute; left: 15px; top: 10px; 
+   }
+   .fly-list-avatar-img{border-radius:50%;width:48px;height: 48px;}
+   .cont-more{
+      text-align:center; padding:0px 0px 14px 0px; 
+   }
+   .fly-list-li-p{
+     margin-top:3px;
+     font-size:14px;
+   }
+   .layui-badge-ico{
+     margin-top:3px;
+     margin-right:4px;
+   }
+   .iconfont-color{color: gray;}
+</style>
+</head>
+
+<body>
+<!-- heand -->
+<div class="header">
+  <div class="main">
+		<a class="logo"  href="#" title="海伦社区">
+		  <img class="logo-img" src="${resultImgPath}/bbs/bbs_icon/logo.png"  />
+		</a>
+       
+		<div class="nav" >
+			<ul>
+			<li>
+			<a href="${futRoot}/view/index"  class="nav-this" >
+				<i class="iconfont icon-desktop"></i>首页
+			</a>
+			</li>
+			
+			<li>
+			<a href="${futRoot}/cont/index"  >
+				<i class="iconfont  icon-leaf"></i>综合区
+			</a>
+			</li>
+            <li>
+			<a href="javascript:;" class="">
+				<i class="iconfont icon-tags"></i>分享
+			</a>
+			</li>
+			<li class="newMsg">
+			<a href="${futRoot}/mine/index" class=" layui-hide">
+				<i class="iconfont icon-user"></i>我的
+			</a>
+            </li>
+            
+			</ul>
+		</div>
+        
+		<div class="nav-user unlogin">
+			<span>
+				<a href="#">登入</a>
+				<a href="#">注册</a>
+			</span> 
+			<p class="out-login">
+			    <a href="#" class="iconfont icon-comments-alt" title="微信登录"></a>
+				<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
+			</p> 
+		</div>	
+  </div>
+</div>
+<!-- heand end -->
+
+<!-- content -->
+<div class="main layui-clear">
+
+<!-- 左边内容 -->
+<div class="wrap">
+	<div class="content detail">
+		<div class="fly-panel detail-box fly-art">
+			<div class="mobile-history">
+				<a href="javascript:history.go(-1);"><i class="iconfont icon-toLeft"></i></a>
+			</div>
+			<div class="fly-website">
+				<span>
+				   当前：
+				   <a href="javascript:;">  <i>&gt;</i> ${postsObj.title?if_exists}</a>
+                  
+					
+				</span>
+				<a href="#comment" class="fly-lr layui-btn layui-btn-normal fly-comment-btn">回复</a>
+			</div>
+			<h1 id="getLocation">${postsObj.title?if_exists}</h1> 
+			<div class="fly-tip fly-detail-hint">
+				<span> 出售</span>
+				<span>未结贴</span>
+				<div class="jie-admin-box" data-id="12345"></div>
+				<div class="fly-list-hint">
+					<a href="#">
+						<i class="iconfont icon-share-alt" title="私信"></i> 私信
+					</a> 
+					<i class="iconfont icon-eye-open" title="人气"></i> 279
+					<a href="#comment"><i class="iconfont icon-comment" title="回答"></i> 0	</a> 
+					
+				</div>
+			</div>
+			<div class="detail-about">
+				<a class="jie-user" href="/index.php/Users/member/uid/117.html" target="_blank">
+					<img id="shareImg" src="http://www.wailaa.cn/Uploads/Head/117/1515471420.jpg"  onerror="imgErrorType('http://www.wailaa.cn/',this,0);" start="width:0; height:0; position:absolute;">
+					<cite>
+						<i>zzzzz</i>
+						<em>发布于 01-30 15:53</em>
+					</cite> 
+				</a>
+				<div class="detail-hits" id="LAY_jieAdmin" data-id="12345">
+					<span style="color:#FF7200">关键词： 相机</span> 
+				</div>
+			</div>
+			<div class="detail-body photos">
+				出 一台自用佳能6D 可配50 1.4 ，南宁艺联差几天16年购入，全画幅 拍人像利器，自用保养成色好，轻微使用痕迹 镜头定义微灰微尘，单机5800，不刀不刀不刀，
+				可南宁看机 面交。箱说全，有发票。想要可私信骚扰&nbsp;<br />
+				<p>
+					一电一充一8G卡。50 1.4亦可出。
+				</p>
+				<p>
+					微博：@<a href="https://weibo.com/u/3947211694?refer_flag=1005055013_&is_hot=1" target="_blank">叫我有福呀</a>
+				</p>
+				<p>
+					<img src="/Uploads/Files/Discuz/20180130/5a702466219df.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a70246643f30.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a7024666a18a.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a7024668c6db.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a7024669baff.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a702466a721a.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a702466c5a62.jpg" alt="" />
+				</p>			
+			</div>
+		</div>
+		<div class="commentBox fly-panel detail-box" style="padding-top: 0;">
+			<fieldset class="layui-elem-field layui-field-title" style="text-align: center;"> <legend>回帖</legend> </fieldset>
+			<ul class="jieda" id="jieda">
+				<!-- 评论 -->
+			</ul>
+			<div class="pager page" id="comment"></div>	
+			<div class="layui-form layui-form-pane commentEditor">
+				<div class="reviewInfo" id="reviewInfo">
+					<div class="content"></div>
+					<div class="close cancelReply">×</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+						<div class="layui-input-block">
+							<blockquote class="layui-elem-quote layui-quote-nm layui-alert">
+							   <a href="/index.php/Users/login.html">未登录 | 请先登录才能回复内容~</a>
+							</blockquote>
+						</div>
+				</div>			
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 左边内容end -->
+
+<!-- 右边内容 -->
+<div class="edge">
+	
+    <div class="fly-panel fly-link">
+		<h3 class="fly-panel-title">友情链接</h3> 
+		<dl>
+			<dd>
+			<a href="http://xsh.gxun.edu.cn" target="_blank">相思湖网站</a>
+			<dd>
+            <dd>
+			<a href="http://lhzy.gxufe.cn/" target="_blank">莲湖之约</a>
+			<dd>
+            <dd>
+			<a href="http://www.konggu.net/" target="_blank">空谷校园</a>
+			<dd>
+            <dd>
+			<a href="http://www.newgxu.cn/" target="_blank">雨无声</a>
+			<dd>
+            <dd>
+			<a href="http://nhcf.gxmu.edu.cn/" target="_blank">南湖晨风</a>
+			<dd>
+            <dd>
+			<a href="http://www.hong-ye.net/" target="_blank">红叶网</a>
+			<dd>
+            <dd>
+			<a href="http://redriver.gxtc.edu.cn/" target="_blank">红水河网</a>
+			<dd>		
+        </dl>
+	</div>	
+    
+    <div class="fly-panel fly-wailaa-adver">
+        <div class="fly-wailaa-block">
+            <img src="${resultImgPath}/bbs/bbs_icon/qrcode_qq.jpg" class="qrcode" style="max-width: 100%;" alt="layui">
+            <p style="position: relative; top: -10px; color: #666;">加入开发【QQ群】</p>
+        </div>
+    </div>
+
+</div>
+<!-- 右边内容 end -->
+
+</div>
+<!-- content  end  -->
+
+<!-- footer -->
+<div class="footer">
+	<p>
+
+		Copyright @ 2018<a href="http://www.cloudyf.cn" id="Cooperation"> 云朵家技术团队</a> 版权所有
+		<a class="display" target="_blank" href="#"><img src="${resultImgPath}/bbs/bbs_icon/ga.png"/>鄂ICP备18018426号-1</a>
+	</p>
+</div>
+<!-- footer end -->
+
+
+
+
+
+</body>
+</html>
