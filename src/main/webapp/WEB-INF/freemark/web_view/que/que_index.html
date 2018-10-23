@@ -5,7 +5,7 @@
 <title>海伦社区</title>
 <meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
 <meta name="description" content="海伦国际欢迎您加入QQ业主【总】群:645952730"/>
-<meta name="author" content="登录页" />
+<meta name="author" content="问卷调查" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
@@ -27,29 +27,7 @@
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
-<script type="text/javascript">
- $(function(){
-   $(".layui-btn").click(function(){
-	   //提交后台处理
-	     $.ajax({
-			url : "${futRoot}/mine/vfLogin",
-			type : "post",
-			dataType : "json",
-		    async: false,
-			data : $("#ajaxForm").serialize(),
-			success : function(data) {
-				console.info(data);
-				if(data==true){
-                    window.location.href="${futRoot}/mine/vf/home";
-				}else{
-                    $("#message").text("用户名密码不对！");
-				}
-			}
-		 }); 
-        
-   })
- })
-</script>
+
 </head>
 
 <body>
@@ -74,7 +52,7 @@
 			</a>
 			</li>
             <li>
-			<a href="${futRoot}/que/index" class="">
+			<a href="${futRoot}/que/index"  class="nav-this" >
 				<i class="iconfont icon-tags"></i>问卷
 			</a>
 			</li>
@@ -114,66 +92,72 @@
 
 <!-- content -->
 <div class="main layui-clear">
-<div class="fly-panel fly-panel-user" pad20>
-		<div class="layui-tab layui-tab-brief" lay-filter="user">
-			<ul class="layui-tab-title">
-				<li class="layui-this">登入</li>
-				<li>
-					<a href="${futRoot}/mine/reg">注册</a>
-				</li>
-			</ul>
-			<div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
-				<div class="layui-tab-item layui-show">
-					<div class="layui-form layui-form-pane">
-						<form id="ajaxForm" method="post">
-						    
-							 <span id="message" style="color:red"></span>
-							
-							<div class="layui-form-item">
-								<label for="L_email" class="layui-form-label">登录帐号</label>
-								<div class="layui-input-inline">
-									<input type="text" id="L_email" name="email" required lay-verify="required" autocomplete="off" class="layui-input" placeholder="请输入邮箱">
-								</div>
-							</div>
-							<div class="layui-form-item">
-								<label for="L_pass" class="layui-form-label">密码</label>
-								<div class="layui-input-inline">
-									<input type="password" id="L_pass" name="upwd" required lay-verify="required" autocomplete="off" class="layui-input" placeholder="请输入密码">
-								</div>
-							</div>
-							<!-- <div class="layui-form-item">
-								<label for="L_vercode" class="layui-form-label">人类验证</label>
-								<div class="layui-input-inline">
-									<input type="text" id="L_vercode" name="verify" required lay-verify="required" placeholder="请输入后面的数字" autocomplete="off" class="layui-input">
-								</div>
-								<span class="check-code">
-									<img class="verifyimg reloadverify" alt="点击切换" src="#" width="120">
-								</span>
-							</div> -->
-							<div class="layui-form-item">
-								<a class="layui-btn layui-btn-normal" >立即登录</a>
-								<span style="padding-left:20px;">
-									<a href="javascript:;">忘记密码？</a>
-								</span> 
-							</div>
-							
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+
+<!-- 左边内容 -->
+<div class="wrap">
+	<div class="content detail">
+	<div class="fly-panel detail-box fly-art">
+		  <h4 style="color:orange">更多功能，敬请期待!</h4>
+	</div>
 	</div>
 </div>
+<!-- 左边内容end -->
 
+<!-- 右边内容 -->
+<div class="edge">
+    <div class="fly-panel fly-link">
+		<h3 class="fly-panel-title">友情链接</h3> 
+		<dl>
+			<dd>
+			<a href="http://xsh.gxun.edu.cn" target="_blank">相思湖网站</a>
+			<dd>
+            <dd>
+			<a href="http://lhzy.gxufe.cn/" target="_blank">莲湖之约</a>
+			<dd>
+            <dd>
+			<a href="http://www.konggu.net/" target="_blank">空谷校园</a>
+			<dd>
+            <dd>
+			<a href="http://www.newgxu.cn/" target="_blank">雨无声</a>
+			<dd>
+            <dd>
+			<a href="http://nhcf.gxmu.edu.cn/" target="_blank">南湖晨风</a>
+			<dd>
+            <dd>
+			<a href="http://www.hong-ye.net/" target="_blank">红叶网</a>
+			<dd>
+            <dd>
+			<a href="http://redriver.gxtc.edu.cn/" target="_blank">红水河网</a>
+			<dd>		
+        </dl>
+	</div>	
+    
+    <div class="fly-panel fly-wailaa-adver">
+        <div class="fly-wailaa-block">
+            <img src="${resultImgPath}/bbs/bbs_icon/qrcode_qq.jpg" class="qrcode" style="max-width: 100%;" alt="layui">
+            <p style="position: relative; top: -10px; color: #666;">加入开发【QQ群】</p>
+        </div>
+    </div>
+
+</div>
+<!-- 右边内容 end -->
+
+</div>
+<!-- content  end  -->
 
 <!-- footer -->
 <div class="footer">
 	<p>
+
 		Copyright @ 2018<a href="http://www.cloudyf.cn" id="Cooperation"> 云朵家技术团队</a> 版权所有
 		<a class="display" target="_blank" href="#"><img src="${resultImgPath}/bbs/bbs_icon/ga.png"/>鄂ICP备18018426号-1</a>
 	</p>
 </div>
 <!-- footer end -->
+
+
+
+
 
 </body>
 </html>
