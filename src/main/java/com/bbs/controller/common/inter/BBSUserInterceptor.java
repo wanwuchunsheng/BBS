@@ -11,26 +11,26 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bbs.model.sys.SysUserInfo;
 /**
- * web后端拦截器
+ * bbs拦截器
  * 
  * */
-public class UserInterceptor implements HandlerInterceptor{
+public class BBSUserInterceptor implements HandlerInterceptor{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session=request.getSession();
 		//验证后端登录
-		SysUserInfo userInfo= (SysUserInfo) session.getAttribute("userInfo");
-		System.out.println("进入拦截器:"+userInfo);
-		if(userInfo!=null){
+		SysUserInfo bbsBserInfo= (SysUserInfo) session.getAttribute("bbsUserInfo");
+		System.out.println("进入拦截器:"+bbsBserInfo);
+		if(bbsBserInfo!=null){
 			return true;
 		}
 		//失败重定向
 	    PrintWriter out = response.getWriter();
 	    out.println("<html>");    
 	    out.println("<script>");    
-	    out.println("window.open ('"+request.getContextPath()+"/login/index','_top')");    
+	    out.println("window.open ('"+request.getContextPath()+"/mine/login','_top')");    
 	    out.println("</script>");    
 	    out.println("</html>");  
 		return false;

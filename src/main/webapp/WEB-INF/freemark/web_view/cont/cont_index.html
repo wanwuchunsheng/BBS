@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <title>海伦社区</title>
-<meta name="keywords" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 "/>
-<meta name="description" content="#"/>
-<meta name="author" content="#" />
-<meta name="baidu-site-verification" content="aFLsAOUOUk" />
+<meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
+<meta name="description" content="海伦国际欢迎您加入QQ业主【总】群:645952730"/>
+<meta name="author" content="子版块" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
 
 <script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
 <script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
@@ -26,34 +26,10 @@
 <link rel="stylesheet" href="${resRoot}/view/css/global.css" />
 <link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
+<link rel="stylesheet" href="${resRoot}/view/css/common.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
 
-<style>
-  .logo-img{
-	  width:140px;
-	  height:40px;
-	  margin-top:1px;
-	  }
-   .nav{margin-top:4px; }
-   .flist-avatar-a{
-      position: absolute; left: 15px; top: 10px; 
-   }
-   .fly-list-avatar-img{border-radius:50%;width:48px;height: 48px;}
-   .cont-more{
-      text-align:center; padding:0px 0px 14px 0px; 
-   }
-   .fly-list-li-p{
-     margin-top:3px;
-     font-size:14px;
-   }
-   .layui-badge-ico{
-     margin-top:3px;
-     margin-right:4px;
-   }
-   .iconfont-color{color: gray;}
-</style>
 </head>
-
 <body>
 <!-- heand -->
 <div class="header">
@@ -91,15 +67,26 @@
 		</div>
         
 		<div class="nav-user unlogin">
-			<span>
-				<a href="#">登入</a>
-				<a href="#">注册</a>
-			</span> 
-			<p class="out-login">
-			    <a href="#" class="iconfont icon-comments-alt" title="微信登录"></a>
-				<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
-			</p> 
-		</div>	
+		  <#if (bbsUserInfo)?? >
+		     <div class="loginuser-span">
+			     <a href="${futRoot}/mine/index">
+			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" />
+			     </a>
+			     <span class="loginuser-signin"> 
+			        <a  href="${futRoot}/mine/logout"><i class="iconfont icon-signin"></i>  注销</a>
+			     </span>
+		     </div>
+		  <#else>
+			   <span>
+					<a href="${futRoot}/mine/login">登入</a>
+					<a href="${futRoot}/mine/reg">注册</a>
+				</span> 
+				<p class="out-login">
+				    <a href="#" class="iconfont icon-comments" title="微信登录"></a>
+					<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
+				</p>
+		  </#if>
+		</div>		
   </div>
 </div>
 <!-- heand end -->
@@ -113,9 +100,9 @@
         <div class="fly-panel">
 			<h3 class="fly-panel-title">
 				<span>
-				   <i class="iconfont-color icon-home"></i>
+				         当前位置<i class="fly-mid"></i>
 				   <#if (bbsSmallBoard)??>
-                      <a href="javascript:;"> 首页  <i class="fly-mid"></i>${bbsSmallBoard.title?if_exists}</a>
+                      <a href="javascript:;">${bbsSmallBoard.title?if_exists}</a>
                    <#else>
                       <a href="javascript:;">综合区</a>
                    </#if>
@@ -132,19 +119,16 @@
 						<a href="#">全部帖</a>
 					</li>
 					<li class="">
-						<a href="#">出售</a>
+						<a href="#">活动</a>
 					</li>
 					<li class="">
-						<a href="#">求购</a>
+						<a href="#">求助</a>
 					</li>
 					<li class="">
-						<a href="#">出租</a>
+						<a href="#">围观</a>
 					</li>
 					<li class="">
-						<a href="#">求租</a>
-					</li>
-					<li class="">
-						<a href="#">周边</a>
+						<a href="#">广告</a>
 					</li>
 				</ul>
 			</div> 
@@ -162,7 +146,7 @@
 							<img class="avatar fly-list-avatar-img" src="${resultImgPath}/bbs/bbs_img/${spt.imgPath?if_exists}"  /> 
 						</a>
 						<h2 class="fly-tip">
-							<a href="#" target="_blank">
+							<a href="${futRoot}/cont/detail?id=${spt.id?if_exists}&smboId=${spt.smboId?if_exists}" target="_blank">
 								${spt.title?if_exists}
 							</a>
 							<#if spt.contStatus==0>

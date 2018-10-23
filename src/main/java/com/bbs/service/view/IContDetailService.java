@@ -13,4 +13,5 @@ public interface IContDetailService {
 
 	BBSSmallBoard queryBBSSmallBoardById(BBSSmallBoard bean);
 
+
 }

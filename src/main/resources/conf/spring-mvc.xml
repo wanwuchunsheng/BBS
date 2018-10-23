@@ -43,7 +43,13 @@ default-autowire="byName">
 	  <mvc:mapping path="/survey/**" />
 	  <bean class="com.bbs.controller.common.inter.UserInterceptor" />
 	</mvc:interceptor>
+	<mvc:interceptor>
+	  <mvc:mapping path="**/vf/**" />
+	  <bean class="com.bbs.controller.common.inter.BBSUserInterceptor" />
+	</mvc:interceptor>
   </mvc:interceptors>
+  
+  
   <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 	  <property name="templateLoaderPath" value="/WEB-INF/freemark/" />
 	  <property name="defaultEncoding" value="utf-8" />
@@ -64,7 +70,7 @@ default-autowire="byName">
 			<entry key="futRoot" value="" />
 			<entry key="realImgPath" value="E:/www2/zhangt-0b44449e649aee1e0164b519f6cd054b/webapp/images/" />
 			<entry key="resultImgPath" value="https://cloudfy.cn/images/" />
-		   -->
+		     -->
 			
 			<entry key="resRoot" value="/BBS/statics/resources" />
 			<entry key="futRoot" value="/BBS" />

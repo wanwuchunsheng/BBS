@@ -4,7 +4,7 @@
    <!--  HD 用户登录验证  -->
    <sql id="verifyUser">
         <![CDATA[
-           select * from sys_user where uname=:uname and upwd=:upwd and del=0
+           select * from sys_user where uname=:uname and upwd=:upwd and del=0 and id=1
         ]]>
     </sql>
     
@@ -41,7 +41,12 @@
         ]]>
     </sql>
     
- 
+   <!-- bbs 用户登录验证  -->
+   <sql id="verifyBBSUser">
+        <![CDATA[
+           select * from sys_user where email=:email and upwd=:upwd and del=0
+        ]]>
+    </sql>
     
 </sqlMap>
 

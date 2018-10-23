@@ -27,7 +27,7 @@ public class ContDetailServiceImpl implements IContDetailService{
 	 * */
 	@Override
 	public BBSPosts queryPostsObjById(BBSPosts bean) {
-		dalClient.dynamicMerge(bean);
+		dalClient.execute("bbsPosts.updateBBSPostsById", bean);//更新预览量
 		return dalClient.queryForObject("bbsPosts.queryBBSPostsObjById", bean, BBSPosts.class);
 	}
 

@@ -1,0 +1,37 @@
+/** wch 布局小调整 */
+.logo-img{
+	  width:140px;
+	  height:40px;
+	  margin-top:1px;
+   }
+   .nav{
+      margin-top:4px; 
+   }
+   .flist-avatar-a{
+      position: absolute; left: 15px; top: 10px; 
+   }
+   .fly-list-avatar-img{
+      border-radius:50%;width:48px;height: 48px;
+   }
+   .cont-more{
+      text-align:center; padding:0px 0px 14px 0px; 
+   }
+   .fly-list-li-p{
+      margin-top:3px;font-size:14px;
+   }
+   .layui-badge-ico{
+      margin-top:3px;margin-right:4px;
+   }
+   .iconfont-color{color: gray;}
+   
+   /* 导航登录用户 */
+   
+   .loginuser-span{
+      margin-top:-2px;margin-right:50px;
+   }
+   .loginuser-img{
+      width:32px;height: 32px;
+   }
+   .loginuser-signin{
+      font-size:14px;margin-left:10px;color:#C9C9C9;
+   }

@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <title>海伦社区</title>
-<meta name="keywords" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 "/>
-<meta name="description" content="#"/>
-<meta name="author" content="#" />
-<meta name="baidu-site-verification" content="aFLsAOUOUk" />
+<meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
+<meta name="description" content="海伦国际欢迎您加入QQ业主【总】群:645952730"/>
+<meta name="author" content="详细页" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
@@ -26,32 +25,9 @@
 <link rel="stylesheet" href="${resRoot}/view/css/global.css" />
 <link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
+<link rel="stylesheet" href="${resRoot}/view/css/common.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
 
-<style>
-  .logo-img{
-	  width:140px;
-	  height:40px;
-	  margin-top:1px;
-	  }
-   .nav{margin-top:4px; }
-   .flist-avatar-a{
-      position: absolute; left: 15px; top: 10px; 
-   }
-   .fly-list-avatar-img{border-radius:50%;width:48px;height: 48px;}
-   .cont-more{
-      text-align:center; padding:0px 0px 14px 0px; 
-   }
-   .fly-list-li-p{
-     margin-top:3px;
-     font-size:14px;
-   }
-   .layui-badge-ico{
-     margin-top:3px;
-     margin-right:4px;
-   }
-   .iconfont-color{color: gray;}
-</style>
 </head>
 
 <body>
@@ -65,7 +41,7 @@
 		<div class="nav" >
 			<ul>
 			<li>
-			<a href="${futRoot}/view/index"  class="nav-this" >
+			<a href="${futRoot}/view/index">
 				<i class="iconfont icon-desktop"></i>首页
 			</a>
 			</li>
@@ -90,15 +66,26 @@
 		</div>
         
 		<div class="nav-user unlogin">
-			<span>
-				<a href="#">登入</a>
-				<a href="#">注册</a>
-			</span> 
-			<p class="out-login">
-			    <a href="#" class="iconfont icon-comments-alt" title="微信登录"></a>
-				<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
-			</p> 
-		</div>	
+		  <#if (bbsUserInfo)?? >
+		     <div class="loginuser-span">
+			     <a href="${futRoot}/mine/index">
+			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" />
+			     </a>
+			     <span class="loginuser-signin"> 
+			        <a  href="${futRoot}/mine/logout"><i class="iconfont icon-signin"></i>  注销</a>
+			     </span>
+		     </div>
+		  <#else>
+			   <span>
+					<a href="${futRoot}/mine/login">登入</a>
+					<a href="${futRoot}/mine/reg">注册</a>
+				</span> 
+				<p class="out-login">
+				    <a href="#" class="iconfont icon-comments" title="微信登录"></a>
+					<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
+				</p>
+		  </#if>
+		</div>		
   </div>
 </div>
 <!-- heand end -->
@@ -110,58 +97,62 @@
 <div class="wrap">
 	<div class="content detail">
 		<div class="fly-panel detail-box fly-art">
-			<div class="mobile-history">
-				<a href="javascript:history.go(-1);"><i class="iconfont icon-toLeft"></i></a>
-			</div>
-			<div class="fly-website">
-				<span>
-				   当前：
-				   <a href="javascript:;">  <i>&gt;</i> ${postsObj.title?if_exists}</a>
-                  
-					
-				</span>
-				<a href="#comment" class="fly-lr layui-btn layui-btn-normal fly-comment-btn">回复</a>
-			</div>
-			<h1 id="getLocation">${postsObj.title?if_exists}</h1> 
+			<!-- 标题 -->
+			<h1 id="getLocation">${postsObj.title?if_exists}
+			    <#if postsObj.contRec==1 >
+			         <i class="layui-badge-ico layui-badge layui-bg-red">加精</i>
+			    </#if>
+				<#if postsObj.contStatus==0>
+	                  <#if postsObj.typ==1>
+	                     <i class="layui-badge-ico layui-badge fly-badge-vip">广告</i>
+	                  <#elseif postsObj.typ==2>
+	                     <i class="layui-badge-ico layui-badge fly-badge-vip">求助</i>
+	                  <#elseif postsObj.typ==3>
+	                     <i class="layui-badge-ico layui-badge fly-badge-vip">活动</i>
+	                  <#elseif postsObj.typ==4>
+	                     <i class="layui-badge-ico layui-badge fly-badge-vip">围观</i>
+	                  </#if>
+                <#elseif postsObj.contStatus==1>
+                       <i class="layui-badge-ico layui-badge layui-bg-gray">已结</i>
+                </#if>
+			</h1> 
+			<!-- 标题 end-->
+			
 			<div class="fly-tip fly-detail-hint">
-				<span> 出售</span>
-				<span>未结贴</span>
-				<div class="jie-admin-box" data-id="12345"></div>
 				<div class="fly-list-hint">
-					<a href="#">
-						<i class="iconfont icon-share-alt" title="私信"></i> 私信
-					</a> 
-					<i class="iconfont icon-eye-open" title="人气"></i> 279
-					<a href="#comment"><i class="iconfont icon-comment" title="回答"></i> 0	</a> 
-					
+					<i class="iconfont icon-envelope" title="私信"></i> 私信
+					<i class="iconfont icon-eye-open" title="人气"></i> ${postsObj.contPreview?if_exists}
+					<a href="#comment"><i class="iconfont icon-comment" title="回答"></i> ${postsObj.contReply?if_exists}	</a> 
 				</div>
 			</div>
+			<br/>
+			<!-- 用户信息  -->
 			<div class="detail-about">
-				<a class="jie-user" href="/index.php/Users/member/uid/117.html" target="_blank">
-					<img id="shareImg" src="http://www.wailaa.cn/Uploads/Head/117/1515471420.jpg"  onerror="imgErrorType('http://www.wailaa.cn/',this,0);" start="width:0; height:0; position:absolute;">
+				<a class="jie-user" href="#" target="_blank">
+					<img id="shareImg" src="${resultImgPath}/bbs/bbs_img/${postsObj.imgPath?if_exists}"  />
 					<cite>
-						<i>zzzzz</i>
-						<em>发布于 01-30 15:53</em>
+						<i>${postsObj.niceName?if_exists}</i>
+						<em>发布于 ${postsObj.updateDate?string("yyyy-MM-dd HH:mm")}</em>
 					</cite> 
 				</a>
 				<div class="detail-hits" id="LAY_jieAdmin" data-id="12345">
-					<span style="color:#FF7200">关键词： 相机</span> 
+					<span style="color:#FF7200">经验值：<i class="layui-badge-ico layui-badge layui-bg-gary">23</i></span> 
 				</div>
 			</div>
+			<!-- 用户信息 end  -->
+			<!-- 内容信息  -->
 			<div class="detail-body photos">
-				出 一台自用佳能6D 可配50 1.4 ，南宁艺联差几天16年购入，全画幅 拍人像利器，自用保养成色好，轻微使用痕迹 镜头定义微灰微尘，单机5800，不刀不刀不刀，
-				可南宁看机 面交。箱说全，有发票。想要可私信骚扰&nbsp;<br />
-				<p>
-					一电一充一8G卡。50 1.4亦可出。
-				</p>
-				<p>
-					微博：@<a href="https://weibo.com/u/3947211694?refer_flag=1005055013_&is_hot=1" target="_blank">叫我有福呀</a>
-				</p>
-				<p>
-					<img src="/Uploads/Files/Discuz/20180130/5a702466219df.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a70246643f30.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a7024666a18a.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a7024668c6db.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a7024669baff.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a702466a721a.jpg" alt="" /><img src="/Uploads/Files/Discuz/20180130/5a702466c5a62.jpg" alt="" />
-				</p>			
+				${postsObj.content?if_exists}		
 			</div>
+			<!-- 内容信息end  -->
+			<div class="cont-more">
+				<button class="layui-btn layui-btn-normal"><i class="iconfont icon-thumbs-up" title="支持"></i>支持</button>
+				<button class="layui-btn layui-btn-warm"><i class="iconfont icon-thumbs-down" title="支持"></i>反对</button>
+				<button class="layui-btn layui-btn-danger"><i class="iconfont icon-share-alt" title="支持"></i>分享</button>
+            </div>
 		</div>
+		
+		<!-- 回帖信息 -->
 		<div class="commentBox fly-panel detail-box" style="padding-top: 0;">
 			<fieldset class="layui-elem-field layui-field-title" style="text-align: center;"> <legend>回帖</legend> </fieldset>
 			<ul class="jieda" id="jieda">
@@ -182,13 +173,14 @@
 				</div>			
 			</div>
 		</div>
+		<!-- 回帖信息 end -->
+		
 	</div>
 </div>
 <!-- 左边内容end -->
 
 <!-- 右边内容 -->
 <div class="edge">
-	
     <div class="fly-panel fly-link">
 		<h3 class="fly-panel-title">友情链接</h3> 
 		<dl>

@@ -3,61 +3,29 @@
 <head>
 <meta charset="utf-8" />
 <title>海伦社区</title>
-<meta name="keywords" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 "/>
-<meta name="description" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 "/>
-<meta name="author" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 " />
-<meta name="baidu-site-verification" content="海伦国际  武汉 武汉青山  武汉武东  武东区  青山武东  青山武东社区  青山海伦国际论坛 BBS 青山BBS  BBS社区  武汉BBS社区  武汉社区  武汉BBS 社区 青山海伦 青山海伦国际社区 " />
+<meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
+<meta name="description" content="海伦国际欢迎您加入QQ业主【总】群:645952730"/>
+<meta name="author" content="首页" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
 <script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
-
 <!-- icon-font -->
 <link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
 <!--[if IE 7]>
 <link href="${resRoot}/view/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
 <![endif]-->
-
 <!-- layui 2.0 -->
 <link rel="stylesheet" href="${resRoot}/view/css/layui.css" />
-<!-- 自定义 -->
 <link rel="stylesheet" href="${resRoot}/view/css/global.css" />
 <link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
+<link rel="stylesheet" href="${resRoot}/view/css/common.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
-
-<style>
-  .logo-img{
-	  width:140px;
-	  height:40px;
-	  margin-top:1px;
-   }
-   .nav{
-      margin-top:4px; 
-   }
-   .flist-avatar-a{
-      position: absolute; left: 15px; top: 10px; 
-   }
-   .fly-list-avatar-img{
-      border-radius:50%;width:48px;height: 48px;
-   }
-   .cont-more{
-      text-align:center; padding:0px 0px 14px 0px; 
-   }
-   .fly-list-li-p{
-      margin-top:3px;font-size:14px;
-   }
-   .layui-badge-ico{
-      margin-top:3px;margin-right:4px;
-   }
-   
-</style>
 </head>
-
 <body>
 <!-- heand -->
 <div class="header">
-
   <div class="main">
 		<a class="logo"  href="#" title="海伦社区">
 		  <img class="logo-img" src="${resultImgPath}/bbs/bbs_icon/logo.png"  />
@@ -90,14 +58,25 @@
 		</div>
         
 		<div class="nav-user unlogin">
-			<span>
-				<a href="#">登入</a>
-				<a href="#">注册</a>
-			</span> 
-			<p class="out-login">
-			    <a href="#" class="iconfont icon-comments" title="微信登录"></a>
-				<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
-			</p> 
+		  <#if (bbsUserInfo)?? >
+		     <div class="loginuser-span">
+			     <a href="${futRoot}/mine/index">
+			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" />
+			     </a>
+			     <span class="loginuser-signin"> 
+			        <a  href="${futRoot}/mine/logout"><i class="iconfont icon-signin"></i>  注销</a>
+			     </span>
+		     </div>
+		  <#else>
+			   <span>
+					<a href="${futRoot}/mine/login">登入</a>
+					<a href="${futRoot}/mine/reg">注册</a>
+				</span> 
+				<p class="out-login">
+				    <a href="#" class="iconfont icon-comments" title="微信登录"></a>
+					<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
+				</p>
+		  </#if>
 		</div>	
   </div>
 </div>
@@ -109,10 +88,9 @@
 <!-- 左边内容 -->
 <div class="wrap">
 	<div class="content">
-		
         <!-- 幻灯片 -->
 		<div class="layui-carousel fly-panel index-banner" id="index-banner">
-			<div carousel-item>
+			<div carousel-item >
 				<div>
 				   <a href="#" target="_blank" title="海伦国际"> <img  src="${resultImgPath}/bbs/bbs_img/1516285551.jpg"  /> </a>
 				</div>
@@ -154,15 +132,15 @@
         <!-- 综合发布 -->
 		<div class="fly-panel">
 				<h3 class="fly-panel-title">热门推荐 </h3> 
-				<ul class="fly-panel fly-list">  
+				<ul class="fly-panel fly-list">
 					<#if (spostsAll?size > 0)>
-		            <#list spostsAll as spt>          
+		            <#list spostsAll as spt>
 					<li class="fly-list-li">
 						<a href="javascript:;" class="flist-avatar-a" target="_blank">
 							<img class="avatar fly-list-avatar-img" src="${resultImgPath}/bbs/bbs_img/${spt.imgPath?if_exists}"  /> 
 						</a>
 						<h2 class="fly-tip">
-							<a href="${futRoot}/cont/detail?id=${spt.id?if_exists}&smboId=${spt.smboId?if_exists}" >
+							<a href="${futRoot}/cont/detail?id=${spt.id?if_exists}&smboId=${spt.smboId?if_exists}" target="_blank">
 								${spt.title?if_exists}
 							</a>
 							<#if spt.contStatus==0>
@@ -202,7 +180,6 @@
 	 </div>
      <!-- end -->
         
-        
 	</div>
 </div>
 <!-- 左边内容end -->
@@ -217,7 +194,9 @@
 			<#if (spostsNews?size > 0)>
 			<#list spostsNews as nw>  
 				<li>
-					<a href="#" target="_blank">${nw.title?if_exists}</a>
+					<a href="${futRoot}/cont/detail?id=${nw.id?if_exists}&smboId=${nw.smboId?if_exists}" target="_blank">
+					${nw.title?if_exists}
+					</a>
 				</li>
 			</#list>
 			</#if>
@@ -294,8 +273,6 @@ layui.use('carousel', function(){
   });
 });
 </script>
-
-
 
 </body>
 </html>

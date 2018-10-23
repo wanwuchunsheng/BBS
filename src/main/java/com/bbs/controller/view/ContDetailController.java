@@ -25,8 +25,10 @@ public class ContDetailController {
 	IContDetailService contDetailService;
 	
 	/**
-	 * 说明：进入子版块-查询所有帖子信息
-	 *  带分页
+	 * 说明：进入版块
+	 *   1/判断是否进入子版块
+	 *   2/查询子版块对象
+	 *   3/查询子版块所有帖子
 	 * @author Administrator
 	 * @createTime 2018年6月11日22:48:33
 	 * */
@@ -39,8 +41,8 @@ public class ContDetailController {
 	}
 	
 	/**
-	 * 说明：通过发帖ID，查询相关对象
-	 *   1/修改预览记录
+	 * 说明：预览详细
+	 *   1/通过ID查询对象内容
 	 * @author Administrator
 	 * @createTime 2018年6月11日22:48:33
 	 * */
@@ -48,10 +50,7 @@ public class ContDetailController {
 	public String gotoContIndex(HttpSession session, HttpServletRequest request,BBSPosts bean){
 		BBSPosts posts=contDetailService.queryPostsObjById(bean);
 		request.setAttribute("postsObj", posts);
-		/*BBSSmallBoard smallBoard=new BBSSmallBoard();
-		smallBoard.setDel(bean.getSmboId());
-		request.setAttribute("bbsSmallBoard", contDetailService.queryBBSSmallBoardById(smallBoard));
-		*/return "/web_view/cont/cont_detail";
+		return "/web_view/cont/cont_detail";
 	}
 
 }
