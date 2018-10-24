@@ -29,8 +29,8 @@
         ]]>
     </sql>
     
-     <!--  修改子版块预览量  -->
-   <sql id="updateBBSSmallBoardById">
+    <!--  修改子版块预览量  -->
+    <sql id="updateBBSSmallBoardById">
         <![CDATA[
            update bbs_small_board set CONT_PREVIEW=cont_preview+1   where id=:id 
         ]]>

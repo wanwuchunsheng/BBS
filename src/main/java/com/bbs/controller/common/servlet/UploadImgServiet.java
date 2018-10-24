@@ -34,21 +34,22 @@ public class UploadImgServiet extends HttpServlet {
         doPost(request, response);
     }
 
+    /**
+     * 图片上传
+     * 
+     * */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //String path = request.getRealPath("/image");
-    	String path =Constants.RESULT_SAVE_IMG+"editor/";
+    	String path =Constants.BBS_SAVE_IMG;
         File file = new File(path);
         if (!file.exists())
             file.mkdirs();
         String fileName = "";// 文件名称
-
-
         /**上传文件处理内容**/
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload sfu = new ServletFileUpload(factory);
         sfu.setHeaderEncoding("UTF-8"); // 处理中文问题
-        sfu.setSizeMax(1024 * 1024); // 限制文件大小
+        sfu.setSizeMax(2 * 1024 * 1024); // 限制文件大小
         try {
             List<FileItem> fileItems = sfu.parseRequest(request); // 解码请求
             for (FileItem fi : fileItems) {
@@ -61,7 +62,7 @@ public class UploadImgServiet extends HttpServlet {
         /**********************/
 
         //获取图片url地址
-        String imgUrl = Constants.RESULT_REQ_IMG+"editor/"+ fileName;
+        String imgUrl = Constants.BBS_REQ_IMG+ fileName;
         response.setContentType("text/text;charset=utf-8");
         PrintWriter out = response.getWriter();
         out.print(imgUrl);  //返回url地址

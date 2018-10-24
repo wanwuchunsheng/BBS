@@ -58,7 +58,7 @@
 			</a>
 			</li>
 			<li class="newMsg">
-			<a href="${futRoot}/mine/index" class=" layui-hide">
+			<a href="${futRoot}/mine/index" class="layui-hide nav-this">
 				<i class="iconfont icon-user"></i>我的
 			</a>
             </li>
@@ -72,6 +72,9 @@
 			     <a href="${futRoot}/mine/index">
 			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" />
 			     </a>
+			     <span class="loginuser-signin"> 
+			        <a>${bbsUserInfo.niceName?if_exists}</a>
+			     </span>
 			     <span class="loginuser-signin"> 
 			        <a  href="${futRoot}/mine/logout"><i class="iconfont icon-signin"></i>  注销</a>
 			     </span>
@@ -120,6 +123,9 @@
 		<a href="javascript:;"> <i class="iconfont icon-home"></i> 我的主页</a>
 	</li>
 	<li class="layui-nav-item ">
+		<a href="${futRoot}/cont/vf/add"> <i class="iconfont icon-edit"></i> 发表新帖</a>
+	</li>
+	<!-- <li class="layui-nav-item ">
 		<a href="javascript:;"> <i class="iconfont icon-cog"></i> 基本设置</a>
 	</li>
 	<li class="layui-nav-item ">
@@ -130,7 +136,7 @@
 	</li>
 	<li class="layui-nav-item ">
 		<a href="javascript:;"> <i class="iconfont  icon-lightbulb"></i> 反馈建议</a>
-	</li>
+	</li> -->
 	<li class="layui-nav-item ">
 		<a href="${futRoot}/mine/logout" onclick="return confirm('是否退出登录？')"> <i class="iconfont  icon-signout "></i> 退出登录</a>
 	</li>

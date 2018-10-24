@@ -1,9 +1,18 @@
 package com.bbs.model.view;
 
+import java.io.Serializable;
 import java.util.Date;
+/**
+ * 回帖
+ * 
+ * */
+public class BBSPostCommend implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-public class BBSPostCommend {
-    private Integer id;
+	private Integer id;
 
     private String code;
 
@@ -23,7 +32,6 @@ public class BBSPostCommend {
 
     private Date updateDate;
 
-    private String sbAdmin;
 
     private Integer del;
 
@@ -105,14 +113,6 @@ public class BBSPostCommend {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
-    }
-
-    public String getSbAdmin() {
-        return sbAdmin;
-    }
-
-    public void setSbAdmin(String sbAdmin) {
-        this.sbAdmin = sbAdmin == null ? null : sbAdmin.trim();
     }
 
     public Integer getDel() {

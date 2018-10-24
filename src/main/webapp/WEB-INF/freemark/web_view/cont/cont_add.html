@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>海伦社区</title>
+<meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
+<meta name="description" content="海伦国际欢迎您加入QQ业主【总】群:645952730"/>
+<meta name="author" content="发帖" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+<script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
+<script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
+
+<!-- icon-font -->
+<link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
+<!--[if IE 7]>
+<link href="${resRoot}/view/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!-- layui 2.0 -->
+<link rel="stylesheet" href="${resRoot}/view/css/layui.css" />
+<!-- 自定义 -->
+<link rel="stylesheet" href="${resRoot}/view/css/global.css" />
+<link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
+<link rel="stylesheet" href="${resRoot}/view/css/style.css" />
+<link rel="stylesheet" href="${resRoot}/view/css/common.css" />
+<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.css" />
+<link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
+<style type="text/css">
+.w-e-toolbar{
+   flex-wrap: wrap;
+}
+</style>
+<script type="text/javascript">
+//通过选择父模块，级联子版块
+function chgSmallBoardSel(){
+     //alert("ttttt");
+}
+</script>
+</head>
+<body>
+<!-- heand -->
+<div class="header">
+
+  <div class="main">
+		<a class="logo"  href="#" title="海伦社区">
+		  <img class="logo-img" src="${resultImgPath}/bbs/bbs_icon/logo.png"  />
+		</a>
+       
+		<div class="nav" >
+			<ul>
+			<li>
+			<a href="${futRoot}/view/index" >
+				<i class="iconfont icon-desktop"></i>首页
+			</a>
+			</li>
+			
+			<li>
+			<a href="${futRoot}/cont/index" >
+				<i class="iconfont  icon-leaf"></i>综合区
+			</a>
+			</li>
+            <li>
+			<a href="${futRoot}/que/index" class="">
+				<i class="iconfont icon-tags"></i>问卷
+			</a>
+			</li>
+			<li class="newMsg">
+			<a href="${futRoot}/mine/index" class=" layui-hide nav-this">
+				<i class="iconfont icon-user"></i>我的
+			</a>
+            </li>
+            
+			</ul>
+		</div>
+        
+		<div class="nav-user unlogin">
+		  <#if (bbsUserInfo)?? >
+		     <div class="loginuser-span">
+			     <a href="${futRoot}/mine/index">
+			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" />
+			     </a>
+			     <span class="loginuser-signin"> 
+			        <a>${bbsUserInfo.niceName?if_exists}</a>
+			     </span>
+			     <span class="loginuser-signin"> 
+			        <a  href="${futRoot}/mine/logout"><i class="iconfont icon-signin"></i>  注销</a>
+			     </span>
+		     </div>
+		  <#else>
+			   <span>
+					<a href="${futRoot}/mine/login">登入</a>
+					<a href="${futRoot}/mine/reg">注册</a>
+				</span> 
+				<p class="out-login">
+				    <a href="#" class="iconfont icon-comments" title="微信登录"></a>
+					<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
+				</p>
+		  </#if>
+		</div>		
+  </div>
+</div>
+<!-- heand end -->
+
+<div class="layui-container fly-marginTop">
+  <div class="fly-panel" pad20 style="padding-top: 5px;">
+    <div class="layui-form layui-form-pane">
+      <div class="layui-tab layui-tab-brief" lay-filter="user">
+        <ul class="layui-tab-title">
+          <li class="layui-this">发表新帖</li>
+        </ul>
+        <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+          <div class="layui-tab-item layui-show">
+          <!-- form表单  -->
+            <form action="${futRoot}/cont/vf/savePosts" method="post">
+             
+              <!-- row start -->
+              <div class="layui-row layui-col-space15 layui-form-item">
+                <div class="layui-col-md13">
+                  <label class="layui-form-label">父版块</label>
+                  <div class="layui-input-block">
+                    <select lay-verify="required" name="bbId" lay-filter="column" onchange="chgSmallBoardSel()"> 
+                      <option></option> 
+                      <#if (bigBoardAll?size > 0)>
+                      <#list bigBoardAll as big>
+                      <option value="${big.id?if_exists}">${big.title?if_exists}</option> 
+                      </#list>
+                      </#if>
+                     
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- row end -->
+              <!-- row start -->
+              <div class="layui-row layui-col-space15 layui-form-item">
+                <div class="layui-col-md13">
+                  <label class="layui-form-label">子版块</label>
+                  <div class="layui-input-block">
+                    <select lay-verify="required" name="smboId" lay-filter="column"> 
+                      <option></option> 
+                      <#if (smallBoardALL?size > 0)>
+                      <#list smallBoardALL as small>
+                      <option value="${small.id?if_exists}">${small.title?if_exists}</option> 
+                      </#list>
+                      </#if>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- row end -->
+              
+              <!-- row start -->
+              <div class="layui-row layui-col-space15 layui-form-item">
+                <div class="layui-col-md3">
+                  <label class="layui-form-label">所在专栏</label>
+                  <div class="layui-input-block">
+                    <select lay-verify="required" name="typ" lay-filter="column"> 
+                      <option></option> 
+                      <#if (postCommend?size > 0)>
+                      <#list postCommend as poc>
+                      <option value="${poc.id?if_exists}">${poc.title?if_exists}</option> 
+                      </#list>
+                      </#if>
+                    </select>
+                  </div>
+                </div>
+                <div class="layui-col-md9">
+                  <label for="L_title" class="layui-form-label">标题</label>
+                  <div class="layui-input-block">                           
+                    <input type="text" id="L_title" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+              </div>
+              <!-- row end -->
+             <!-- 文本编辑器 start -->
+              <div class="layui-form-item layui-form-text">
+                <div class="layui-input-block" id="wangEdit">
+                   <p><font style="color:blue;"> 海伦社区</font>欢迎您！</p>
+                </div>
+                <textarea id="text1" hidden="hidden" name="content" style="width:100%; height:200px;"></textarea>
+              </div>
+              <!-- 文本编辑器end -->
+              <div class="layui-form-item">
+                <div class="layui-inline">
+                  <label class="layui-form-label">悬赏经验值</label>
+                  <div class="layui-input-inline" >
+                    <select name="experience" name="contReward">
+                      <option value=""></option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                      <option value="60">60</option>
+                    </select>
+                  </div>
+                  <div class="layui-form-mid layui-word-aux">发表后无法更改悬赏</div>
+                </div>
+              </div>
+              
+              <div class="layui-form-item">
+				<button class="layui-btn layui-btn-normal" lay-filter="*" lay-submit>立即发布</button>
+				<a href="javascript:;" class="layui-btn layui-btn-normal bgred">预览</a>
+			  </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<div class="footer">
+	<p>
+		Copyright @ 2018<a href="http://www.cloudyf.cn" id="Cooperation"> 云朵家技术团队</a> 版权所有
+		<a class="display" target="_blank" href="#"><img src="${resultImgPath}/bbs/bbs_icon/ga.png"/>鄂ICP备18018426号-1</a>
+	</p>
+</div>
+<!-- footer end -->
+<!-- layui 2.0 -->
+<script src="${resRoot}/view/js/layui.all.js" ></script>
+<script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor.min.js"></script>
+<script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.js"></script>
+
+<script type="text/javascript">
+   /** 
+              初始化select控件
+   */
+   layui.use('form', function(){
+   	var form = layui.form;
+   });
+   
+   /**
+              富文本: wangEditor,
+     API地址:http://www.wangeditor.com/index.html
+   */
+   var E = window.wangEditor
+   var editor = new E('#wangEdit')
+   var $text1 = $('#text1')
+   editor.customConfig.zIndex = 1
+   editor.customConfig.onchange = function (html) {
+       // 监控变化，同步更新到 textarea
+       $text1.val(html)
+   }
+   //赋值内容图片
+   /* editor.customConfig.pasteTextHandle = function (content) {
+       let parser = new DOMParser();
+       let xmlDoc = parser.parseFromString(content, "text/html");
+       let img = xmlDoc.getElementsByTagName('img');
+   } */
+   // 将图片大小限制为 2M
+   editor.customConfig.uploadImgMaxSize = 2 * 1024 * 1024
+   // 限制一次最多上传 10 张图片
+   editor.customConfig.uploadImgMaxLength = 10
+   //自定义超时时间15s
+   editor.customConfig.uploadImgTimeout = 15000
+   // 配置服务器端地址
+   editor.customConfig.uploadImgServer = '${futRoot}/upload'
+    editor.create()
+    E.fullscreen.init('#wangEdit')
+    // 初始化 textarea 的值
+    $text1.val(editor.txt.html())
+</script>
+
+
+
+
+</body>
+</html>

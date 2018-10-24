@@ -1,9 +1,11 @@
 package com.bbs.model.view;
 
+import java.util.Date;
+
 public class BBSReply {
     private Integer id;
 
-    private Integer biboId;
+    private Integer bbId;
 
     private Integer smboId;
 
@@ -18,6 +20,13 @@ public class BBSReply {
     private Integer replyId;
 
     private Integer gradeId;
+    
+    
+    private Integer createUserId;
+
+    private String createUserName;
+
+    private Date createDate;
 
     private Integer del;
 
@@ -29,12 +38,12 @@ public class BBSReply {
         this.id = id;
     }
 
-    public Integer getBiboId() {
-        return biboId;
+    public Integer getBbId() {
+        return bbId;
     }
 
-    public void setBiboId(Integer biboId) {
-        this.biboId = biboId;
+    public void setBbId(Integer bbId) {
+        this.bbId = bbId;
     }
 
     public Integer getSmboId() {
@@ -93,11 +102,37 @@ public class BBSReply {
         this.gradeId = gradeId;
     }
 
-    public Integer getDel() {
+    public Integer getCreateUserId() {
+		return createUserId;
+	}
+
+	public void setCreateUserId(Integer createUserId) {
+		this.createUserId = createUserId;
+	}
+
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Integer getDel() {
         return del;
     }
 
     public void setDel(Integer del) {
         this.del = del;
     }
+    
+    
 }

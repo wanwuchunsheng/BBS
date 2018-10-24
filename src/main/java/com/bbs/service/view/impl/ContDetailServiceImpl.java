@@ -50,5 +50,14 @@ public class ContDetailServiceImpl implements IContDetailService{
 	public BBSSmallBoard queryBBSSmallBoardById(BBSSmallBoard bean) {
 		return dalClient.find(BBSSmallBoard.class, bean);
 	}
+	
+	/**
+	 * 说明：添增新帖
+	 * @author wch
+	 * */
+	@Override
+	public void savePosts(BBSPosts bean) {
+		dalClient.persist(bean);
+	}
 
 }

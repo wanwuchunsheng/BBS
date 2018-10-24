@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="bbsPostCommend">
+    
+   
+   <!--  查询基础数据  -->
+   <sql id="queryBbsPostCommendAll">
+        <![CDATA[
+           select * from bbs_post_commend where del=0
+        ]]>
+    </sql>
+    
+ 
+    
+</sqlMap>
+
+
+

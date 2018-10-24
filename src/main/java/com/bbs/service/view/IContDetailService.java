@@ -13,5 +13,7 @@ public interface IContDetailService {
 
 	BBSSmallBoard queryBBSSmallBoardById(BBSSmallBoard bean);
 
+	void savePosts(BBSPosts bean);
+
 
 }

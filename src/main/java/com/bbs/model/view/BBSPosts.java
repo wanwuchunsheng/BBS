@@ -54,8 +54,6 @@ public class BBSPosts {
 
     private Date updateDate;
 
-    private String sbAdmin;
-
     private Integer del;
 
     private String content;
@@ -199,7 +197,7 @@ public class BBSPosts {
     public void setCreateUserName(String createUserName) {
         this.createUserName = createUserName == null ? null : createUserName.trim();
     }
-    @Column(name = "create_user_date")
+    @Column(name = "create_date")
     public Date getCreateDate() {
         return createDate;
     }
@@ -231,14 +229,7 @@ public class BBSPosts {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
-    @Column(name = "sb_admin")
-    public String getSbAdmin() {
-        return sbAdmin;
-    }
-
-    public void setSbAdmin(String sbAdmin) {
-        this.sbAdmin = sbAdmin == null ? null : sbAdmin.trim();
-    }
+   
     @Column(name = "del")
     public Integer getDel() {
         return del;

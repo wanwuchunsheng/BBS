@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServlet;
 
 import org.apache.log4j.Logger;
 
+import com.bbs.service.view.IInitService;
+
 /**
  * 服务器启动时，访问数据库，加载所有实例化信息到静态类中
- * <li>@author Leejean
- * <li>@create 2014-7-5下午09:18:48
+ * <li>@author sch
  */
 @WebServlet("/InitResourceServlet")
 public class InitResourceServlet extends HttpServlet {
@@ -28,10 +29,11 @@ public class InitResourceServlet extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		/*IPhoneService comboboxs=ApplicationContextUtil.getBean(IPhoneService.class);
-		comboboxs.initCommodityNavInfo();
-		comboboxs.initcnavAll();//商品类型
-		log.info("初始化数据成功！！");*/
+		IInitService comboboxs=ApplicationContextUtil.getBean(IInitService.class);
+		comboboxs.queryBBSBigBoardAll();// 查询父版块
+		comboboxs.queryBBSSmallBoardAll();//查询子版块
+		comboboxs.queryPostCommend();//查询基础数据
+		log.info("初始化数据成功！！");
 	}
 
 }

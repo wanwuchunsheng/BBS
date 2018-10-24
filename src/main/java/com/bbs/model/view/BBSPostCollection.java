@@ -5,7 +5,7 @@ import java.util.Date;
 public class BBSPostCollection {
     private Integer id;
 
-    private Integer biboId;
+    private Integer bbId;
 
     private Integer smboId;
 
@@ -25,15 +25,15 @@ public class BBSPostCollection {
         this.id = id;
     }
 
-    public Integer getBiboId() {
-        return biboId;
-    }
+    public Integer getBbId() {
+		return bbId;
+	}
 
-    public void setBiboId(Integer biboId) {
-        this.biboId = biboId;
-    }
+	public void setBbId(Integer bbId) {
+		this.bbId = bbId;
+	}
 
-    public Integer getSmboId() {
+	public Integer getSmboId() {
         return smboId;
     }
 

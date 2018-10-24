@@ -58,7 +58,7 @@
 			</a>
 			</li>
 			<li class="newMsg">
-			<a href="${futRoot}/mine/index" class=" layui-hide">
+			<a href="${futRoot}/mine/index" class="layui-hide nav-this">
 				<i class="iconfont icon-user"></i>我的
 			</a>
             </li>
@@ -72,6 +72,9 @@
 			     <a href="${futRoot}/mine/index">
 			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" />
 			     </a>
+			     <span class="loginuser-signin"> 
+			        <a>${bbsUserInfo.niceName?if_exists}</a>
+			     </span>
 			     <span class="loginuser-signin"> 
 			        <a  href="${futRoot}/mine/logout"><i class="iconfont icon-signin"></i>  注销</a>
 			     </span>
