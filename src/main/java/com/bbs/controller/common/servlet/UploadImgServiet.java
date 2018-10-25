@@ -2,13 +2,17 @@ package com.bbs.controller.common.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -65,7 +69,10 @@ public class UploadImgServiet extends HttpServlet {
         String imgUrl = Constants.BBS_REQ_IMG+ fileName;
         response.setContentType("text/text;charset=utf-8");
         PrintWriter out = response.getWriter();
-        out.print(imgUrl);  //返回url地址
+        Map<String,String> map=new HashMap<String, String>();
+        map.put("url", imgUrl);
+        JSONArray json = JSONArray.fromObject(map); 
+        out.print(json.toString());  //返回url地址
         out.flush();
         out.close();
     }

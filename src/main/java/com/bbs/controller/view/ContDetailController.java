@@ -2,6 +2,7 @@ package com.bbs.controller.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,6 +76,7 @@ public class ContDetailController {
 	
 	/**
 	 * 说明：添加增帖子
+	 *   拦截器-验证是否登录
 	 *   保存完成后，重定向综合区
 	 * @author Administrator
 	 * @createTime 2018年6月11日22:48:33
@@ -88,6 +90,16 @@ public class ContDetailController {
 			bean.setUpdateUserId(bbsUserInfo.getId());
 			bean.setCreateUserName(bbsUserInfo.getUname());
 			bean.setUpdateUserName(bbsUserInfo.getUname());
+			bean.setCreateDate(new Date());
+			bean.setUpdateDate(bean.getCreateDate());
+			bean.setContPreview(0);//预览0
+			bean.setContReply(0);//回复0
+			bean.setContTop(0);//置顶0
+			bean.setContRec(0);//
+			bean.setContGood(0);//点赞0
+			bean.setContBad(0);//反对0
+			bean.setContStatus(0);//默认状态0  1-完结
+			bean.setDel(0);//默认0-显示  1-禁用 
 			contDetailService.savePosts(bean);
 			//重定向
 			PrintWriter out = response.getWriter();
