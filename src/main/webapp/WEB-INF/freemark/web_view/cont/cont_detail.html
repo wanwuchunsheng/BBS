@@ -300,6 +300,7 @@
 							<textarea class="layui-textarea fly-editor" id="content" style="display: none" name="content" lay-verify="content" >  
 						             
 						    </textarea>
+
 							<div class="cont-right">
 							   <br/>
 							   <button onclick="replySub()" class="layui-btn layui-btn-normal">发送</button>		
@@ -376,8 +377,11 @@
 
 
 <script type="text/javascript">
+var index=null;
+var layedit=null;
    layui.use(['layer', 'form','layedit'], function(){
-	   var layedit= layui.layedit;
+	   layedit= layui.layedit;
+	  
 		//图片上传
 	   var docName="bbs_reply";//添加帖子，富文本图片保存
 	   layedit.set({
@@ -387,10 +391,10 @@
 		   }
 	   });
 	  //富文本编辑器自定义工具栏
-      var index=  layedit.build('content', {
+      index=  layedit.build('content', {
            height: 160
-        })
-      layedit.sync(index)
+      })
+
 	  /*  {
 		  "code": 0 //0表示成功，其它失败
 		  ,"msg": "" //提示信息 //一般上传失败后返回
@@ -404,6 +408,7 @@
    
 	
    function replySub(){
+	   layedit.sync(index);
 	   //提交后台处理
 	   $.ajax({
 			url :"${futRoot}/cont/vf/addBbsReply",

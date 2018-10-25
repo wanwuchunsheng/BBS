@@ -159,11 +159,18 @@
         ]]>
     </sql>
     <!-- 根据子版块ID，查询综合或者子版块  -->
-   <sql id="updateBBSPostsById">
+    <sql id="updateBBSPostsById">
         <![CDATA[
             update bbs_posts set CONT_PREVIEW=cont_preview+1   where id=:id 
         ]]>
     </sql>
+    <!-- 根据子版块ID，查询综合或者子版块  回帖postId指  bbs_posts表ID-->
+    <sql id="updateBBSPostsByContReply">
+        <![CDATA[
+            update bbs_posts set cont_reply=cont_reply+1   where id=:postsId
+        ]]>
+    </sql>
+    
 </sqlMap>
 
 

@@ -122,7 +122,8 @@ public class ContDetailController {
 	/**
 	 * 说明：回帖
 	 *   拦截器-验证是否登录
-	 *   保存完成后,局部刷新页面
+	 *   增加事物处理
+	 *   保存完成后,更新主贴回复数1
 	 * @author Administrator
 	 * @createTime 2018年6月11日22:48:33
 	 * */

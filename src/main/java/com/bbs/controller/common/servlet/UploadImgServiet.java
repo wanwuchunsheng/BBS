@@ -40,6 +40,9 @@ public class UploadImgServiet extends HttpServlet {
 
     /**
      * 图片上传
+     * bbs_reply -回帖上传
+     * bbs_editor -发帖上传
+     * 要求返回的json格式不同，分开判断
      * 
      * */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -68,15 +71,22 @@ public class UploadImgServiet extends HttpServlet {
         /**********************/
 
         //获取图片url地址
-        String imgUrl = Constants.BBS_REQ_IMG+ fileName;
+        String imgUrl = Constants.BBS_REQ_IMG+docName+"/"+ fileName;
         response.setContentType("text/text;charset=utf-8");
         PrintWriter out = response.getWriter();
         Map<String,String> map=new HashMap<String, String>();
-        map.put("url", imgUrl);
-        JSONArray json = JSONArray.fromObject(map); 
-        out.print(json.toString());  //返回url地址
-        out.flush();
-        out.close();
+        if("bbs_editor".equals(docName)){
+        	map.put("url", imgUrl);
+        	JSONArray json = JSONArray.fromObject(map); 
+            out.print(json.toString());  //返回url地址
+            out.flush();
+            out.close();
+        }else if("bbs_reply".equals(docName)){
+        	 String str="{\"code\": 0 ,\"msg\": \"\"  ,\"data\": {\"src\": \""+imgUrl+"\",\"title\": \"\"}}";
+        	 out.print(str);  //返回url地址
+             out.flush();
+             out.close();
+        }
     }
 
     public void init() throws ServletException {

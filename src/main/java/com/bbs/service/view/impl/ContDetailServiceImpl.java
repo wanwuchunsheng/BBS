@@ -10,6 +10,7 @@ import com.bbs.model.view.BBSReply;
 import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.service.view.IContDetailService;
 import com.ibm.framework.dal.client.IPaginationDalClient;
+import com.ibm.framework.dal.transaction.template.CallBackTemplate;
 /**
  * 说明：跳转详细页面
  * @dateTime 2018年10月22日16:48:15
@@ -63,11 +64,21 @@ public class ContDetailServiceImpl implements IContDetailService{
 
 	/**
 	 * 说明：保存回帖
+	 *   事物
 	 * @author wch
 	 * */
 	@Override
-	public void addBbsReply(BBSReply bean) {
-		dalClient.persist(bean);
+	public void addBbsReply(final BBSReply bean) {
+		dalClient.getTransactionTemplate().execute(new CallBackTemplate<Integer>() {
+			@Override
+			public Integer invoke() {
+				//保存
+        		dalClient.persist(bean);
+        		//更新帖子回复数量
+        		dalClient.execute("bbsPosts.updateBBSPostsByContReply", bean);
+				return null;
+			}
+		});
 	}
 
 	/**
