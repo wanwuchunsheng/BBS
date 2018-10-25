@@ -12,9 +12,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbs.model.sys.SysUserInfo;
 import com.bbs.model.view.BBSPosts;
+import com.bbs.model.view.BBSReply;
 import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.model.view.BaseParams;
 import com.bbs.service.view.IContDetailService;
@@ -49,6 +51,7 @@ public class ContDetailController {
 	/**
 	 * 说明：预览详细
 	 *   1/通过ID查询对象内容
+	 *   2/查询该对象所有回帖
 	 * @author Administrator
 	 * @createTime 2018年6月11日22:48:33
 	 * */
@@ -56,6 +59,7 @@ public class ContDetailController {
 	public String gotoContIndex(HttpSession session, HttpServletRequest request,BBSPosts bean){
 		BBSPosts posts=contDetailService.queryPostsObjById(bean);
 		request.setAttribute("postsObj", posts);
+		request.setAttribute("replyAll",contDetailService.queryBBSReplyAll(posts) );
 		return "/web_view/cont/cont_detail";
 	}
 	
@@ -114,5 +118,30 @@ public class ContDetailController {
 		}
 	    
 	}
-
+	
+	/**
+	 * 说明：回帖
+	 *   拦截器-验证是否登录
+	 *   保存完成后,局部刷新页面
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/addBbsReply")
+	@ResponseBody
+	public String addBbsReply(HttpSession session, HttpServletResponse response,HttpServletRequest request,BBSReply bean){
+		try {
+			SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
+			bean.setCreateUserId(bbsUserInfo.getId());
+			bean.setCreateUserName(bbsUserInfo.getUname());
+			bean.setCreateDate(new Date());
+			bean.setContGood(0);//点赞0
+			bean.setContBad(0);//反对0
+			bean.setDel(0);//默认0-显示  1-禁用 
+			contDetailService.addBbsReply(bean);//保存 
+			return "true";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    return "false";
+	}
 }

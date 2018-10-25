@@ -202,7 +202,7 @@ function chgSmallBoardSel(){
               
               <div class="layui-form-item">
 				<button class="layui-btn layui-btn-normal" lay-filter="*" lay-submit>立即发布</button>
-				<a href="javascript:;" class="layui-btn layui-btn-normal bgred">预览</a>
+				<button id="btn1" class="layui-btn layui-btn-normal bgred">预览</button>
 			  </div>
 
             </form>
@@ -255,11 +255,13 @@ function chgSmallBoardSel(){
    // 将图片大小限制为 2M
    editor.customConfig.uploadImgMaxSize = 2 * 1024 * 1024
    // 限制一次最多上传 10 张图片
-   editor.customConfig.uploadImgMaxLength = 10
+   editor.customConfig.uploadImgMaxLength = 1
    //自定义超时时间15s
    editor.customConfig.uploadImgTimeout = 15000
+   //定义保存本地文件夹名称
+   var docName="bbs_editor";//添加帖子，富文本图片保存
    // 配置服务器端地址
-   editor.customConfig.uploadImgServer = '${futRoot}/upload'
+   editor.customConfig.uploadImgServer = '${futRoot}/upload?docName='+docName
    editor.customConfig.uploadImgHooks = {
 		    before: function (xhr, editor, files) {
 		        // 图片上传之前触发
@@ -301,6 +303,12 @@ function chgSmallBoardSel(){
     E.fullscreen.init('#wangEdit')
     // 初始化 textarea 的值
     $text1.val(editor.txt.html())
+    
+    //预览
+    document.getElementById('btn1').addEventListener('click', function () {
+        // 读取 html
+        alert(editor.txt.html())
+    }, false)
 </script>
 
 

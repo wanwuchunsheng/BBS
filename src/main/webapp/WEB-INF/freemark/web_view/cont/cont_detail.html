@@ -26,6 +26,7 @@
 <link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
+<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
 
 </head>
@@ -157,23 +158,162 @@
 		
 		<!-- 回帖信息 -->
 		<div class="commentBox fly-panel detail-box" style="padding-top: 0;">
-			<fieldset class="layui-elem-field layui-field-title" style="text-align: center;"> <legend>回帖</legend> </fieldset>
+			<fieldset class="layui-elem-field layui-field-title" style="text-align: center;"><legend>回帖</legend> </fieldset>
 			<ul class="jieda" id="jieda">
 				<!-- 评论 -->
-			</ul>
-			<div class="pager page" id="comment"></div>	
-			<div class="layui-form layui-form-pane commentEditor">
-				<div class="reviewInfo" id="reviewInfo">
-					<div class="content"></div>
-					<div class="close cancelReply">×</div>
+				<!-- <li data-id="13" id="comment13" data-type="discuz">
+					<div class="detail-about detail-about-reply fly-detail-user">
+						<div class="jieda-comment">
+							<span type="comment" class="comment-btn">
+								<i class="iconfont icon-comment"></i>回复
+							</span> 
+						</div>
+						<div class="jie-user comment-user">
+							<a href="/index.php/Users/member/uid/10.html">
+							<img src="http://www.wailaa.cn/Uploads/Head/10/1514340232.jpg"  onerror="imgErrorType('http://www.wailaa.cn/',this,0);">
+							<cite>
+								<i>愤怒的射手</i>
+							</cite> 
+							</a>
+						</div>
+						<div class="detail-hits">
+							<span>2017-12-27 17:06</span> 
+						</div>
+					</div>
+					<div class="detail-body comment-body jieda-body photos">实用哦</div>
+					回复
+					<div class="replayList replayDetail13"></div>
+				</li>
+				<li data-id="64" id="comment64" data-type="discuz">
+					<div class="detail-about detail-about-reply fly-detail-user">
+						<div class="jieda-comment">
+							<span type="deleteComment" class="comment-btn">
+									<i class="iconfont icon-delete"></i>删除
+							</span>							
+							<span type="comment" class="comment-btn">
+								<i class="iconfont icon-comment"></i>回复
+							</span> 
+						</div>
+						<div class="jie-user comment-user">
+							<a href="/index.php/Users/member/uid/315.html">
+							<img src="http://www.wailaa.cn/Uploads/Head/315/1540280343.jpg"  onerror="imgErrorType('http://www.wailaa.cn/',this,0);">
+							<cite>
+								<i>简单点VS</i>
+							</cite> 
+							</a>
+						</div>
+						<div class="detail-hits">
+							<span>刚刚</span> 
+						</div>
+					</div>
+					<div class="detail-body comment-body jieda-body photos">111</div>
+					回复
+					<div class="replayList replayDetail64">
+						<div class="replyDetail" reply-id="20" id="reply20">
+								<div class="detail-about detail-about-reply fly-detail-user">
+									<div class="jieda-comment jieda-reply-sub">
+										<span type="deleteReply" class="comment-btn" reply-id="20">
+												<i class="iconfont icon-delete"></i>删除
+										</span>										
+										<span type="reply" class="reply-btn" reply-id="20">
+											<i class="iconfont icon-comment"></i>回复
+										</span> 
+									</div>
+									<div class="jie-user reply-user">
+										<a href="/index.php/Users/member/uid/315.html">
+										<img src="http://www.wailaa.cn/Uploads/Head/315/1540280343.jpg"  onerror="imgErrorType('http://www.wailaa.cn/',this,0);">
+										</a>
+										<cite>
+											<a href="/index.php/Users/member/uid/315.html">
+											<i class="replyAuthor">简单点VS</i>
+											</a>
+											<em>刚刚</em>
+											<em class="display">回复：</em>
+												<i class="blue display">
+													<a href="/index.php/Users/member/uid/315.html">简单点VS</a>
+												</i>										
+										</cite>
+									</div>
+								</div>
+								<div class="detail-body reply-body jieda-body photos">
+									222								
+								</div>
+							</div>					
 				</div>
+				</li>	 -->
+				
+				<#if (replyAll?size > 0)>
+		        <#list replyAll as rep>
+				<li data-id="13" id="comment13" data-type="discuz">
+					<div class="detail-about detail-about-reply fly-detail-user">
+						<div class="jieda-comment">
+							<span type="comment" class="comment-btn">
+								<i class="iconfont icon-comment"></i>回复
+							</span> 
+						</div>
+						<div class="jie-user comment-user">
+							<a href="javascript:;">
+							<img src="${resultImgPath}/bbs/bbs_icon/${rep.imgPath?if_exists}" >
+							<cite>
+								<i>${rep.createUserName?if_exists}</i>
+							</cite> 
+							</a>
+						</div>
+						<div class="detail-hits">
+							<span>${rep.createDate?string("yyyy-MM-dd HH:mm")}</span> 
+						</div>
+					</div>
+					<div class="detail-body comment-body jieda-body photos">
+                        ${rep.content?if_exists}
+                    </div>
+					<!-- 回复 -->
+					<div class="replayList replayDetail13"></div>
+				</li>
+				</#list>
+		        </#if>	
+			</ul>
+
+			<div class="pager page" id="comment">
+		                
+		            
+			</div>	
+			<div class="layui-form layui-form-pane commentEditor">
+				<!-- <div class="reviewInfo" id="reviewInfo">
+					<div class="content">good</div>
+					<div class="close cancelReply">X</div>
+				</div> -->
 				<div class="layui-form-item layui-form-text">
+				       <#if (bbsUserInfo)??>
+						<!-- <div class="layui-input-block">
+							<div class="layui-input-block" id="wangEdit">
+			                  
+			                </div>
+			                <textarea id="text1" hidden="hidden" name="content" style="width:100%; height:200px;"></textarea>
+						</div> -->
+						 <form id="ajaxForm" action="" method="post">
+						    <input type="hidden" value="${postsObj.id}" name="postsId"  />
+						    <input type="hidden" value="${postsObj.bbId}" name="bbId"  />
+						    <input type="hidden" value="${postsObj.smboId}" name="smboId"  />
+						    <input type="hidden" value="0" name="replyId"  />
+						    <input type="hidden" value="0" name="gradeId"  />
+							<!-- 文本框 -->
+							<textarea class="layui-textarea fly-editor" id="content" style="display: none" name="content" lay-verify="content" >  
+						             
+						    </textarea>
+							<div class="cont-right">
+							   <br/>
+							   <button onclick="replySub()" class="layui-btn layui-btn-normal">发送</button>		
+							</div>
+						</form>
+					   <#else>
 						<div class="layui-input-block">
 							<blockquote class="layui-elem-quote layui-quote-nm layui-alert">
 							   <a href="${futRoot}/mine/login">未登录 | 请先登录才能回复内容~</a>
 							</blockquote>
 						</div>
-				</div>			
+					  </#if>
+				</div>	
+				
 			</div>
 		</div>
 		<!-- 回帖信息 end -->
@@ -235,7 +375,54 @@
 <!-- footer end -->
 
 
+<script type="text/javascript">
+   layui.use(['layer', 'form','layedit'], function(){
+	   var layedit= layui.layedit;
+		//图片上传
+	   var docName="bbs_editor";//添加帖子，富文本图片保存
+	   layedit.set({
+		   uploadImage: {
+		     url:'${futRoot}/upload?docName='+docName //接口url
+		     ,type: 'post' //默认post
+		   }
+	   });
+	  //富文本编辑器自定义工具栏
+      var index=  layedit.build('content', {
+           height: 160
+        })
+      layedit.sync(index)
+	  /*  {
+		  "code": 0 //0表示成功，其它失败
+		  ,"msg": "" //提示信息 //一般上传失败后返回
+		  ,"data": {
+		    "src": "图片路径"
+		    ,"title": "图片名称" //可选
+		  }
+		} */
 
+   });
+   
+	
+   function replySub(){
+	   //提交后台处理
+	   $.ajax({
+			url :"${futRoot}/cont/vf/addBbsReply",
+			type : "post",
+			dataType : "json",
+		    async: false,
+			data : $("#ajaxForm").serialize(),
+			success : function(data) {
+				console.info(data);
+				if(data==true){
+					//刷新当前页面 
+					window.location.reload();
+				}else{
+                    alert("提交失败!");
+			    }
+			}
+		}); 
+   }
+</script>
 
 
 </body>

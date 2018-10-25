@@ -44,7 +44,9 @@ public class UploadImgServiet extends HttpServlet {
      * */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	String path =Constants.BBS_SAVE_IMG;
+    	String docName=request.getParameter("docName");
+    	String path =Constants.BBS_SAVE_IMG+docName;
+    	System.out.println("localhost url>>"+path);
         File file = new File(path);
         if (!file.exists())
             file.mkdirs();

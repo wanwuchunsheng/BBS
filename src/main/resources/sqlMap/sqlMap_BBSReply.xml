@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="bbsReply">
+    
+   <!--  查询列表 -->
+   <sql id="queryBBSReplyAll">
+        <![CDATA[
+			SELECT
+				a.ID,
+				a.BB_ID,
+				a.SMBO_ID,
+				a.POSTS_ID,
+				a.CONTENT,
+				a.CONT_GOOD,
+				a.CONT_BAD,
+				a.REPLY_ID,
+				a.GRADE_ID,
+				a.CREATE_USER_NAME,
+				a.CREATE_USER_ID,
+				a.CREATE_DATE,
+				a.DEL,
+			  b.photo_path as imgPath
+			FROM
+				bbs_reply a left join sys_user b on a.CREATE_USER_ID=b.id
+			WHERE
+				a.del = 0 and b.del=0
+			ORDER BY
+				a.create_date DESC
+        ]]>
+    </sql>
+ 
+    
+  
+</sqlMap>
+
+
+

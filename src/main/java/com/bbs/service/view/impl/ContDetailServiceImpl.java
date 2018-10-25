@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbs.model.view.BBSPosts;
+import com.bbs.model.view.BBSReply;
 import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.service.view.IContDetailService;
 import com.ibm.framework.dal.client.IPaginationDalClient;
@@ -58,6 +59,25 @@ public class ContDetailServiceImpl implements IContDetailService{
 	@Override
 	public void savePosts(BBSPosts bean) {
 		dalClient.persist(bean);
+	}
+
+	/**
+	 * 说明：保存回帖
+	 * @author wch
+	 * */
+	@Override
+	public void addBbsReply(BBSReply bean) {
+		dalClient.persist(bean);
+	}
+
+	/**
+	 * 说明：查询回帖
+	 * @author wch
+	 * */
+	@Override
+	public List<BBSReply> queryBBSReplyAll(BBSPosts posts) {
+		// TODO Auto-generated method stub
+		return dalClient.queryForList("bbsReply.queryBBSReplyAll", posts, BBSReply.class);
 	}
 
 }

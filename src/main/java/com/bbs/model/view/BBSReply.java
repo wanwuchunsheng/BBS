@@ -1,9 +1,25 @@
 package com.bbs.model.view;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BBSReply {
-    private Integer id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+/**
+ * 回帖实体类
+ * */
+@Entity(name = "bbs_reply")
+public class BBSReply implements Serializable{
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer bbId;
 
@@ -29,7 +45,13 @@ public class BBSReply {
     private Date createDate;
 
     private Integer del;
+    
+    //
+    private String imgPath;//头像路径
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
@@ -37,7 +59,7 @@ public class BBSReply {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @Column(name = "bb_id")
     public Integer getBbId() {
         return bbId;
     }
@@ -46,6 +68,7 @@ public class BBSReply {
         this.bbId = bbId;
     }
 
+    @Column(name = "smbo_id")
     public Integer getSmboId() {
         return smboId;
     }
@@ -53,7 +76,7 @@ public class BBSReply {
     public void setSmboId(Integer smboId) {
         this.smboId = smboId;
     }
-
+    @Column(name = "posts_id")
     public Integer getPostsId() {
         return postsId;
     }
@@ -62,6 +85,7 @@ public class BBSReply {
         this.postsId = postsId;
     }
 
+    @Column(name = "content")
     public String getContent() {
         return content;
     }
@@ -70,6 +94,7 @@ public class BBSReply {
         this.content = content == null ? null : content.trim();
     }
 
+    @Column(name = "cont_good")
     public Integer getContGood() {
         return contGood;
     }
@@ -78,6 +103,7 @@ public class BBSReply {
         this.contGood = contGood;
     }
 
+    @Column(name = "cont_bad")
     public Integer getContBad() {
         return contBad;
     }
@@ -85,7 +111,7 @@ public class BBSReply {
     public void setContBad(Integer contBad) {
         this.contBad = contBad;
     }
-
+    @Column(name = "reply_id")
     public Integer getReplyId() {
         return replyId;
     }
@@ -94,6 +120,7 @@ public class BBSReply {
         this.replyId = replyId;
     }
 
+    @Column(name = "grade_id")
     public Integer getGradeId() {
         return gradeId;
     }
@@ -101,7 +128,7 @@ public class BBSReply {
     public void setGradeId(Integer gradeId) {
         this.gradeId = gradeId;
     }
-
+    @Column(name = "create_user_id")
     public Integer getCreateUserId() {
 		return createUserId;
 	}
@@ -109,7 +136,7 @@ public class BBSReply {
 	public void setCreateUserId(Integer createUserId) {
 		this.createUserId = createUserId;
 	}
-
+	@Column(name = "create_user_name")
 	public String getCreateUserName() {
 		return createUserName;
 	}
@@ -117,7 +144,7 @@ public class BBSReply {
 	public void setCreateUserName(String createUserName) {
 		this.createUserName = createUserName;
 	}
-
+	@Column(name = "create_date")
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -125,7 +152,7 @@ public class BBSReply {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-
+	@Column(name = "del")
 	public Integer getDel() {
         return del;
     }
@@ -133,6 +160,14 @@ public class BBSReply {
     public void setDel(Integer del) {
         this.del = del;
     }
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
     
     
 }
