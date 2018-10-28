@@ -5,7 +5,7 @@
    <!--  查询基础数据  -->
    <sql id="queryBbsPostCommendAll">
         <![CDATA[
-           select * from bbs_post_commend where del=0
+           select * from bbs_post_commend where del=0 order by num asc
         ]]>
     </sql>
     

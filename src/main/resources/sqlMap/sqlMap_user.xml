@@ -41,13 +41,49 @@
         ]]>
     </sql>
     
-   <!-- bbs 用户登录验证  -->
+   <!-- bbs 用户登录验证 select * from sys_user where email=:email and upwd=:upwd and del=0  -->
    <sql id="verifyBBSUser">
         <![CDATA[
-           select * from sys_user where email=:email and upwd=:upwd and del=0
+            select 
+			    a.ID,
+				a.UNAME,
+				a.UPWD,
+				a.ENO,
+				a.GENDER,
+				a.TEL,
+				a.PHONE,
+				a.EMAIL,
+				a.DEL,
+				a.SECURITY_LEVEL,
+				a.WEBCHAT,
+				a.QQ,
+				a.USR_STATUS,
+				a.SMS_NOTITFY,
+				a.PHOTO_PATH,
+				a.QRCODE_PATH,
+				a.ADDRESS,
+				a.DPNUM,
+				a.JOB,
+				a.NOW_ADDRESS,
+				a.NICE_NAME,
+				a.CREATE_TIME,
+				a.UPDATE_USER_ID,
+				a.UPDATE_TIME,
+				a.CREATE_USER_ID,
+				a.EXP_POINTS,
+			  (select c.id from bbs_signin c where c.CREATE_USER_ID=a.id and DATE_FORMAT(c.create_date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') limit 1) as isCheck
+			 from sys_user a 
+			 where a.email=:email and a.upwd=:upwd and a.del=0
         ]]>
     </sql>
     
+    
+    <!-- 修改用户经验值 -->
+    <sql id="updateSysUserById">
+        <![CDATA[
+            update sys_user set exp_points=exp_points+:expPoints  where id=1
+        ]]>
+    </sql>
 </sqlMap>
 
 

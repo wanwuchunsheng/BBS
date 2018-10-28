@@ -45,6 +45,10 @@ public class SysUserInfo implements Serializable{
 	private String nowAddress;//现居地，收货地址
 	private String niceName;//昵称
 	
+	private String expPoints;//经验值
+	private String isCheck;//BBS签到
+	
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -240,6 +244,20 @@ public class SysUserInfo implements Serializable{
 	}
 	public void setNiceName(String niceName) {
 		this.niceName = niceName;
+	}
+	@Column(name = "exp_points")
+	public String getExpPoints() {
+		return expPoints;
+	}
+	public void setExpPoints(String expPoints) {
+		this.expPoints = expPoints;
+	}
+	
+	public String getIsCheck() {
+		return isCheck;
+	}
+	public void setIsCheck(String isCheck) {
+		this.isCheck = isCheck;
 	}
 	
 	

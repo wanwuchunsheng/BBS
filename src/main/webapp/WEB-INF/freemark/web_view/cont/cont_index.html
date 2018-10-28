@@ -4,15 +4,13 @@
 <meta charset="utf-8" />
 <title>海伦社区</title>
 <meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
-<meta name="description" content="海伦国际欢迎您加入QQ业主【总】群:645952730"/>
+<meta name="description" content="武汉青山武东海伦国际业主自己开发的社区，方便业主近距离交流，分享生活。青山武东海伦国际自己的交流区，海伦国际欢迎各业主加入QQ【总】群:645952730"/>
 <meta name="author" content="子版块" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 <script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
 <script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
-<!-- layui 2.0 -->
-<script src="${resRoot}/view/js/layui.all.js" ></script>
 
 <!-- icon-font -->
 <link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
@@ -118,21 +116,25 @@
 		<div class="fly-tab" >
 			<div class="layui-tab layui-tab-brief">
 				<ul class="layui-tab-title">
-					<li class="layui-this">
-						<a href="#">全部帖</a>
-					</li>
-					<li class="">
-						<a href="#">活动</a>
-					</li>
-					<li class="">
-						<a href="#">求助</a>
-					</li>
-					<li class="">
-						<a href="#">围观</a>
-					</li>
-					<li class="">
-						<a href="#">广告</a>
-					</li>
+				   <#if (bbsSmallBoard)??>
+						<li >
+							<a style="float:left;" href="${futRoot}/cont/index?smboId=${bbsSmallBoard.id?if_exists}" >全部帖</a><a onclick="window.location.reload()" href="javascript:;"><i class="iconfont icon-refresh allstyl"></i></a>
+						</li>
+						<#if (postCommendAll?size > 0)>
+		                <#list postCommendAll as pca>
+		                  <li><a href="${futRoot}/cont/index?typ=${pca.code?if_exists}&smboId=${bbsSmallBoard.id?if_exists}">${pca.title?if_exists}</a></li>
+					    </#list>
+					    </#if>
+				  <#else>
+				       <li>
+							<a style="float:left;" href="${futRoot}/cont/index" >全部帖</a><a onclick="window.location.reload()" href="javascript:;"><i class="iconfont icon-refresh allstyl"></i></a>
+						</li>
+						<#if (postCommendAll?size > 0)>
+		                <#list postCommendAll as pca>
+		                  <li><a href="${futRoot}/cont/index?typ=${pca.code?if_exists}">${pca.title?if_exists}</a></li>
+					    </#list>
+					    </#if>
+				  </#if>
 				</ul>
 			</div> 
 		</div>
@@ -182,12 +184,12 @@
 					</li>
 					</#list>
 					<br/>
-					<div class="cont-more" >
+					<!-- <div class="cont-more" >
 				        <div class="pager page"></div>  
 						<span class="current">1</span>
 						<a class="num" href="#">2</a> 
 						<a class="next" href="#">下页</a>
-				    </div>
+				    </div> -->
 	                </#if>
 			   </ul>
 			   
@@ -204,8 +206,32 @@
 <div class="edge">
 	
     <div class="jie-add">
-		<a href="javascript:void();" class="layui-btn layui-btn-normal layui-btn-big">星期一</a>
-		<a href="javascript:layer.msg('尚未开放');" class="layui-btn layui-btn-big layui-btn-normal" style="margin-left: 10px;">签到</a>
+    <script language="javascript">
+	var week;
+	//获取当前星期X(0-6,0代表星期天)
+	if(new Date().getDay()==0) week="星期日"
+	if(new Date().getDay()==1) week="星期一"
+	if(new Date().getDay()==2) week="星期二"
+	if(new Date().getDay()==3) week="星期三"
+	if(new Date().getDay()==4) week="星期四"
+	if(new Date().getDay()==5) week="星期五"
+	if(new Date().getDay()==6) week="星期六"
+	//document.write("今天是："+new Date().getYear()+"年 "+(new Date().getMonth()+1)+" 月 "+new Date().getDate()+" 日 "+week+" "+new Date().getHours()+" 点 "+new Date().getMinutes()+" 分");
+	</script>
+		<a href="javascript:void();" class="layui-btn layui-btn-normal layui-btn-big"><script>document.write(week);</script></a>
+		
+		<#if (bbsUserInfo)??>
+			<#if bbsUserInfo.isCheck?if_exists=='1'>
+			          <a href="javascript:layer.msg('您已签到');" class="layui-btn layui-btn-big layui-btn-normal" style="margin-left: 10px;"> 已签到</a>
+			<#else>
+			     <a href="${futRoot}/cont/vf/addsignin" class="layui-btn layui-btn-big layui-btn-normal" style="margin-left: 10px;">未签到 </a>
+			</#if>
+		<#else>
+			  <a href="javascript:layer.msg('请登录后再签到...');" class="layui-btn layui-btn-big layui-btn-normal" style="margin-left: 10px;">未签到 </a>
+		</#if>
+		
+		
+		</a>
     </div>
 			
     <div class="fly-panel fly-link">
@@ -259,8 +285,14 @@
 <!-- footer end -->
 
 
-
-
+<!-- layui 2.0 -->
+<script src="${resRoot}/view/js/layui.all.js" ></script>
+<script type="text/javascript">
+    layui.use('element', function(){
+	  var element = layui.element;
+	  
+	});
+</script>
 
 </body>
 </html>

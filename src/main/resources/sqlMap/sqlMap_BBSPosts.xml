@@ -127,7 +127,6 @@
 				a.SMBO_ID,
 				a.TITLE,
 				a.TYP,
-				a.CONTENT,
 				a.CONT_PREVIEW,
 				a.CONT_REPLY,
 				a.CONT_REWARD,
@@ -153,7 +152,8 @@
 				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
 			WHERE
 				a.del = 0 and b.del=0
-			    <#if id?exists && id!=""> AND a.smbo_id=:id  </#if>
+			    <#if smboId?exists && smboId!=""> AND a.smbo_id=:smboId  </#if>
+			    <#if typ?exists && typ!=""> AND a.typ=:typ  </#if>
 			ORDER BY
 				a.UPDATE_DATE DESC 
         ]]>
@@ -167,7 +167,7 @@
     <!-- 根据子版块ID，查询综合或者子版块  回帖postId指  bbs_posts表ID-->
     <sql id="updateBBSPostsByContReply">
         <![CDATA[
-            update bbs_posts set cont_reply=cont_reply+1   where id=:postsId
+            update bbs_posts set cont_reply=cont_reply+1,update_date=SYSDATE()   where id=:postsId
         ]]>
     </sql>
     

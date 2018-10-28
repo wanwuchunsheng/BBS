@@ -49,6 +49,7 @@ public class BBSSmallBoard implements Serializable{
 
     private Integer del;
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -173,7 +174,7 @@ public class BBSSmallBoard implements Serializable{
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
 	}
-    
-    
+
+	
     
 }

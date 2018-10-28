@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bbs.model.sys.SysUserInfo;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSReply;
+import com.bbs.model.view.BBSSignin;
 import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.model.view.BaseParams;
 import com.bbs.service.view.IContDetailService;
@@ -41,10 +42,17 @@ public class ContDetailController {
 	 * @createTime 2018年6月11日22:48:33
 	 * */
 	@RequestMapping("index")
-	public String gotoBBSSmallBoard(HttpSession session, HttpServletRequest request,BBSSmallBoard bean){
+	public String gotoBBSSmallBoard(HttpSession session, HttpServletRequest request,BBSPosts bean){
+		//内容列表数据
 		List<BBSPosts> postsAll=contDetailService.queryBBSPostsAll(bean);
 		request.setAttribute("postsAll", postsAll);
-		request.setAttribute("bbsSmallBoard", contDetailService.queryBBSSmallBoardById(bean));
+		//当前位置信息数据
+		if(null==bean.getSmboId()){
+			request.setAttribute("bbsSmallBoard", null);
+		}else{
+			request.setAttribute("bbsSmallBoard", contDetailService.queryBBSSmallBoardById(bean));
+		}
+		request.setAttribute("postCommendAll", BaseParams.getPostCommend());
 		return "/web_view/cont/cont_index";
 	}
 	
@@ -145,4 +153,40 @@ public class ContDetailController {
 		}
 	    return "false";
 	}
+	
+	/**
+	 * 说明：签到
+	 *   拦截器-验证是否登录
+	 *   每个签到给用户新增3个经验值
+	 *   向签到表新增签到记录
+	 *   修改session ischeck数据1-已签到
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/addsignin")
+	public void addsignin(HttpSession session, HttpServletResponse response,HttpServletRequest request,  BBSSignin bean){
+		try {
+			SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
+			bean.setCreateUserId(bbsUserInfo.getId());
+			bean.setCreateUserName(bbsUserInfo.getUname());
+			bean.setCreateDate(new Date());
+			bean.setExpPoints(5);
+			contDetailService.addsignin(bean);
+			//修改session
+			bbsUserInfo.setIsCheck("1");
+			session.setAttribute("bbsUserInfo", bbsUserInfo);
+			//重定向综合区
+			//重定向
+			PrintWriter out = response.getWriter();
+			out.println("<html>");    
+		    out.println("<script>");    
+		    out.println("window.open ('"+request.getContextPath()+"/cont/index','_top')");    
+		    out.println("</script>");    
+		    out.println("</html>");  
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
 }

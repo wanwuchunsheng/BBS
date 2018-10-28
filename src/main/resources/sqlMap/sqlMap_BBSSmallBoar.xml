@@ -36,6 +36,14 @@
         ]]>
     </sql>
     
+     <!--  通过ID查询对象 -->
+    <sql id="queryBBSSmallBoardById">
+        <![CDATA[
+           select * from bbs_small_board where  id=:smboId 
+        
+        ]]>
+    </sql>
+    
  
     
 </sqlMap>
