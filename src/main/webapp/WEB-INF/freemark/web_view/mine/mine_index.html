@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>海伦社区</title>
+<title>海伦社区-个人中心</title>
 <meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
 <meta name="description" content="武汉青山武东海伦国际业主自己开发的社区，方便业主近距离交流，分享生活。青山武东海伦国际自己的交流区，海伦国际欢迎各业主加入QQ【总】群:645952730"/>
 <meta name="author" content="个人中心" />
@@ -67,13 +67,13 @@
 		</div>
         
 		<div class="nav-user unlogin">
-		  <#if (bbsUserInfo)?? >
+		  <#if (bbsUser)?? >
 		     <div class="loginuser-span">
 			     <a href="${futRoot}/mine/index">
-			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" />
+			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUser.photoPath?if_exists}" />
 			     </a>
 			     <span class="loginuser-signin"> 
-			        <a>${bbsUserInfo.niceName?if_exists}</a>
+			        <a>${bbsUser.niceName?if_exists}</a>
 			     </span>
 			     <span class="loginuser-signin"> 
 			        <a  href="${futRoot}/mine/logout"><i class="iconfont icon-signin"></i>  注销</a>
@@ -95,58 +95,82 @@
 <!-- heand end -->
 
 <!-- content -->
-<div class="main layui-clear">
-<div class="main fly-user-main layui-clear user-index">
-	<div class="mobile-history">
-		<a href="javascript:history.go(-1);"><i class="iconfont icon-toLeft"></i></a>
-	</div>
-	<div class="site-tree-mobile layui-hide">
-		<i class="layui-icon">&#xe602;</i>
-	</div>
-	<div class="site-mobile-shade"></div>
-	<div class="fly-panel fly-panel-user" pad20>
-		<div class="fly-home" style=" background-image: url();">
-			<a href="javascript:;"><img src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" ></a>
-			<h1>
-				<a href="javascript:;">${bbsUserInfo.uname?if_exists}</a>
-				<span style="color:#FF7200">经验：${bbsUserInfo.expPoints?if_exists}</span> 
-				
-			</h1> 
-			<p class="fly-home-info">
-				<i class="iconfont icon-time"></i> <span>${bbsUserInfo.createTime?string("yyyy-MM-dd HH:mm")}</span>
-			</p>
-			<p class="fly-home-sign">（主人很懒，什么都没有留下~）</p>
+
+
+<div class="fly-home" style=" background:#f8f8f8; ">
+	<img src="${resultImgPath}/bbs/bbs_icon/${bbsUser.photoPath?if_exists}" >
+	<h1>
+		<a href="javascript:;">${bbsUser.uname?if_exists}</a>
+		<i class="iconfont icon-nan"></i>
+		<span class="message"><a href="javascript:layer.msg('功能未开放，敬请期待...');">私信</a></span>
+		
+		
+	</h1> 
+	<p class="fly-home-info">
+		<i class="iconfont icon-time"></i> <span>${bbsUser.createTime?string("yyyy-MM-dd HH:mm")}</span>
+	</p>
+	<p class="fly-home-sign">（主人很懒，什么都没有留下~）</p>
+</div>
+
+
+<div class="main fly-home-main">
+	<div class="layui-inline fly-home-jie">
+		<div class="fly-panel">
+			<h3 class="fly-panel-title">
+			  <i class="iconfont icon-time"></i> 最近1个月的发布
+			</h3> 
+			<div class="layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+				<div class="layui-tab-item layui-show">
+					<div id="ajaxListPage">
+						    <#if (bbsPosts?size > 0)>
+							    <div class="fly-none" style="text-align:left;padding-top:0px;min-height: 50px;  height:auto;">
+							        <ul  class="mine-view jie-row">
+		       						<#list bbsPosts as posts>
+										<li> <a class="jie-title users-index-title" href="${futRoot}/cont/detail?id=${posts.id?if_exists}&smboId=${posts.smboId?if_exists}" target="_blank">${posts.title?if_exists}</a> <i>${posts.createDate?string("yyyy-MM-dd HH:mm")}</i> <em>${posts.contPreview?if_exists}阅/${posts.contReply?if_exists}答</em> </li>
+									</#list>
+									</ul>
+								</div>
+							<#else>
+							    <div class="fly-none" style=" min-height: 50px;  height:auto;">
+							        <ul  class="mine-view jie-row">
+								    <i style="font-size:14px;">没有发表任何求解</i>
+								    </ul>
+							    </div>
+							</#if>
+						
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
 	
-	<li class="layui-nav-item ">
-		<a href="${futRoot}/mine/preview?id=${bbsUserInfo.id}"> <i class="iconfont icon-home"></i> 我的主页</a>
-	</li>
-	<li class="layui-nav-item ">
-		<a href="${futRoot}/cont/vf/add"> <i class="iconfont icon-edit"></i> 发表新帖</a>
-	</li>
-	<!-- <li class="layui-nav-item ">
-		<a href="javascript:;"> <i class="iconfont icon-cog"></i> 基本设置</a>
-	</li>
-	<li class="layui-nav-item ">
-		<a href="javascript:;"> <i class="iconfont icon-filter"></i> 发帖记录 </a>
-	</li>
-	<li class="layui-nav-item ">
-		<a href="javascript:;"> <i class="iconfont  icon-comments-alt"></i> 我的私信</a>
-	</li>
-	<li class="layui-nav-item ">
-		<a href="javascript:;"> <i class="iconfont  icon-lightbulb"></i> 反馈建议</a>
-	</li> -->
-	<li class="layui-nav-item ">
-		<a href="${futRoot}/mine/logout" onclick="return confirm('是否退出登录？')"> <i class="iconfont  icon-signout "></i> 退出登录</a>
-	</li>
-</ul>
-<div class="mobile-history">
-	<a href="javascript:;"><i class="iconfont icon-toLeft"></i></a>
+	<div class="layui-inline fly-home-da">
+		<div class="fly-panel">
+			<h3 class="fly-panel-title">最近1个月的回答</h3> 
+			<ul class="home-jieda">
+			   <#if (bbspcommend?size > 0)>
+   					<#list bbspcommend as commend>
+					<li>
+						<p> <span>${commend.createDate?string("yyyy-MM-dd HH:mm")}</span> 在
+						<a href="${futRoot}/cont/detail?id=${commend.postsId?if_exists}&smboId=${commend.smboId?if_exists}" target="_blank">${commend.replyTitle?if_exists}
+						</a>中回答：</p>
+						<div class="home-dacontent">
+							${commend.content?if_exists}				
+					    </div>
+					</li>
+					</#list>
+				<#else>
+				    <i style="font-size:14px;">没有发表任何求解</i>
+				</#if>
+				
+				
+            </ul>
+		</div>
+	</div>
 </div>
-</div>
-</div>
+
+
+
 
 
 <!-- footer -->

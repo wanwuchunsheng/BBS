@@ -81,7 +81,7 @@
     <!-- 修改用户经验值 -->
     <sql id="updateSysUserById">
         <![CDATA[
-            update sys_user set exp_points=exp_points+:expPoints  where id=1
+            update sys_user set exp_points=exp_points+:expPoints  where id=:id
         ]]>
     </sql>
 </sqlMap>

@@ -117,8 +117,8 @@
 			<div class="layui-tab layui-tab-brief">
 				<ul class="layui-tab-title">
 				   <#if (bbsSmallBoard)??>
-						<li >
-							<a style="float:left;" href="${futRoot}/cont/index?smboId=${bbsSmallBoard.id?if_exists}" >全部帖</a><a onclick="window.location.reload()" href="javascript:;"><i class="iconfont icon-refresh allstyl"></i></a>
+						<li><!-- class="layui-this"> -->
+							<a href="${futRoot}/cont/index?smboId=${bbsSmallBoard.id?if_exists}" >全部帖</a>
 						</li>
 						<#if (postCommendAll?size > 0)>
 		                <#list postCommendAll as pca>
@@ -127,7 +127,7 @@
 					    </#if>
 				  <#else>
 				       <li>
-							<a style="float:left;" href="${futRoot}/cont/index" >全部帖</a><a onclick="window.location.reload()" href="javascript:;"><i class="iconfont icon-refresh allstyl"></i></a>
+							<a  href="${futRoot}/cont/index" >全部帖</a>
 						</li>
 						<#if (postCommendAll?size > 0)>
 		                <#list postCommendAll as pca>
@@ -147,7 +147,7 @@
 				    <#if (postsAll?size > 0)>
 		            <#list postsAll as spt>
 					<li class="fly-list-li">
-						<a href="#" class="flist-avatar-a" target="_blank">
+						<a href="${futRoot}/mine/preview?id=${spt.createUserId?if_exists}" class="flist-avatar-a" target="_blank">
 							<img class="avatar fly-list-avatar-img" src="${resultImgPath}/bbs/bbs_icon/${spt.imgPath?if_exists}"  /> 
 						</a>
 						<h2 class="fly-tip">
@@ -190,6 +190,9 @@
 						<a class="num" href="#">2</a> 
 						<a class="next" href="#">下页</a>
 				    </div> -->
+				    <div class="cont-more">
+						<a  href="${futRoot}/cont/index" class="layui-btn layui-btn-big layui-btn-primary">获取更多信息</a>
+				   </div>
 	                </#if>
 			   </ul>
 			   

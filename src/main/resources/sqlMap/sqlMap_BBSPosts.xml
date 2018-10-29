@@ -108,6 +108,7 @@
 				b.PHOTO_PATH as imgPath,
 				b.security_level as securityLevel,
 				b.nice_name as niceName,
+				b.exp_points,
 		        (select title from bbs_big_board where del=0 and id=a.bb_id limit 1) as bbName,
 		        (select title from bbs_small_board where del=0 and id=a.bb_id limit 1) as smboName
 			FROM
@@ -170,6 +171,15 @@
             update bbs_posts set cont_reply=cont_reply+1,update_date=SYSDATE()   where id=:postsId
         ]]>
     </sql>
+    
+    <!-- 查询最近一个月的发帖量 -->
+    <sql id="queryBBSPostsByCreateUserId">
+        <![CDATA[
+            select id,smbo_id,title,create_date,cont_reply,cont_preview from bbs_posts where create_user_id=:id 
+and DATE_SUB(CURDATE(), INTERVAL 1 MONTH) <= date(create_date) order by create_date desc
+        ]]>
+    </sql>
+    
     
 </sqlMap>
 

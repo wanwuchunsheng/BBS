@@ -65,6 +65,7 @@ public class BBSPosts {
     private String niceName; //昵称
     private String bbName;//主版块名称
     private String smboName;//子版块名称 
+    private Integer expPoints;//用户签到经验值
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -285,6 +286,14 @@ public class BBSPosts {
 
 	public void setSmboName(String smboName) {
 		this.smboName = smboName;
+	}
+
+	public Integer getExpPoints() {
+		return expPoints;
+	}
+
+	public void setExpPoints(Integer expPoints) {
+		this.expPoints = expPoints;
 	}
     
 	

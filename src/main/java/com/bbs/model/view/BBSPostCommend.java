@@ -2,10 +2,17 @@ package com.bbs.model.view;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
- * 回帖
+ * 基础数据
  * 
  * */
+@Entity(name = "bbs_posts_commend")
 public class BBSPostCommend implements Serializable{
     /**
 	 * 
@@ -37,6 +44,9 @@ public class BBSPostCommend implements Serializable{
 
     private Integer del;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
@@ -44,7 +54,8 @@ public class BBSPostCommend implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
+    @Column(name = "code")
     public String getCode() {
         return code;
     }
@@ -53,6 +64,7 @@ public class BBSPostCommend implements Serializable{
         this.code = code == null ? null : code.trim();
     }
 
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -61,6 +73,7 @@ public class BBSPostCommend implements Serializable{
         this.title = title == null ? null : title.trim();
     }
 
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -69,6 +82,7 @@ public class BBSPostCommend implements Serializable{
         this.remark = remark == null ? null : remark.trim();
     }
 
+    @Column(name = "create_user_id")
     public Integer getCreateUserId() {
         return createUserId;
     }
@@ -77,6 +91,7 @@ public class BBSPostCommend implements Serializable{
         this.createUserId = createUserId;
     }
 
+    @Column(name = "create_user_name")
     public String getCreateUserName() {
         return createUserName;
     }
@@ -85,6 +100,7 @@ public class BBSPostCommend implements Serializable{
         this.createUserName = createUserName == null ? null : createUserName.trim();
     }
 
+    @Column(name = "create_date")
     public Date getCreateDate() {
         return createDate;
     }
@@ -93,6 +109,7 @@ public class BBSPostCommend implements Serializable{
         this.createDate = createDate;
     }
 
+    @Column(name = "update_user_id")
     public Integer getUpdateUserId() {
         return updateUserId;
     }
@@ -101,6 +118,7 @@ public class BBSPostCommend implements Serializable{
         this.updateUserId = updateUserId;
     }
 
+    @Column(name = "update_user_name")
     public String getUpdateUserName() {
         return updateUserName;
     }
@@ -109,6 +127,7 @@ public class BBSPostCommend implements Serializable{
         this.updateUserName = updateUserName == null ? null : updateUserName.trim();
     }
 
+    @Column(name = "update_date")
     public Date getUpdateDate() {
         return updateDate;
     }
@@ -117,6 +136,7 @@ public class BBSPostCommend implements Serializable{
         this.updateDate = updateDate;
     }
 
+    @Column(name = "del")
     public Integer getDel() {
         return del;
     }
@@ -125,6 +145,7 @@ public class BBSPostCommend implements Serializable{
         this.del = del;
     }
 
+    @Column(name = "num")
 	public Integer getNum() {
 		return num;
 	}

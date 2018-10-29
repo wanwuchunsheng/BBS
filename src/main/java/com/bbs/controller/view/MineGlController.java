@@ -1,5 +1,7 @@
 package com.bbs.controller.view;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbs.model.sys.SysUserInfo;
+import com.bbs.model.view.BBSPostCommend;
+import com.bbs.model.view.BBSPosts;
+import com.bbs.model.view.BBSReply;
 import com.bbs.service.view.IMineService;
 
 /**
@@ -31,7 +36,7 @@ public class MineGlController {
 	 * @createTime 2018年10月23日13:59:59
 	 * */
 	@RequestMapping("index")
-	public String gotoMineIndex(HttpSession session){
+	public String gotoMineHome(HttpSession session){
 		SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
 		if(bbsUserInfo!=null){
 			return "/web_view/mine/mine_home";
@@ -118,6 +123,27 @@ public class MineGlController {
 		//默认设置
 		session.removeAttribute("bbsUserInfo");
 		return "/web_view/mine/mine_login";
+	}
+	
+	/**
+	 * 说明：查看个人信息
+	 *   通过用户ID，查询用户表
+	 *   通过用户ID，查询发帖纪录列表
+	 *   通过用户ID，查询最近回帖
+	 * @author Administrator
+	 * @createTime 2018年10月23日13:59:59
+	 * */
+	@RequestMapping("preview")
+	public String previewMineIndex(HttpSession session,HttpServletRequest request, SysUserInfo bean){
+		//查询用户
+		request.setAttribute("bbsUser", mineService.querySysUserById(bean));
+		//查询用户发帖纪录
+		List<BBSPosts> bbsPosts=mineService.queryBBSPostsAll(bean);
+		request.setAttribute("bbsPosts", bbsPosts);
+		//查询用户回帖纪录
+		List<BBSReply> bbspcommend=mineService.queryBBSReplyAll(bean);
+		request.setAttribute("bbspcommend", bbspcommend);
+		return "/web_view/mine/mine_index";
 	}
 
 }

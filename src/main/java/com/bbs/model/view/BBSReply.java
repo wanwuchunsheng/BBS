@@ -48,6 +48,7 @@ public class BBSReply implements Serializable{
     
     //
     private String imgPath;//头像路径
+    private String replyTitle;//标题
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -167,6 +168,14 @@ public class BBSReply implements Serializable{
 
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
+	}
+
+	public String getReplyTitle() {
+		return replyTitle;
+	}
+
+	public void setReplyTitle(String replyTitle) {
+		this.replyTitle = replyTitle;
 	}
     
     

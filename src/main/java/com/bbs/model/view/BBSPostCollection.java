@@ -1,9 +1,26 @@
 package com.bbs.model.view;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BBSPostCollection {
-    private Integer id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+/**
+ * 收藏实体类
+ * 
+ * */
+@Entity(name = "bbs_posts_collection")
+public class BBSPostCollection implements Serializable{
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer bbId;
 
@@ -17,6 +34,9 @@ public class BBSPostCollection {
 
     private Date createDate;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
@@ -25,6 +45,7 @@ public class BBSPostCollection {
         this.id = id;
     }
 
+    @Column(name = "bb_id")
     public Integer getBbId() {
 		return bbId;
 	}
@@ -33,6 +54,7 @@ public class BBSPostCollection {
 		this.bbId = bbId;
 	}
 
+	@Column(name = "smbo_id")
 	public Integer getSmboId() {
         return smboId;
     }
@@ -41,6 +63,7 @@ public class BBSPostCollection {
         this.smboId = smboId;
     }
 
+    @Column(name = "posts_id")
     public Integer getPostsId() {
         return postsId;
     }
@@ -49,6 +72,7 @@ public class BBSPostCollection {
         this.postsId = postsId;
     }
 
+    @Column(name = "create_user_id")
     public Integer getCreateUserId() {
         return createUserId;
     }
@@ -57,6 +81,7 @@ public class BBSPostCollection {
         this.createUserId = createUserId;
     }
 
+    @Column(name = "create_user_name")
     public String getCreateUserName() {
         return createUserName;
     }
@@ -65,6 +90,7 @@ public class BBSPostCollection {
         this.createUserName = createUserName == null ? null : createUserName.trim();
     }
 
+    @Column(name = "create_date")
     public Date getCreateDate() {
         return createDate;
     }
