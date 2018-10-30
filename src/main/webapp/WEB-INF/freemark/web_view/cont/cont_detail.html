@@ -103,28 +103,25 @@
 		<div class="fly-panel detail-box fly-art">
 			<!-- 标题 -->
 			<h1 id="getLocation">${postsObj.title?if_exists}
-			    <#if postsObj.contRec==1 >
-			         <i class="layui-badge-ico layui-badge layui-bg-red">加精</i>
-			    </#if>
-				<#if postsObj.contStatus==0>
-	                  <#if postsObj.typ==1>
-	                     <i class="layui-badge-ico layui-badge fly-badge-vip">广告</i>
-	                  <#elseif postsObj.typ==2>
-	                     <i class="layui-badge-ico layui-badge fly-badge-vip">求助</i>
-	                  <#elseif postsObj.typ==3>
-	                     <i class="layui-badge-ico layui-badge fly-badge-vip">活动</i>
-	                  <#elseif postsObj.typ==4>
-	                     <i class="layui-badge-ico layui-badge fly-badge-vip">围观</i>
-	                  </#if>
-                <#elseif postsObj.contStatus==1>
-                       <i class="layui-badge-ico layui-badge layui-bg-gray">已结</i>
-                </#if>
+			    <#if (postsObj.contStatus==0) >
+					   <#if (postsObj.contRec==1) >
+	                      <i class="layui-btn layui-btn-xs layui-bg-red">加精</i>
+	                   <#elseif (postsObj.contReward>0) >
+	                      <i class="layui-btn layui-btn-xs layui-bg-orange">悬赏</i>
+	                   <#elseif (postsObj.contReply>100) >
+	                      <i class="layui-btn layui-btn-xs layui-bg-blue">围观 </i>
+	                   </#if>
+                 <#elseif (postsObj.contStatus==1) >
+                          <i class="layui-btn layui-btn-xs layui-bg-gray">已结</i>
+                 </#if>
 			</h1> 
 			<!-- 标题 end-->
 			
 			<div class="fly-tip fly-detail-hint">
 				<div class="fly-list-hint">
-					<i class="iconfont icon-envelope" title="私信"></i> 私信
+				    <#if (postsObj.contReward>0) >
+	                   <i class="iconfont  icon-strikethrough"  title="悬赏"></i> ${postsObj.contReward?if_exists}
+	                </#if>
 					<i class="iconfont icon-eye-open" title="人气"></i> ${postsObj.contPreview?if_exists}
 					<a href="#comment"><i class="iconfont icon-comment" title="回答"></i> ${postsObj.contReply?if_exists}	</a> 
 				</div>
@@ -132,11 +129,11 @@
 			<br/>
 			<!-- 用户信息  -->
 			<div class="detail-about">
-				<a class="jie-user" href="#" target="_blank">
+				<a class="jie-user" href="${futRoot}/mine/preview?id=${postsObj.createUserId?if_exists}" target="_blank">
 					<img id="shareImg" src="${resultImgPath}/bbs/bbs_icon/${postsObj.imgPath?if_exists}"  />
 					<cite>
 						<i>${postsObj.niceName?if_exists}</i>
-						<em>发布于 ${postsObj.updateDate?string("yyyy-MM-dd HH:mm")}</em>
+						<em>发布于 ${postsObj.createDate?string("yyyy-MM-dd HH:mm")}</em>
 					</cite> 
 				</a>
 				<div class="detail-hits" id="LAY_jieAdmin" data-id="12345">

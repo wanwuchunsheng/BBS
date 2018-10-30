@@ -27,17 +27,13 @@
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
 <link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
+
 <style type="text/css">
 .w-e-toolbar{
    flex-wrap: wrap;
 }
 </style>
-<script type="text/javascript">
-//通过选择父模块，级联子版块
-function chgSmallBoardSel(){
-     //alert("ttttt");
-}
-</script>
+
 </head>
 <body>
 <!-- heand -->
@@ -112,100 +108,93 @@ function chgSmallBoardSel(){
         </ul>
         <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
           <div class="layui-tab-item layui-show">
-          <!-- form表单  -->
-            <form action="${futRoot}/cont/vf/savePosts" method="post">
-             
-              <!-- row start -->
-              <div class="layui-row layui-col-space15 layui-form-item">
-                <div class="layui-col-md13">
-                  <label class="layui-form-label">父版块</label>
-                  <div class="layui-input-block">
-                    <select lay-verify="required" name="bbId" lay-filter="column" onchange="chgSmallBoardSel()"> 
-                      <option></option> 
-                      <#if (bigBoardAll?size > 0)>
-                      <#list bigBoardAll as big>
-                      <option value="${big.id?if_exists}">${big.title?if_exists}</option> 
-                      </#list>
-                      </#if>
-                     
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <!-- row end -->
-              <!-- row start -->
-              <div class="layui-row layui-col-space15 layui-form-item">
-                <div class="layui-col-md13">
-                  <label class="layui-form-label">子版块</label>
-                  <div class="layui-input-block">
-                    <select lay-verify="required" name="smboId" lay-filter="column"> 
-                      <option></option> 
-                      <#if (smallBoardALL?size > 0)>
-                      <#list smallBoardALL as small>
-                      <option value="${small.id?if_exists}">${small.title?if_exists}</option> 
-                      </#list>
-                      </#if>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <!-- row end -->
-              
-              <!-- row start -->
-              <div class="layui-row layui-col-space15 layui-form-item">
-                <div class="layui-col-md3">
-                  <label class="layui-form-label">所在专栏</label>
-                  <div class="layui-input-block">
-                    <select lay-verify="required" name="typ" lay-filter="column"> 
-                      <option></option> 
-                      <#if (postCommend?size > 0)>
-                      <#list postCommend as poc>
-                      <option value="${poc.id?if_exists}">${poc.title?if_exists}</option> 
-                      </#list>
-                      </#if>
-                    </select>
-                  </div>
-                </div>
-                <div class="layui-col-md9">
-                  <label for="L_title" class="layui-form-label">标题</label>
-                  <div class="layui-input-block">                           
-                    <input type="text" id="L_title" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-              </div>
-              <!-- row end -->
-             <!-- 文本编辑器 start -->
-              <div class="layui-form-item layui-form-text">
-                <div class="layui-input-block" id="wangEdit">
-                   <p><font style="color:blue;"> 海伦社区</font>欢迎您！</p>
-                </div>
-                <textarea id="text1" hidden="hidden" name="content" style="width:100%; height:200px;"></textarea>
-              </div>
-              <!-- 文本编辑器end -->
-              
-			  <div class="layui-form-item">
-                <div class="layui-inline">
-                  <label class="layui-form-label">悬赏经验值 </label>
-                  <div class="layui-input-inline" style="width: 150px;">
-                    <select name="contReward" lay-filter="column" >
-                      <option value="0"></option>
-                      <option value="5">5</option>
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="30">30</option>
-                      <option value="50">50</option>
-                    </select>
-                  </div>
-                  <div class="layui-form-mid layui-word-aux">发表后无法更改悬赏</div>
-                </div>
-              </div>
-              
-              <div class="layui-form-item">
-				<button class="layui-btn layui-btn-normal" lay-filter="*" lay-submit>立即发布</button>
-				<button id="btn1" class="layui-btn layui-btn-normal bgred">预览</button>
-			  </div>
-
-            </form>
+          <#if (bbsUserInfo.expPoints?if_exists >0 ) >
+                <!-- form表单  -->
+	             <form action="${futRoot}/cont/vf/savePosts" method="post">
+	              <!-- row end -->
+	              <!-- row start -->
+	              <div class="layui-row layui-col-space15 layui-form-item">
+	                <div class="layui-col-md13">
+	                  <label class="layui-form-label">版块</label>
+	                  <div class="layui-input-block">
+	                    <select lay-verify="required"  lay-filter="smboId"> 
+	                      <option></option> 
+	                      <#if (bigBoardAll?size > 0)>
+	                      <#list bigBoardAll as big>
+	                           <optgroup label="${big.title}">
+	                               <#if (smallBoardALL?size > 0)>
+			                       <#list smallBoardALL as small>
+			                          <#if (small.bbId==big.id) >
+			                          <option value="${small.id?if_exists},${small.bbId?if_exists}">${small.title?if_exists}</option> 
+			                          </#if>
+			                       </#list>
+			                       </#if>
+	                           </optgroup>
+	                      </#list>
+	                      </#if>
+	                    </select>
+	                  </div>
+	                </div>
+	              </div>
+	              <!-- row end -->
+	              
+	              <!-- row start -->
+	              <div class="layui-row layui-col-space15 layui-form-item">
+	                <div class="layui-col-md3">
+	                  <label class="layui-form-label">所在专栏</label>
+	                  <div class="layui-input-block">
+	                    <select lay-verify="required" name="typ" lay-filter="typ"> 
+	                      <option></option> 
+	                      <#if (postCommend?size > 0)>
+	                      <#list postCommend as poc>
+	                      <option value="${poc.id?if_exists}">${poc.title?if_exists}</option> 
+	                      </#list>
+	                      </#if>
+	                    </select>
+	                  </div>
+	                </div>
+	                <div class="layui-col-md9">
+	                  <label for="L_title" class="layui-form-label">标题</label>
+	                  <div class="layui-input-block">                           
+	                    <input type="text" id="L_title" name="title"  lay-verify="required" autocomplete="off" class="layui-input">
+	                  </div>
+	                </div>
+	              </div>
+	              <!-- 隐藏的父版块ID -->
+	              <input type="hidden"  id="bbId" name="bbId" required class="layui-input">
+	              <input type="hidden"  id="smboId" name="smboId" required class="layui-input">
+	              <!-- row end -->
+	             <!-- 文本编辑器 start -->
+	              <div class="layui-form-item layui-form-text">
+	                <div class="layui-input-block" id="wangEdit">
+	                  
+	                </div>
+	                <textarea id="text1" hidden="hidden" name="content" style="width:100%; height:200px;"></textarea>
+	              </div>
+	              <!-- 文本编辑器end -->
+	              <div class="layui-row layui-col-space15 layui-form-item">
+	              <div class="layui-col-md3">
+	                  <label class="layui-form-label">悬赏经验值 </label>
+	                  <div class="layui-input-block">
+	                     <select name="contReward" lay-filter="column" >
+	                      <option value="0"></option>
+	                      <option value="5">5</option>
+	                      <option value="10">10</option>
+	                      <option value="25">25</option>
+	                      <option value="30">30</option>
+	                      <option value="50">50</option>
+	                    </select>
+	                  </div>
+	             </div>
+	             </div>
+	              <div class="layui-form-item">
+					<button class="layui-btn layui-btn-normal" lay-filter="*" lay-submit>立即发布</button>
+					<a href="${futRoot}/cont/index?smboId=${smallBoard.id?if_exists}" class="layui-btn layui-btn-normal layui-bg-red">返回</a>
+				  </div>
+	            </form>
+          <#else>
+                                          您的经验值为：<font style="color:red">${bbsUserInfo.expPoints?if_exists}</font>，无法发布新帖 
+          </#if>
           </div>
         </div>
       </div>
@@ -231,7 +220,14 @@ function chgSmallBoardSel(){
               初始化select控件
    */
    layui.use('form', function(){
-   	var form = layui.form;
+	   	var form = layui.form;
+	   	//选择版块，跟父版块隐藏input赋值
+	   	form.on('select(smboId)', function(data){   
+	   	  var val=data.value;
+	   	  //父版块赋值
+	   	  $("#smboId").val(val.split(",")[0]);
+	   	  $("#bbId").val(val.split(",")[1]);
+	    });
    });
    
    /**
@@ -305,10 +301,10 @@ function chgSmallBoardSel(){
     $text1.val(editor.txt.html())
     
     //预览
-    document.getElementById('btn1').addEventListener('click', function () {
+    /* document.getElementById('btn1').addEventListener('click', function () {
         // 读取 html
         alert(editor.txt.html())
-    }, false)
+    }, false) */
 </script>
 
 

@@ -45,7 +45,7 @@ public class SysUserInfo implements Serializable{
 	private String nowAddress;//现居地，收货地址
 	private String niceName;//昵称
 	
-	private String expPoints;//经验值
+	private Integer expPoints;//经验值
 	private String isCheck;//BBS签到
 	
 	
@@ -246,10 +246,10 @@ public class SysUserInfo implements Serializable{
 		this.niceName = niceName;
 	}
 	@Column(name = "exp_points")
-	public String getExpPoints() {
+	public Integer getExpPoints() {
 		return expPoints;
 	}
-	public void setExpPoints(String expPoints) {
+	public void setExpPoints(Integer expPoints) {
 		this.expPoints = expPoints;
 	}
 	

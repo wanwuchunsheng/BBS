@@ -115,7 +115,10 @@ public class StringUtil {
 	}
 	
 	
-	
+	public static String getNowTimeString (String stl){
+	   SimpleDateFormat df = new SimpleDateFormat(stl);//设置日期格式
+	   return df.format(new Date());
+	}
  
 	
 	

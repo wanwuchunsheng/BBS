@@ -78,10 +78,17 @@
     </sql>
     
     
-    <!-- 修改用户经验值 -->
+    <!-- 签到-增加用户经验值 -->
     <sql id="updateSysUserById">
         <![CDATA[
-            update sys_user set exp_points=exp_points+:expPoints  where id=:id
+            update sys_user set exp_points=exp_points+:expPoints  where id=:createUserId
+        ]]>
+    </sql>
+    
+    <!-- 发帖后，扣除经验值 -->
+    <sql id="updateSysUserByExpPoints">
+        <![CDATA[
+            update sys_user set exp_points=exp_points-:expPoints  where id=:createUserId
         ]]>
     </sql>
 </sqlMap>

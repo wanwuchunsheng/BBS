@@ -119,11 +119,11 @@
 			<h3 class="fly-panel-title">
 			  <i class="iconfont icon-time"></i> 最近1个月的发布
 			</h3> 
-			<div class="layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+			<div class="layui-tab-content" id="LAY_ucm" style="padding-top:3px;">
 				<div class="layui-tab-item layui-show">
 					<div id="ajaxListPage">
 						    <#if (bbsPosts?size > 0)>
-							    <div class="fly-none" style="text-align:left;padding-top:0px;min-height: 50px;  height:auto;">
+							    <div style="text-align:left; min-height: 50px;  height:auto;">
 							        <ul  class="mine-view jie-row">
 		       						<#list bbsPosts as posts>
 										<li> <a class="jie-title users-index-title" href="${futRoot}/cont/detail?id=${posts.id?if_exists}&smboId=${posts.smboId?if_exists}" target="_blank">${posts.title?if_exists}</a> <i>${posts.createDate?string("yyyy-MM-dd HH:mm")}</i> <em>${posts.contPreview?if_exists}阅/${posts.contReply?if_exists}答</em> </li>

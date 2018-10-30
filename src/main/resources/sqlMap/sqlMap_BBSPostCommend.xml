@@ -9,6 +9,12 @@
         ]]>
     </sql>
     
+    <!--  查询基础数据  -->
+   <sql id="queryBBSPostCommendGroupByTyp">
+        <![CDATA[
+            select typ from bbs_post_commend group by typ
+        ]]>
+    </sql>
  
     
 </sqlMap>

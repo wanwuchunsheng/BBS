@@ -8,4 +8,6 @@ public interface IInitService {
 
 	void queryPostCommend();
 
+	void queryPostsNews();
+
 }

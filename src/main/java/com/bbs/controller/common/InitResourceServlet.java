@@ -33,6 +33,7 @@ public class InitResourceServlet extends HttpServlet {
 		comboboxs.queryBBSBigBoardAll();// 查询父版块
 		comboboxs.queryBBSSmallBoardAll();//查询子版块
 		comboboxs.queryPostCommend();//查询基础数据
+		comboboxs.queryPostsNews();//查询站内新闻
 		log.info("初始化数据成功！！");
 	}
 

@@ -37,7 +37,22 @@ public interface Constants {
      * 
      * */
     public static final Integer ABOUT_INDEX = 0;
-    
-    
+    /**
+     * bbs签到默认5个经验值
+     * 
+     * */
+    public static final Integer EXP_POINTS = 5;
+    /**
+     * 验证是否签到
+     *  
+     *   1-已签到
+     * 
+     * */
+    public static final String IS_CHECK = "1";
+    /**
+     * 每次发帖子，都扣5个经验值
+     * 
+     * */
+    public static final Integer DED_EXP_POINTS = 5;
     
 }

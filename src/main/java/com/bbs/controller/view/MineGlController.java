@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbs.model.sys.SysUserInfo;
-import com.bbs.model.view.BBSPostCommend;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSReply;
 import com.bbs.service.view.IMineService;

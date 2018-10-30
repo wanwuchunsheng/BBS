@@ -56,11 +56,21 @@ public class ContDetailServiceImpl implements IContDetailService{
 	
 	/**
 	 * 说明：添增新帖
+	 *   如果有悬赏，扣除用户悬赏分
 	 * @author wch
 	 * */
 	@Override
-	public void savePosts(BBSPosts bean) {
-		dalClient.persist(bean);
+	public void savePosts(final BBSPosts bean) {
+		dalClient.getTransactionTemplate().execute(new CallBackTemplate<Integer>() {
+			@Override
+			public Integer invoke() {
+				dalClient.persist(bean);
+				if(bean.getContReward()>0){
+					dalClient.execute("user.updateSysUserByExpPoints", bean);
+				}
+				return null;
+			}
+		});
 	}
 
 	/**

@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
+
 </head>
 <body>
 <!-- heand -->
@@ -140,34 +141,43 @@
 		            <#list spostsAll as spt>
 					<li class="fly-list-li">
 						<a href="${futRoot}/mine/preview?id=${spt.createUserId?if_exists}" class="flist-avatar-a" target="_blank">
-							<img class="avatar fly-list-avatar-img" src="${resultImgPath}/bbs/bbs_img/${spt.imgPath?if_exists}"  /> 
+							<img class="avatar fly-list-avatar-img" src="${resultImgPath}/bbs/bbs_icon/${spt.imgPath?if_exists}"  /> 
 						</a>
 						<h2 class="fly-tip">
 							<a href="${futRoot}/cont/detail?id=${spt.id?if_exists}&smboId=${spt.smboId?if_exists}" target="_blank">
 								${spt.title?if_exists}
 							</a>
-							<#if spt.contStatus==0>
-								 <#if spt.typ==1>
-	                                <i class="layui-badge-ico layui-badge fly-badge-vip">广告</i>
-	                             <#elseif spt.typ==2>
-	                                <i class="layui-badge-ico layui-badge fly-badge-vip">求助</i>
-	                             <#elseif spt.typ==3>
-	                                <i class="layui-badge-ico layui-badge fly-badge-vip">活动</i>
-	                             <#elseif spt.typ==4>
-	                                <i class="layui-badge-ico layui-badge fly-badge-vip">围观</i>
+							<#if (spt.contStatus==0) >
+								 <#if (spt.contRec==1) >
+	                                <i class="layui-badge-ico layui-badge fly-badge-vip">加精</i>
+	                             <#elseif (spt.contReward>0) >
+	                                <i class="layui-badge-ico layui-badge layui-bg-orange">悬赏</i>
+	                             <#elseif (spt.contReply>100) >
+	                                <i class="layui-badge-ico layui-badge layui-bg-blue">围观 </i>
 	                             </#if>
-                            <#elseif spt.contStatus==1>
+                            <#elseif (spt.contStatus==1) >
                                    <i class="layui-badge-ico layui-badge layui-bg-gray">已结</i>
                             </#if>
 						</h2> 
-						<p class="fly-list-li-p">
+						<p class="fly-list-li-p" >
+						    <#if (spt.securityLevel==1) >
+                                  <span> <i class="layui-badge layui-bg-green">官网认证</i></span> 
+                            </#if>
+						    <span>
+							    <#if (postCommendAll?size > 0)>
+				                <#list postCommendAll as pca>
+				                     <#if pca.code==spt.typ>
+				                         <font > ${pca.title?if_exists}</font>
+				                     </#if> 
+							    </#list>
+							    </#if>
+						    </span>
 							<span class="name">
-							     <cite>${spt.niceName?if_exists}</cite>
-                                 <#if spt.securityLevel==1>
-                                    <i class="layui-badge layui-bg-green">官网认证</i>
-                                 </#if>
+							     ${spt.niceName?if_exists}
 							</span>
+							
 							<span>${spt.updateDate?string("yyyy-MM-dd HH:mm")}</span>
+							
 							<span class="fly-list-hint">
 							    <i class="iconfont icon-eye-open" title="人气"></i> ${spt.contPreview?if_exists}
 								<i class="iconfont icon-comment" title="回答"></i> ${spt.contReply?if_exists}	

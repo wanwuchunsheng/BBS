@@ -38,3 +38,12 @@
    .allstyl{
       margin-left:5px; 
    }
+   .iconBut{
+    border: 1px solid #e6e6e6;
+	background-color: #FBFBFB;
+	color: #C9C9C9;
+	text-align: center;
+    cursor: not-allowed;
+	opacity: 1;
+	padding:1px;
+  }

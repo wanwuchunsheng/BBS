@@ -20,6 +20,7 @@ import com.bbs.model.view.BBSReply;
 import com.bbs.model.view.BBSSignin;
 import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.model.view.BaseParams;
+import com.bbs.service.common.Constants;
 import com.bbs.service.view.IContDetailService;
 
 /**
@@ -50,9 +51,15 @@ public class ContDetailController {
 		if(null==bean.getSmboId()){
 			request.setAttribute("bbsSmallBoard", null);
 		}else{
-			request.setAttribute("bbsSmallBoard", contDetailService.queryBBSSmallBoardById(bean));
+			//通过快照取值，减少查询数据库
+			for(BBSSmallBoard b:BaseParams.getSmallBoard()){
+				if(bean.getSmboId().equals(b.getId())){
+					request.setAttribute("bbsSmallBoard", b);
+					break;
+				}
+			}
 		}
-		request.setAttribute("postCommendAll", BaseParams.getPostCommend());
+		request.setAttribute("postCommendAll", BaseParams.getPostCommendMap().get("C001"));
 		return "/web_view/cont/cont_index";
 	}
 	
@@ -78,18 +85,21 @@ public class ContDetailController {
 	 * @createTime 2018年6月11日22:48:33
 	 * */
 	@RequestMapping("vf/add")
-	public String gotoContAddPage(HttpServletRequest request){
+	public String gotoContAddPage(HttpServletRequest request,BBSSmallBoard bean){
 		//获取参数数据
 		request.setAttribute("bigBoardAll", BaseParams.getBigBoard());//父版块
 		request.setAttribute("smallBoardALL", BaseParams.getSmallBoard());//子版块
-		request.setAttribute("postCommend", BaseParams.getPostCommend());//基础类型数据
+		request.setAttribute("postCommend", BaseParams.getPostCommendMap().get("C001"));//基础类型数据
+		request.setAttribute("smallBoard", bean);//首页类别或综合区
 		return "/web_view/cont/cont_add";
 	}
 	
 	/**
 	 * 说明：添加增帖子
 	 *   拦截器-验证是否登录
-	 *   保存完成后，重定向综合区
+	 *   保存完成后， 如果有悬赏，扣除用户悬赏分
+	 *   重定向综合区
+	 *   每发帖子一次，扣除5个经验值
 	 * @author Administrator
 	 * @createTime 2018年6月11日22:48:33
 	 * */
@@ -112,7 +122,11 @@ public class ContDetailController {
 			bean.setContBad(0);//反对0
 			bean.setContStatus(0);//默认状态0  1-完结
 			bean.setDel(0);//默认0-显示  1-禁用 
+			bean.setExpPoints(bean.getExpPoints()+Constants.DED_EXP_POINTS);
 			contDetailService.savePosts(bean);
+			//更新session 经验值
+			bbsUserInfo.setExpPoints( bbsUserInfo.getExpPoints()-bean.getExpPoints() );
+			session.setAttribute("bbsUserInfo", bbsUserInfo);
 			//重定向
 			PrintWriter out = response.getWriter();
 			out.println("<html>");    
@@ -121,7 +135,6 @@ public class ContDetailController {
 		    out.println("</script>");    
 		    out.println("</html>");  
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	    
@@ -170,13 +183,12 @@ public class ContDetailController {
 			bean.setCreateUserId(bbsUserInfo.getId());
 			bean.setCreateUserName(bbsUserInfo.getUname());
 			bean.setCreateDate(new Date());
-			bean.setExpPoints(5);
+			bean.setExpPoints(Constants.EXP_POINTS);
 			contDetailService.addsignin(bean);
 			//修改session
-			bbsUserInfo.setIsCheck("1");
+			bbsUserInfo.setIsCheck(Constants.IS_CHECK);
 			session.setAttribute("bbsUserInfo", bbsUserInfo);
 			//重定向综合区
-			//重定向
 			PrintWriter out = response.getWriter();
 			out.println("<html>");    
 		    out.println("<script>");    
@@ -184,7 +196,7 @@ public class ContDetailController {
 		    out.println("</script>");    
 		    out.println("</html>");  
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}

@@ -21,7 +21,9 @@ public class BBSPostCommend implements Serializable{
 
 	private Integer id;
 
-    private String code;
+    private Integer code;
+    
+    private String typ;
 
     private String title;
 
@@ -41,7 +43,6 @@ public class BBSPostCommend implements Serializable{
     
     private Integer num;//排序
 
-
     private Integer del;
 
     @Id
@@ -56,12 +57,12 @@ public class BBSPostCommend implements Serializable{
     }
     
     @Column(name = "code")
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     @Column(name = "title")
@@ -152,6 +153,15 @@ public class BBSPostCommend implements Serializable{
 
 	public void setNum(Integer num) {
 		this.num = num;
+	}
+	
+	@Column(name = "typ")
+	public String getTyp() {
+		return typ;
+	}
+
+	public void setTyp(String typ) {
+		this.typ = typ;
 	}
     
     
