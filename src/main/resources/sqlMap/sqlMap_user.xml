@@ -71,6 +71,7 @@
 				a.UPDATE_TIME,
 				a.CREATE_USER_ID,
 				a.EXP_POINTS,
+				a.remark,
 			  (select c.id from bbs_signin c where c.CREATE_USER_ID=a.id and DATE_FORMAT(c.create_date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') limit 1) as isCheck
 			 from sys_user a 
 			 where a.email=:email and a.upwd=:upwd and a.del=0
@@ -91,6 +92,14 @@
             update sys_user set exp_points=exp_points-:expPoints  where id=:createUserId
         ]]>
     </sql>
+    
+    <!-- 头像修改  -->
+    <sql id="updateUserPhotoPathById">
+        <![CDATA[
+            update sys_user set photo_path=:photoPath  where id=:id
+        ]]>
+    </sql>
+   
 </sqlMap>
 
 

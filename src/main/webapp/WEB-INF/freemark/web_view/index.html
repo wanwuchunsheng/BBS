@@ -136,60 +136,66 @@
         <!-- 综合发布 -->
 		<div class="fly-panel">
 				<h3 class="fly-panel-title">站内推荐 </h3> 
-				<ul class="fly-panel fly-list">
 					<#if (spostsAll?size > 0)>
-		            <#list spostsAll as spt>
-					<li class="fly-list-li">
-						<a href="${futRoot}/mine/preview?id=${spt.createUserId?if_exists}" class="flist-avatar-a" target="_blank">
-							<img class="avatar fly-list-avatar-img" src="${resultImgPath}/bbs/bbs_icon/${spt.imgPath?if_exists}"  /> 
-						</a>
-						<h2 class="fly-tip">
-							<a href="${futRoot}/cont/detail?id=${spt.id?if_exists}&smboId=${spt.smboId?if_exists}" target="_blank">
-								${spt.title?if_exists}
+					    <ul class="fly-panel fly-list">
+		                <#list spostsAll as spt>
+						<li class="fly-list-li">
+							<a href="${futRoot}/mine/preview?id=${spt.createUserId?if_exists}" class="flist-avatar-a" target="_blank">
+								<img class="avatar fly-list-avatar-img" src="${resultImgPath}/bbs/bbs_icon/${spt.imgPath?if_exists}"  /> 
 							</a>
-							<#if (spt.contStatus==0) >
-								 <#if (spt.contRec==1) >
-	                                <i class="layui-badge-ico layui-badge fly-badge-vip">加精</i>
-	                             <#elseif (spt.contReward>0) >
-	                                <i class="layui-badge-ico layui-badge layui-bg-orange">悬赏</i>
-	                             <#elseif (spt.contReply>100) >
-	                                <i class="layui-badge-ico layui-badge layui-bg-blue">围观 </i>
-	                             </#if>
-                            <#elseif (spt.contStatus==1) >
-                                   <i class="layui-badge-ico layui-badge layui-bg-gray">已结</i>
-                            </#if>
-						</h2> 
-						<p class="fly-list-li-p" >
-						    <#if (spt.securityLevel==1) >
-                                  <span> <i class="layui-badge layui-bg-green">官网认证</i></span> 
-                            </#if>
-						    <span>
-							    <#if (postCommendAll?size > 0)>
-				                <#list postCommendAll as pca>
-				                     <#if pca.code==spt.typ>
-				                         <font > ${pca.title?if_exists}</font>
-				                     </#if> 
-							    </#list>
-							    </#if>
-						    </span>
-							<span class="name">
-							     ${spt.niceName?if_exists}
-							</span>
-							
-							<span>${spt.updateDate?string("yyyy-MM-dd HH:mm")}</span>
-							
-							<span class="fly-list-hint">
-							    <i class="iconfont icon-eye-open" title="人气"></i> ${spt.contPreview?if_exists}
-								<i class="iconfont icon-comment" title="回答"></i> ${spt.contReply?if_exists}	
-	                        </span>
-						</p>
-					</li>
-					</#list>
+							<h2 class="fly-tip">
+								<a href="${futRoot}/cont/detail?id=${spt.id?if_exists}&smboId=${spt.smboId?if_exists}" target="_blank">
+									${spt.title?if_exists}
+								</a>
+								<#if (spt.contStatus==0) >
+									 <#if (spt.contRec==1) >
+		                                <i class="layui-badge-ico layui-badge fly-badge-vip">加精</i>
+		                             <#elseif (spt.contReward>0) >
+		                                <i class="layui-badge-ico layui-badge layui-bg-orange">悬赏</i>
+		                             <#elseif (spt.contReply>100) >
+		                                <i class="layui-badge-ico layui-badge layui-bg-blue">围观 </i>
+		                             </#if>
+	                            <#elseif (spt.contStatus==1) >
+	                                   <i class="layui-badge-ico layui-badge layui-bg-gray">已结</i>
+	                            </#if>
+							</h2> 
+							<p class="fly-list-li-p" >
+							    <#if (spt.securityLevel==1) >
+	                                  <span> <i class="layui-badge layui-bg-green">官网认证</i></span> 
+	                            </#if>
+							    <span>
+								    <#if (postCommendAll?size > 0)>
+					                <#list postCommendAll as pca>
+					                     <#if pca.code==spt.typ>
+					                         <font > ${pca.title?if_exists}</font>
+					                     </#if> 
+								    </#list>
+								    </#if>
+							    </span>
+								<span class="name">
+								     ${spt.niceName?if_exists}
+								</span>
+								
+								<span>${spt.updateDate?string("yyyy-MM-dd HH:mm")}</span>
+								
+								<span class="fly-list-hint">
+								    <i class="iconfont icon-eye-open" title="人气"></i> ${spt.contPreview?if_exists}
+									<i class="iconfont icon-comment" title="回答"></i> ${spt.contReply?if_exists}	
+		                        </span>
+							</p>
+						</li>
+					   </#list>
+					   </ul>
+					   <div class="cont-more">
+						   <a  href="${futRoot}/cont/index" class="layui-btn layui-btn-big layui-btn-primary">更多信息在【综合区】预览</a>
+					   </div>
+					<#else>
+					  <ul class="fly-panel fly-notice fly-list">
+					     <li>暂时没有推荐</li>
+					  </ul>
 	                </#if>
-			   </ul>
-			   <div class="cont-more">
-					<a  href="${futRoot}/cont/index" class="layui-btn layui-btn-big layui-btn-primary">更多信息在【综合区】预览</a>
-			   </div>
+			  
+			  
 	 </div>
      <!-- end -->
         
@@ -212,6 +218,8 @@
 					</a>
 				</li>
 			</#list>
+			<#else>
+			 未发布新闻
 			</#if>
          </ul>
 	</div>			

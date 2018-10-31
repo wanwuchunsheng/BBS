@@ -5,14 +5,12 @@
 <title>海伦社区</title>
 <meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
 <meta name="description" content="武汉青山武东海伦国际业主自己开发的社区，方便业主近距离交流，分享生活。青山武东海伦国际自己的交流区，海伦国际欢迎各业主加入QQ【总】群:645952730"/>
-<meta name="author" content="个人中心" />
+<meta name="author" content="发送历史记录" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 <script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
 <script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
-<!-- layui 2.0 -->
-<script src="${resRoot}/view/js/layui.all.js" ></script>
 
 <!-- icon-font -->
 <link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
@@ -105,23 +103,35 @@
 	</div>
 	<div class="site-mobile-shade"></div>
 	<div class="fly-panel fly-panel-user" pad20>
-		<div class="fly-home" style=" background-image: url();">
-			<a href="javascript:;"><img src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" ></a>
-			<h1>
-				<a href="javascript:;">${bbsUserInfo.uname?if_exists}</a>
-				<span style="color:#FF7200">经验：${bbsUserInfo.expPoints?if_exists}</span> 
-				
-			</h1> 
-			<p class="fly-home-info">
-				<i class="iconfont icon-time"></i> <span>${bbsUserInfo.createTime?string("yyyy-MM-dd HH:mm")}</span>
-			</p>
-			<p class="fly-home-sign">
-			<#if (bbsUserInfo.remark?exists) >
-			   ${bbsUserInfo.remark?if_exists}
-			<#else>
-			   （主人很懒，什么都没有留下~）
-			</#if>
-			</p>
+		<div class="layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+			<div class="layui-tab-item layui-show">
+			    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                   <legend>发帖纪录</legend>
+				</fieldset>
+				<ul id="ajaxList" class="mine-view jie-row">
+				<#if (bbsPostsAll?size > 0)>
+	                <#list bbsPostsAll as bpa>
+					<li> 
+					<a href="${futRoot}/cont/detail?id=${bpa.id?if_exists}&smboId=${bpa.smboId?if_exists}" class="jie-title"  target="_blank">${bpa.title?if_exists}</a> 
+					<i>${bpa.createDate?string("yyyy-MM-dd HH:mm")}</i> 
+					<!-- <a class="mine-edit" href="#">编辑</a>  -->
+					<a href="${futRoot}/mine/vf/delPosts?id=${bpa.id?if_exists}" class="mine-edit layui-bg-red" href="#">删除</a>
+					<em>${bpa.contPreview?if_exists}阅/${bpa.contReply?if_exists}答</em> 
+					</li>
+					</#list>
+					<!-- <div id="ajaxListPage"><div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1"><span class="layui-laypage-count">共 2 条</span><a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0">上一页</a><span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span><a href="javascript:;" class="layui-laypage-next layui-disabled" data-page="2">下一页</a><span class="layui-laypage-limits"><select lay-ignore=""><option value="10">10 条/页</option><option value="20" selected="">20 条/页</option><option value="30">30 条/页</option><option value="40">40 条/页</option><option value="50">50 条/页</option></select></span></div></div>
+				 -->
+				<#else>
+				           没有发帖纪录
+				</ul>
+				</#if>
+			</div>
+			
+			<!-- 分页 -->
+			<div class="layui-tab-item">
+				<ul class="mine-view jie-row"></ul>
+				<div id="LAY_page1"></div>
+			</div>
 		</div>
 	</div>
 	<ul class="layui-nav layui-nav-tree layui-inline" style="z-index: 1;" lay-filter="user">
@@ -138,7 +148,7 @@
 			<a href="${futRoot}/mine/vf/history"> <i class="iconfont icon-filter"></i> 发帖记录 </a>
 		</li>
 		<li class="layui-nav-item ">
-			<a href="${futRoot}/mine/vf/message"> <i class="iconfont  icon-comments-alt"></i> 我的信息    <#if (messageCount?if_exists>0) >    <span class="layui-badge-dot"></#if> </span>     </a>
+			<a href="${futRoot}/mine/vf/message"> <i class="iconfont  icon-comments-alt"></i> 我的信息</a>
 		</li>
 		<!-- <li class="layui-nav-item ">
 			<a href="javascript:;"> <i class="iconfont  icon-lightbulb"></i> 反馈建议</a>
@@ -163,6 +173,20 @@
 	</p>
 </div>
 <!-- footer end -->
+<!-- layui 2.0 -->
+<script src="${resRoot}/view/js/layui.all.js" ></script>
+<script>
+layui.use(['element', 'layer'], function(){
+  var element = layui.element;
+  var layer = layui.layer;
+  
+  //监听折叠
+ element.on('collapse(test)', function(data){
+	 console.info(data)
+    layer.msg('展开状态：'+ data.show);
+  });
+});
+</script>
 
 </body>
 </html>

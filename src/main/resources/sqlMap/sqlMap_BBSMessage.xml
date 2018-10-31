@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="message">
+    
+   <!--  查询 -->
+   <sql id="queryBBSMessageAll">
+        <![CDATA[
+			select * from bbs_message where del=0 and status=0 and  RECIPIENT_ID=:id
+        ]]>
+    </sql>
+ 
+    <!-- 查询是否有消息 -->
+	<sql id="queryBBSMessageCount">
+        <![CDATA[
+			select id from bbs_message where del=0 and status=0  and  RECIPIENT_ID=:id 
+        ]]>
+    </sql>
+    
+    
+  
+</sqlMap>
+
+
+

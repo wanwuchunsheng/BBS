@@ -40,10 +40,11 @@ public class SysUserInfo implements Serializable{
 	private String photoPath; //图片地址
 	private String qrcodePath;//二维码
 	private String address; //地址
-	private String dpnum;//商铺类别
+	private Integer dpnum;//修改次数
 	private String job;//职位，工作
 	private String nowAddress;//现居地，收货地址
 	private String niceName;//昵称
+	private String remark;//备注
 	
 	private Integer expPoints;//经验值
 	private String isCheck;//BBS签到
@@ -218,10 +219,10 @@ public class SysUserInfo implements Serializable{
 	}
 	
 	@Column(name = "dpnum")
-	public String getDpnum() {
+	public Integer getDpnum() {
 		return dpnum;
 	}
-	public void setDpnum(String dpnum) {
+	public void setDpnum(Integer dpnum) {
 		this.dpnum = dpnum;
 	}
 	@Column(name = "job")
@@ -252,7 +253,13 @@ public class SysUserInfo implements Serializable{
 	public void setExpPoints(Integer expPoints) {
 		this.expPoints = expPoints;
 	}
-	
+	@Column(name = "remark")
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public String getIsCheck() {
 		return isCheck;
 	}

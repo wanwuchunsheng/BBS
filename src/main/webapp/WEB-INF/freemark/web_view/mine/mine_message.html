@@ -5,14 +5,12 @@
 <title>海伦社区</title>
 <meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
 <meta name="description" content="武汉青山武东海伦国际业主自己开发的社区，方便业主近距离交流，分享生活。青山武东海伦国际自己的交流区，海伦国际欢迎各业主加入QQ【总】群:645952730"/>
-<meta name="author" content="个人中心" />
+<meta name="author" content="我的消息" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 <script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
 <script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
-<!-- layui 2.0 -->
-<script src="${resRoot}/view/js/layui.all.js" ></script>
 
 <!-- icon-font -->
 <link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
@@ -28,7 +26,12 @@
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
-
+<style type="text/css">
+.layui-colla-title{
+  background-color: #fff;
+}
+.layui-colla-content {padding:0px;}
+</style>
 </head>
 
 <body>
@@ -97,31 +100,37 @@
 <!-- content -->
 <div class="main layui-clear">
 <div class="main fly-user-main layui-clear user-index">
-	<div class="mobile-history">
-		<a href="javascript:history.go(-1);"><i class="iconfont icon-toLeft"></i></a>
-	</div>
-	<div class="site-tree-mobile layui-hide">
-		<i class="layui-icon">&#xe602;</i>
-	</div>
+	
 	<div class="site-mobile-shade"></div>
 	<div class="fly-panel fly-panel-user" pad20>
-		<div class="fly-home" style=" background-image: url();">
-			<a href="javascript:;"><img src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" ></a>
-			<h1>
-				<a href="javascript:;">${bbsUserInfo.uname?if_exists}</a>
-				<span style="color:#FF7200">经验：${bbsUserInfo.expPoints?if_exists}</span> 
-				
-			</h1> 
-			<p class="fly-home-info">
-				<i class="iconfont icon-time"></i> <span>${bbsUserInfo.createTime?string("yyyy-MM-dd HH:mm")}</span>
-			</p>
-			<p class="fly-home-sign">
-			<#if (bbsUserInfo.remark?exists) >
-			   ${bbsUserInfo.remark?if_exists}
-			<#else>
-			   （主人很懒，什么都没有留下~）
-			</#if>
-			</p>
+		<div class="layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+			    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                   <legend>信息面板</legend>
+				</fieldset>
+				<div class="layui-collapse" lay-filter="test">
+				 <#if (messageAll?size > 0)>
+                 <#list messageAll as mes>
+				  <div class="layui-colla-item">
+				    <h2 class="layui-colla-title">
+				   
+				    <#if (commendAll?size > 0)>
+                    <#list commendAll as cd>
+                          <#if cd.code==mes.typ>
+                                                                                      【${cd.title?if_exists}】<span style="padding-left:10px;">${mes.createDate?string("yyyy-MM-dd HH:mm")}</span>
+                          </#if>
+                    </#list>
+                    </#if>
+				    <span style="color:blue;margin-right: 5px; ">${mes.createUserName?if_exists}</span>来信留言.</h2>
+				    <div class="layui-colla-content">
+				      <textarea style="border: 0px;background-color: #FFFAFA" id="L_sign"  name="remark" autocomplete="off" class="layui-textarea" style="height: 80px;" >${mes.content?if_exists}</textarea>
+				    </div>
+				  </div>
+				  </#list>
+				  <#else>
+				                    暂无留言
+				  </#if>
+				  
+				</div>
 		</div>
 	</div>
 	<ul class="layui-nav layui-nav-tree layui-inline" style="z-index: 1;" lay-filter="user">
@@ -138,7 +147,7 @@
 			<a href="${futRoot}/mine/vf/history"> <i class="iconfont icon-filter"></i> 发帖记录 </a>
 		</li>
 		<li class="layui-nav-item ">
-			<a href="${futRoot}/mine/vf/message"> <i class="iconfont  icon-comments-alt"></i> 我的信息    <#if (messageCount?if_exists>0) >    <span class="layui-badge-dot"></#if> </span>     </a>
+			<a href="${futRoot}/mine/vf/message"> <i class="iconfont  icon-comments-alt"></i> 我的信息</a>
 		</li>
 		<!-- <li class="layui-nav-item ">
 			<a href="javascript:;"> <i class="iconfont  icon-lightbulb"></i> 反馈建议</a>
@@ -148,9 +157,7 @@
 			<a href="${futRoot}/mine/logout" onclick="return confirm('是否退出登录？')"> <i class="iconfont  icon-signout "></i> 退出登录</a>
 		</li>
    </ul>
-<div class="mobile-history">
-	<a href="javascript:;"><i class="iconfont icon-toLeft"></i></a>
-</div>
+
 </div>
 </div>
 
@@ -163,6 +170,21 @@
 	</p>
 </div>
 <!-- footer end -->
+
+<!-- layui 2.0 -->
+<script src="${resRoot}/view/js/layui.all.js" ></script>
+<script>
+layui.use(['element', 'layer'], function(){
+  var element = layui.element;
+  var layer = layui.layer;
+  
+  //监听折叠
+ /* element.on('collapse(test)', function(data){
+	 console.info(data)
+    layer.msg('展开状态：'+ data.show);
+  }); */
+});
+</script>
 
 </body>
 </html>

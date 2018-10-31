@@ -109,7 +109,13 @@
 	<p class="fly-home-info">
 		<i class="iconfont icon-time"></i> <span>${bbsUser.createTime?string("yyyy-MM-dd HH:mm")}</span>
 	</p>
-	<p class="fly-home-sign">（主人很懒，什么都没有留下~）</p>
+	<p class="fly-home-sign">
+        <#if (bbsUser.remark?exists) >
+            ${bbsUser.remark?if_exists}
+		<#else>
+		         （主人很懒，什么都没有留下~）
+		</#if>
+	</p>
 </div>
 
 

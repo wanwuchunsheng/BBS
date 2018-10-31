@@ -122,7 +122,7 @@ public class ContDetailController {
 			bean.setContBad(0);//反对0
 			bean.setContStatus(0);//默认状态0  1-完结
 			bean.setDel(0);//默认0-显示  1-禁用 
-			bean.setExpPoints(bean.getExpPoints()+Constants.DED_EXP_POINTS);
+			bean.setExpPoints(bean.getContReward()+Constants.DED_EXP_POINTS);//提交的经验值+默认发帖扣5经验值
 			contDetailService.savePosts(bean);
 			//更新session 经验值
 			bbsUserInfo.setExpPoints( bbsUserInfo.getExpPoints()-bean.getExpPoints() );
@@ -198,7 +198,7 @@ public class ContDetailController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
+	
 	
 }

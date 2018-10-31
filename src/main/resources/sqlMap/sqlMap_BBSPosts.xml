@@ -39,7 +39,7 @@
         ]]>
     </sql>
     
-    <!--  查询首页站内推荐  -->
+    <!--  查询首页站内新闻  -->
    <sql id="queryBBSPostsByTyp">
         <![CDATA[
            SELECT
@@ -71,7 +71,7 @@
 				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
 			WHERE
 				a.del = 0 and b.del=0
-			AND a.typ = 8
+			AND a.typ = 0
 			ORDER BY
 				a.UPDATE_DATE DESC  limit 6
         ]]>
@@ -167,12 +167,20 @@
     <!-- 查询最近一个月的发帖量 -->
     <sql id="queryBBSPostsByCreateUserId">
         <![CDATA[
-            select id,smbo_id,title,create_date,cont_reply,cont_preview from bbs_posts where create_user_id=:id 
+            select id,smbo_id,title,create_date,cont_reply,cont_preview from bbs_posts where 
+            del=0 and create_user_id=:id 
 and DATE_SUB(CURDATE(), INTERVAL 1 MONTH) <= date(create_date) order by create_date desc
         ]]>
     </sql>
     
-    
+    <!-- 查询最近一个月的发帖量 -->
+    <sql id="queryBBSPostsAllByCreateUserId">
+        <![CDATA[
+            select id,smbo_id,title,create_date,cont_reply,cont_preview from bbs_posts where
+            del=0 and create_user_id=:id 
+            order by create_date desc
+        ]]>
+    </sql>
 </sqlMap>
 
 

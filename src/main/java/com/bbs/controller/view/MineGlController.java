@@ -1,5 +1,6 @@
 package com.bbs.controller.view;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbs.model.sys.SysUserInfo;
+import com.bbs.model.view.BBSMessage;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSReply;
+import com.bbs.model.view.BaseParams;
 import com.bbs.service.view.IMineService;
 
 /**
@@ -35,9 +38,10 @@ public class MineGlController {
 	 * @createTime 2018年10月23日13:59:59
 	 * */
 	@RequestMapping("index")
-	public String gotoMineHome(HttpSession session){
+	public String gotoMineHome(HttpSession session,HttpServletRequest request){
 		SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
 		if(bbsUserInfo!=null){
+			request.setAttribute("messageCount", mineService.queryBBSMessageCount(bbsUserInfo));
 			return "/web_view/mine/mine_home";
 		}
 		return "/web_view/mine/mine_login";
@@ -108,7 +112,10 @@ public class MineGlController {
 	 * @createTime 2018年10月23日13:59:59
 	 * */
 	@RequestMapping("vf/home")
-	public String gotoMineHome(){
+	public String gotoMineHome(HttpServletRequest request,HttpSession session){
+		SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
+		//查询系统消息
+		request.setAttribute("messageCount", mineService.queryBBSMessageCount(bbsUserInfo));
 		return "/web_view/mine/mine_home";
 	}
 	
@@ -145,4 +152,97 @@ public class MineGlController {
 		return "/web_view/mine/mine_index";
 	}
 
+
+	
+	/**
+	 * 说明：我的消息
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/message")
+	public String gotoContMessage(HttpSession session, HttpServletRequest request){
+		SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
+		List<BBSMessage> list=mineService.queryBBSMessageAll(bbsUserInfo);
+		request.setAttribute("messageAll", list);
+		request.setAttribute("commendAll", BaseParams.getPostCommendMap().get("SY001"));
+		return "/web_view/mine/mine_message";
+	}
+	
+	/**
+	 * 说明：发帖记录
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/history")
+	public String gotoContHistory(HttpSession session, HttpServletRequest request){
+		//查询发帖
+		SysUserInfo bean=(SysUserInfo) session.getAttribute("bbsUserInfo");
+		request.setAttribute("bbsPostsAll", mineService.queryBBSPostsAllByCreateUserId(bean)); 
+		return "/web_view/mine/mine_history";
+	}
+	
+	/**
+	 * 说明：重置
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/forget")
+	public String gotoContForget(HttpSession session, HttpServletRequest request){
+		
+		return "/web_view/mine/mine_forget";
+	}
+	
+	/**
+	 * 说明：基础信息设置
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/set")
+	public String gotoContSet(HttpSession session, HttpServletRequest request){
+		//查询用户基本信息
+		SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
+		SysUserInfo sysUserInfo=mineService.querySysUserById(bbsUserInfo);
+		session.setAttribute("bbsUserInfo", sysUserInfo);
+		request.setAttribute("userInfo", sysUserInfo);
+		return "/web_view/mine/mine_set";
+	}
+	
+	/**
+	 * 说明：修改基本资料
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/updateSysUser")
+	@ResponseBody
+	public String updateSysUser(HttpSession session, HttpServletRequest request,SysUserInfo bean){
+		try {
+			bean.setUpdateTime(new Date());
+			bean.setDpnum(bean.getDpnum()-1);
+			mineService.updateSysUser(bean);
+			return "true";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "false";
+	}
+	
+	/**
+	 * 说明：删除发帖纪录
+	 *   修改帖子状态1
+	 *   修改对应帖子回帖1
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/delPosts")
+	public String delPosts(HttpSession session, HttpServletRequest request,BBSPosts bean){
+		bean.setUpdateDate(new Date());
+		bean.setDel(1);//1-禁用
+		mineService.delPosts(bean);
+		gotoContHistory(session, request);
+		return "/web_view/mine/mine_history";
+	}
+	
+	
+	
+	
 }
