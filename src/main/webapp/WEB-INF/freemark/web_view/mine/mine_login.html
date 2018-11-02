@@ -27,29 +27,6 @@
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
-<script type="text/javascript">
- $(function(){
-   $(".layui-btn").click(function(){
-	   //提交后台处理
-	     $.ajax({
-			url : "${futRoot}/mine/vfLogin",
-			type : "post",
-			dataType : "json",
-		    async: false,
-			data : $("#ajaxForm").serialize(),
-			success : function(data) {
-				console.info(data);
-				if(data==true){
-                    window.location.href="${futRoot}/mine/vf/home";
-				}else{
-                    $("#message").text("用户名密码不对！");
-				}
-			}
-		 }); 
-        
-   })
- })
-</script>
 </head>
 
 <body>
@@ -144,19 +121,21 @@
 									<input type="password" id="L_pass" name="upwd" required lay-verify="required" autocomplete="off" class="layui-input" placeholder="请输入密码">
 								</div>
 							</div>
-							<!-- <div class="layui-form-item">
-								<label for="L_vercode" class="layui-form-label">人类验证</label>
-								<div class="layui-input-inline">
-									<input type="text" id="L_vercode" name="verify" required lay-verify="required" placeholder="请输入后面的数字" autocomplete="off" class="layui-input">
-								</div>
-								<span class="check-code">
-									<img class="verifyimg reloadverify" alt="点击切换" src="#" width="120">
-								</span>
-							</div> -->
 							<div class="layui-form-item">
-								<a class="layui-btn layui-btn-normal" >立即登录</a>
+								<label for="L_vercode" class="layui-form-label">验证码</label>
+								<div class="layui-input-inline">
+									<input type="text"  id="imageContent" name="imageContent" required lay-verify="imageContent" placeholder="请输入后面的数字" autocomplete="off" class="layui-input">
+								</div>
+								
+								<span class="check-code">
+									<img id="imgObj" alt="验证码"  src="${futRoot}/captcha/getCaptchaImage.jpg"  onclick="changeImg()">
+								</span>
+						    </div>
+							<div class="layui-form-item">
+								<!-- <a class="layui-btn layui-btn-normal"  >立即登录</a> -->
+								<button class="layui-btn layui-btn-normal" lay-filter="demoSub" lay-submit>立即登录</button>
 								<span style="padding-left:20px;">
-									<a href="javascript:;">忘记密码？</a>
+									<a href="javascript:layer.msg('功能未开放,敬请期待...')">忘记密码？</a>
 								</span> 
 							</div>
 							
@@ -177,6 +156,72 @@
 	</p>
 </div>
 <!-- footer end -->
+
+<script type="text/javascript">
+layui.use(['form'], function(){
+	var form = layui.form;
+	var layer = layui.layer;
+	//监听提交
+	form.on('submit(demoSub)', function(data){
+		var imageContent=data.field.imageContent;
+		//验证码验证
+	    var res=false;
+	    $.ajax({
+		    type : 'post',
+		    async : false,
+		    url :'${futRoot}/captcha/checkCaptcha',
+		    data : {
+		        "code" : imageContent
+		    },
+		    success : function(data) {
+			    console.info("验证码返回："+data)
+		       if(data=='false'){
+		    	   res=false;
+			   }else{
+		           res=true;
+				}  
+		    }
+		});
+		if(!res){
+			layer.msg('验证码输入错误', {icon: 2});
+			 return false;
+		}else{
+			 //成功提交验证邮箱密码是否匹配
+		     $.ajax({
+				url : "${futRoot}/mine/vfLogin",
+				type : "post",
+				dataType : "json",
+			    async: false,
+				data : $("#ajaxForm").serialize(),
+				success : function(data) {
+					console.info(data);
+					if(data==true){
+	                    window.location.href="${futRoot}/mine/vf/home";
+					}else{
+	                    $("#message").text("用户名密码不对！");
+					}
+				}
+			 }); 
+		}
+		return false;
+	})
+})
+
+//单机刷新验证码
+function changeImg() {
+     var imgSrc = $("#imgObj");
+     var src = imgSrc.attr("src");
+     imgSrc.attr("src", chgUrl(src));
+};
+//时间戳   
+//为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳   
+function chgUrl(url) {
+     var timestamp = (new Date()).valueOf();
+     var stamp = $("#timestamp");
+     return url;
+};
+
+</script>
 
 </body>
 </html>

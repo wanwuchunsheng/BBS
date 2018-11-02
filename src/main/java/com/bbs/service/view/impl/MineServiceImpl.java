@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbs.model.sys.SysUserInfo;
+import com.bbs.model.view.BBSIdeAuthentication;
 import com.bbs.model.view.BBSMessage;
 import com.bbs.model.view.BBSPostCommend;
 import com.bbs.model.view.BBSPosts;
@@ -33,8 +34,14 @@ public class MineServiceImpl implements IMineService{
 	 * @dateTime 2018年10月23日15:09:06
 	 * */
 	@Override
-	public void saveMineReg(SysUserInfo user) {
-		 dalClient.persist(user);
+	public String saveMineReg(SysUserInfo user) {
+		 SysUserInfo userinfo=dalClient.queryForObject("user.querySysUserByEmail", user, SysUserInfo.class);
+		 if(userinfo!=null){
+			 return "2";
+		 }else{
+			 dalClient.persist(user);
+			 return "1";
+		 }
 	}
 
 	/**
@@ -136,6 +143,26 @@ public class MineServiceImpl implements IMineService{
 	public List<BBSMessage> queryBBSMessageAll(SysUserInfo bean) {
 		// TODO Auto-generated method stub
 		return dalClient.queryForList("message.queryBBSMessageAll", bean,BBSMessage.class);
+	}
+
+	/**
+	 * 说明：保存身份证
+	 * 
+	 * */
+	@Override
+	public void saveIdeAuthentication(BBSIdeAuthentication bia) {
+		dalClient.persist(bia);
+	}
+
+	/**
+	 * 说明：查询身份认证信息
+	 * 
+	 * */
+	@Override
+	public List<BBSIdeAuthentication> queryBBSIdeAuthenAll(
+			SysUserInfo sysUserInfo) {
+		// TODO Auto-generated method stub
+		return dalClient.queryForList("message.queryBBSIdeAuthenAll", sysUserInfo,BBSIdeAuthentication.class);
 	}
 	
 	

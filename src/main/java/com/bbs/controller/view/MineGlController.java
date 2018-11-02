@@ -2,6 +2,7 @@ package com.bbs.controller.view;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bbs.controller.common.tools.EncrypMD5;
+import com.bbs.controller.common.tools.StringUtil;
 import com.bbs.model.sys.SysUserInfo;
+import com.bbs.model.view.BBSIdeAuthentication;
 import com.bbs.model.view.BBSMessage;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSReply;
@@ -60,16 +64,34 @@ public class MineGlController {
 	
 	/**
 	 * 说明：保存注册信息
+	 * @return 1-注册成功  2-邮箱已被注册  3-注册失败
 	 * @author Administrator
 	 * @createTime 2018年10月23日13:59:59
 	 * */
 	@RequestMapping("saveReg")
+	@ResponseBody
 	public String saveMineReg(HttpServletRequest request, SysUserInfo user){
-		//默认设置
-		user.setPhotoPath("common.jpg");//默认头像
-		user.setNiceName(user.getUname());//默认昵称和用户名一致， 后期可在个人中心编辑修改
-		mineService.saveMineReg(user); //添加成功后，返回对象
-		return "/web_view/mine/mine_login";
+		try {
+			//默认设置
+			user.setPhotoPath("common.jpg");//默认头像
+			user.setDel(0);
+			user.setUsrStatus(0);
+			user.setCreateUserId(0);
+			user.setUpdateUserId(0);
+			user.setExpPoints(5);
+			user.setSecurityLevel(1);//0-管理员 1- 普通注册 2-官网认证  3-业主
+			user.setDpnum(5);//个人基本资料默认5次修改机会
+			user.setGender(2);//默认性别未知
+			user.setNiceName(user.getUname());//默认昵称和用户名一致， 后期可在个人中心编辑修改
+			//随机生成邀请码
+			user.setEno(UUID.randomUUID()+StringUtil.getItemId(4));
+			//密码加密
+			user.setUpwd(EncrypMD5.SHA256(user.getUpwd()));
+			return mineService.saveMineReg(user); //添加成功后，返回对象
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "3";
 	}
 	
 	/**
@@ -93,6 +115,8 @@ public class MineGlController {
 	@ResponseBody
 	public String verifyLoginUser(HttpSession session,SysUserInfo user){
 		try {
+			//加密查询 
+			user.setUpwd(EncrypMD5.SHA256(user.getUpwd()));
 			SysUserInfo bbsUserInfo=mineService.querySysUserInfo(user);
 			if(bbsUserInfo!=null){
 				//存储BBS登录信息
@@ -100,7 +124,7 @@ public class MineGlController {
 				return "true";
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return "false";
 		
@@ -201,7 +225,10 @@ public class MineGlController {
 	public String gotoContSet(HttpSession session, HttpServletRequest request){
 		//查询用户基本信息
 		SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
-		SysUserInfo sysUserInfo=mineService.querySysUserById(bbsUserInfo);
+		SysUserInfo sysUserInfo=mineService.querySysUserInfo(bbsUserInfo);//mineService.querySysUserById(bbsUserInfo);
+		//查询用户认证信息
+		List<BBSIdeAuthentication> ideAuthenAll=mineService.queryBBSIdeAuthenAll(sysUserInfo);
+		request.setAttribute("ideAuthenAll", ideAuthenAll);
 		session.setAttribute("bbsUserInfo", sysUserInfo);
 		request.setAttribute("userInfo", sysUserInfo);
 		return "/web_view/mine/mine_set";
@@ -241,8 +268,6 @@ public class MineGlController {
 		gotoContHistory(session, request);
 		return "/web_view/mine/mine_history";
 	}
-	
-	
 	
 	
 }

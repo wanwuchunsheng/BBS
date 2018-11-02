@@ -160,8 +160,8 @@
 	                            </#if>
 							</h2> 
 							<p class="fly-list-li-p" >
-							    <#if (spt.securityLevel==1) >
-	                                  <span> <i class="layui-badge layui-bg-green">官网认证</i></span> 
+							    <#if (spt.securityLevel>1) >
+	                                  <span> <i class="layui-badge layui-bg-green" style="border-radius:5px">官网认证</i></span> 
 	                            </#if>
 							    <span>
 								    <#if (postCommendAll?size > 0)>
@@ -191,7 +191,7 @@
 					   </div>
 					<#else>
 					  <ul class="fly-panel fly-notice fly-list">
-					     <li>暂时没有推荐</li>
+					     <li>暂无推荐</li>
 					  </ul>
 	                </#if>
 			  
@@ -219,7 +219,7 @@
 				</li>
 			</#list>
 			<#else>
-			 未发布新闻
+			 未发布
 			</#if>
          </ul>
 	</div>			

@@ -4,7 +4,7 @@
    <!--  HD 用户登录验证  -->
    <sql id="verifyUser">
         <![CDATA[
-           select * from sys_user where uname=:uname and upwd=:upwd and del=0 and id=1
+           select * from sys_user where uname=:uname and upwd=:upwd and del=0 and SECURITY_LEVEL=0
         ]]>
     </sql>
     
@@ -72,9 +72,11 @@
 				a.CREATE_USER_ID,
 				a.EXP_POINTS,
 				a.remark,
+				a.idcode,
+				a.birthdate,
 			  (select c.id from bbs_signin c where c.CREATE_USER_ID=a.id and DATE_FORMAT(c.create_date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') limit 1) as isCheck
 			 from sys_user a 
-			 where a.email=:email and a.upwd=:upwd and a.del=0
+			 where a.email=:email and a.upwd=:upwd and a.del=0 and a.SECURITY_LEVEL>0
         ]]>
     </sql>
     
@@ -97,6 +99,13 @@
     <sql id="updateUserPhotoPathById">
         <![CDATA[
             update sys_user set photo_path=:photoPath  where id=:id
+        ]]>
+    </sql>
+   
+   <!-- 注册前，验证邮箱是否重复注册   -->
+    <sql id="querySysUserByEmail">
+        <![CDATA[
+            select id from sys_user where email=:email
         ]]>
     </sql>
    

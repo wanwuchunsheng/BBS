@@ -16,6 +16,13 @@
     </sql>
     
     
+    <!-- 查询身份认证资料 -->
+	<sql id="queryBBSIdeAuthenAll">
+        <![CDATA[
+			select * from bbs_ide_authentication where del=0 and CREATE_USER_ID=:id order by CREATE_DATE asc
+        ]]>
+    </sql>
+    
   
 </sqlMap>
 

@@ -107,11 +107,11 @@ input,textarea{
 			<div class="layui-tab-content" style="padding: 20px 0;">
 			 <!-- 基本资料 start -->
 			 <div class="layui-form layui-form-pane layui-tab-item layui-show">
-			   <button id="updateIcon" class="layui-btn layui-btn-sm layui-btn-normal" style="margin-bottom: 15px;"><i class="layui-icon"></i> 修改头像</button>
+			   <button id="updateIcon" class="layui-btn layui-btn-sm layui-bg-blue" style="margin-bottom: 15px;border-radius:10%;"><i class="layui-icon"></i> 修改头像</button>
 			   <div id="updateIconDiv" class="layui-row layui-col-space15 layui-form-item" style="display:none;">
 		             <div class="layui-col-md">
 		                   <div class="avatar-add"> 
-				                <button id="test1" class="layui-btn upload-img layui-bg-blue"><i class="layui-icon">&#xe67c;</i>修改头像</button>
+				                <button id="test1" class="layui-btn upload-img layui-bg-blue"><i class="layui-icon">&#xe67c;</i>上传头像</button>
 				                <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过60KB</p>
 								<img id="demo1"  src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}">  
 			              </div>
@@ -149,8 +149,24 @@ input,textarea{
 		             <div class="layui-col-md5">
 		                    <label class="layui-form-label" >性别</label> 
 						    <div class="layui-input-block">
-						       <input type="radio" name="gender" value="1" <#if (userInfo.gender?if_exists==1) >checked</#if>  title="男">
-                               <input type="radio" name="gender" value="0" <#if (userInfo.gender?if_exists==0) >checked</#if>  title="女">
+						       <input type="radio" name="gender" lay-verify="required"  value="1" <#if (userInfo.gender?if_exists==1) >checked</#if>  title="男">
+                               <input type="radio" name="gender" lay-verify="required"  value="0" <#if (userInfo.gender?if_exists==0) >checked</#if>  title="女">
+						    </div>
+		             </div>
+	            </div>
+	            
+	            <div class="layui-row layui-col-space15 layui-form-item">
+		             <div class="layui-col-md7">
+		                   <label class="layui-form-label" >身份证号</label>
+						    <div class="layui-input-block">
+						      <input type="text" name="idcode" required lay-verify="required"  placeholder="请输入身份证" autocomplete="off" class="layui-input"  value="${userInfo.idcode?if_exists}" >
+						    </div>
+		             </div>
+		             
+		             <div class="layui-col-md5">
+		                    <label class="layui-form-label" >出生年月</label> 
+						    <div class="layui-input-block">
+						       <input type="text" name="birthdate" required lay-verify="required"  placeholder="2015-02" autocomplete="off" class="layui-input"  value="${userInfo.birthdate?if_exists}" >
 						    </div>
 		             </div>
 	            </div>
@@ -215,7 +231,7 @@ input,textarea{
 		             <div class="layui-form-item layui-form-text">
 		              <label for="L_sign" class="layui-form-label">个性签名</label>
 		              <div class="layui-input-block">
-		                <textarea placeholder="随便写些什么刷下存在感" id="L_sign"  name="remark" autocomplete="off" class="layui-textarea" style="height: 80px;" value="${userInfo.reamrk?if_exists}">${userInfo.reamrk?if_exists}</textarea>
+		                <textarea placeholder="随便写些什么刷下存在感" id="L_sign"  name="remark" autocomplete="off" class="layui-textarea" style="height: 80px;" value="${userInfo.remark?if_exists}">${userInfo.remark?if_exists}</textarea>
 		              </div>
 		            </div>
 		            <input type="hidden" name="id" class="layui-input" value="${bbsUserInfo.id?if_exists}" >
@@ -232,7 +248,66 @@ input,textarea{
             <!-- 官网认证 start -->
             <div class="layui-form layui-form-pane layui-tab-item">
 	            <div class="layui-form-item">
-	                                              业主认证 
+					
+					
+				<#if (userInfo.securityLevel?if_exists>=2)  >
+				         <blockquote class="layui-elem-quote layui-quote-nm" >
+				             <h2  style="color:red;padding:40px 10px;">恭喜您成为官网认证用户.</h2>
+				         </blockquote>
+				         <br/><br/>
+                <#else>
+                  <div class="layui-row layui-col-space15 layui-form-item">
+			            <div class="layui-col-md">
+							<div class="layui-upload">
+							  <button type="button" class="layui-btn" id="test2">个人验证</button> <span style="color:#c2c2c2;">**个人身份证正反面各1张，手持身份证全身照1张</span>
+							  <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+							    预览图：
+							    <div class="layui-upload-list" id="demo2">
+							      <!-- 回显图片 -->
+							      <#if (ideAuthenAll?size > 0)>
+                                  <#list ideAuthenAll as ide>
+                                      <#if ide.typ?if_exists==0 >
+                                      <img src="${resultImgPath}/bbs/bbs_icon/${ide.photoPath?if_exists}" alt="${ide.remark?if_exists}" class="layui-upload-img" />
+                                      </#if>
+                                  </#list>
+                                  </#if>
+							    </div>
+							 </blockquote>
+							</div>
+		                </div>
+	               </div>
+                </#if>   
+                    
+                <#if (userInfo.securityLevel?if_exists==3)  >
+                         <blockquote class="layui-elem-quote layui-quote-nm" >
+				            <h2 style="color:red;padding:20px 10px;">恭喜您成为官网业主认证用户,欢迎各业主加入社区认证QQ群：645952730 <br/><br/>加群邀请码：【${userInfo.eno?if_exists}】</h2>
+				            
+				         </blockquote>
+				         <br/><br/>
+				         
+                <#else>                                            
+                   <div class="layui-row layui-col-space15 layui-form-item">
+			            <div class="layui-col-md">
+		                    <div class="layui-upload">
+							  <button type="button" class="layui-btn" id="test22">业主验证</button> <span style="color:#c2c2c2;">**能证明自己是业主的照片，照片越多，通过审核概率越高</span>
+							  <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+							    预览图：
+							    <div class="layui-upload-list" id="demo22">
+							      <#if (ideAuthenAll?size > 0)>
+                                  <#list ideAuthenAll as ide>
+                                      <#if ide.typ?if_exists==1 >
+                                      <img src="${resultImgPath}/bbs/bbs_icon/${ide.photoPath?if_exists}" alt="${ide.remark?if_exists}" class="layui-upload-img" />
+                                      </#if>
+                                  </#list>
+                                  </#if>
+							    </div>
+							 </blockquote>
+							</div>
+			             </div>
+	                </div>
+	             </#if>
+                    
+                    
 	            </div>
             </div>
             <!-- 官网认证 end -->
@@ -283,8 +358,9 @@ input,textarea{
 <script type="text/javascript">
 $(function(){
 	$("#updateIcon").click(function(){
-		$("#updateIconDiv").slideToggle(1000);//.toggle(1000);
+		$("#updateIconDiv").slideToggle(300);//.toggle(1000);
 	})
+
 })
 layui.use(['form','element','upload'], function(){
   var form = layui.form;
@@ -298,6 +374,19 @@ layui.use(['form','element','upload'], function(){
 	  var dpnum=data.field.dpnum;
 	  var remark=data.field.remark;
 	  var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+	  console.log(data.field)
+      if (!data.field.gender){
+          layer.msg('性别必填', {icon: 2});
+          return false;
+      }
+	    if(tel.length!=11){
+	      layer.msg('请输入有效的手机号码', {icon: 2});
+	      return false;
+	    }
+	    if(!myreg.test(tel)){
+	      layer.msg('请输入有效的手机号码', {icon: 2});
+	      return false;
+	    }
 	  //验证修改次数
 	  if(dpnum-1<=0){
 		 layer.msg('提交失败，您可修改次数为:'+dpnum, {icon: 2});
@@ -309,14 +398,6 @@ layui.use(['form','element','upload'], function(){
 	  }
 	  //修改前给出提醒
 	  layer.confirm('确定要提交修改吗？还可修改：'+dpnum+'次', { btn : [ '确定', '取消' ]}, function(index) {
-		    if(tel.length!=11){
-		      layer.msg('请输入有效的手机号码', {icon: 2});
-		      return false;
-		    }
-		    if(!myreg.test(tel)){
-		      layer.msg('请输入有效的手机号码', {icon: 2});
-		      return false;
-		    }
 		    //提交后台处理
 		    $.ajax({
 				url:"${futRoot}/mine/vf/updateSysUser",
@@ -338,6 +419,43 @@ layui.use(['form','element','upload'], function(){
       });
       return false;   
   })
+  
+   //多图片上传-身份证
+  upload.render({
+    elem: '#test2'
+    ,url: '${futRoot}/upload?docName='+"bbs_ide&typ=0"
+    ,size: 2*1024 //限制文件大小，单位 2M
+    ,multiple: true
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+      });
+    }
+    ,done: function(res){
+      //上传完毕
+    	layer.msg('上传成功');
+    }
+  });
+  //多图片上传-业主证明
+  upload.render({
+    elem: '#test22'
+    ,url: '${futRoot}/upload?docName='+"bbs_ide&typ=1"
+    ,size: 2*1024 //限制文件大小，单位 2M
+    ,multiple: true
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#demo22').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+      });
+    }
+    ,done: function(res){
+      //上传完毕
+       layer.msg('上传成功');
+    }
+  });
+  
+  
 
   //图片上传
   var uploadInst = upload.render({

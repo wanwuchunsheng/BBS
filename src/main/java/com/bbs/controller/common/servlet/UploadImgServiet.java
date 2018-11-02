@@ -2,6 +2,7 @@ package com.bbs.controller.common.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.bbs.controller.common.ApplicationContextUtil;
 import com.bbs.model.sys.SysUserInfo;
+import com.bbs.model.view.BBSIdeAuthentication;
 import com.bbs.service.common.Constants;
 import com.bbs.service.sys.ISysUserService;
 import com.bbs.service.view.IIndexService;
@@ -100,6 +102,34 @@ public class UploadImgServiet extends HttpServlet {
         	 out.print(str);  //返回url地址
              out.flush();
              out.close();
+        }else if("bbs_ide".equals(docName)){
+        	/**
+        	 * 身份证资料
+        	 * 
+        	 * */
+        	HttpSession session=request.getSession();
+        	//判断session
+        	SysUserInfo bbsSysUserInfo= (SysUserInfo)session.getAttribute("bbsUserInfo");
+        	if(bbsSysUserInfo!=null){
+	        	String typ=request.getParameter("typ");
+	        	BBSIdeAuthentication bia=new BBSIdeAuthentication();
+	        	bia.setTyp(Integer.parseInt(typ));
+	        	bia.setCreateDate(new Date());
+	        	bia.setCreateUserName(bbsSysUserInfo.getUname());
+	        	bia.setCreateUserId(bbsSysUserInfo.getId());
+	        	bia.setStatus(1);//0-审核通过  1-审核中  2-审核不通过
+	        	bia.setDel(0);//0-启用  1-禁用
+	        	bia.setPhotoPath(fileName);
+	        	IMineService comboboxs=ApplicationContextUtil.getBean(IMineService.class);
+	        	comboboxs.saveIdeAuthentication(bia);
+	        	//返回新的URL
+        		map.put("url", imgUrl);
+            	JSONArray json = JSONArray.fromObject(map); 
+                out.print(json.toString());  //返回url地址
+                out.flush();
+                out.close();
+        	}
+        
         }else if("bbs_icon".equals(docName)){ 
         	/**
         	 * 个人资料-头像上传

@@ -22,6 +22,9 @@ public class BaseParams {
 	//站内新闻
 	private static List<BBSPosts> posts=new ArrayList<BBSPosts>();
 	
+	//内存数据
+	private static Map<String,String> checkMap=new HashMap<String, String>();
+	
 	public static List<BBSBigBoard> getBigBoard() {
 		return bigBoard;
 	}
@@ -47,6 +50,13 @@ public class BaseParams {
 	public static void setPosts(List<BBSPosts> posts) {
 		BaseParams.posts = posts;
 	}
+	public static Map<String, String> getCheckMap() {
+		return checkMap;
+	}
+	public static void setCheckMap(Map<String, String> checkMap) {
+		BaseParams.checkMap = checkMap;
+	}
+
 	
 	
 }

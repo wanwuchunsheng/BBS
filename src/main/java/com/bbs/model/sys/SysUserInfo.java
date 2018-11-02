@@ -19,23 +19,30 @@ public class SysUserInfo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private Integer id;
 	private Date createTime;
-	private int createUserId; //创建人ID
+	private Integer createUserId; //创建人ID
 	private Date updateTime; //修改时间
-	private int updateUserId; //修改人ID
+	private Integer updateUserId; //修改人ID
 	private String uname; //姓名
 	private String upwd; //密码
 	private String eno; //卡号
-	private int gender; //性别 0-女  1-男
+	private Integer gender; //性别 0-女  1-男
 	private String tel; //电话
 	private String phone; //手机
 	private String email; //邮箱
-	private int del; //0-默认  1：删除
-	private int securityLevel; //安全级别  0-普通   1-vip
+	private Integer del; //0-默认  1：删除
+	/**
+	 * 0-后端管理用户 
+		1-普通注册用户  
+		2-官网认证用户  
+		3-业主
+	 * 
+	 * */
+	private Integer securityLevel; 
 	private String webchat; //微信
 	private String qq; //QQ
-	private int usrStatus; //状态
+	private Integer usrStatus; //状态
 	private String smsNotitfy; //短信通知
 	private String photoPath; //图片地址
 	private String qrcodePath;//二维码
@@ -45,6 +52,8 @@ public class SysUserInfo implements Serializable{
 	private String nowAddress;//现居地，收货地址
 	private String niceName;//昵称
 	private String remark;//备注
+	private String idcode;//身份证号
+	private String birthdate;//出生年月
 	
 	private Integer expPoints;//经验值
 	private String isCheck;//BBS签到
@@ -53,10 +62,10 @@ public class SysUserInfo implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	@Column(name = "create_time")
@@ -67,10 +76,10 @@ public class SysUserInfo implements Serializable{
 		this.createTime = createTime;
 	}
 	@Column(name = "create_user_id")
-	public int getCreateUserId() {
+	public Integer getCreateUserId() {
 		return createUserId;
 	}
-	public void setCreateUserId(int createUserId) {
+	public void setCreateUserId(Integer createUserId) {
 		this.createUserId = createUserId;
 	}
 	
@@ -83,10 +92,10 @@ public class SysUserInfo implements Serializable{
 	}
 	
 	@Column(name = "update_user_id")
-	public int getUpdateUserId() {
+	public Integer getUpdateUserId() {
 		return updateUserId;
 	}
-	public void setUpdateUserId(int updateUserId) {
+	public void setUpdateUserId(Integer updateUserId) {
 		this.updateUserId = updateUserId;
 	}
 	
@@ -115,10 +124,10 @@ public class SysUserInfo implements Serializable{
 	}
 	
 	@Column(name = "gender")
-	public int getGender() {
+	public Integer getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
 	
@@ -147,18 +156,18 @@ public class SysUserInfo implements Serializable{
 	}
 	
 	@Column(name = "del")
-	public int getDel() {
+	public Integer getDel() {
 		return del;
 	}
-	public void setDel(int del) {
+	public void setDel(Integer del) {
 		this.del = del;
 	}
 	
 	@Column(name = "security_level")
-	public int getSecurityLevel() {
+	public Integer getSecurityLevel() {
 		return securityLevel;
 	}
-	public void setSecurityLevel(int securityLevel) {
+	public void setSecurityLevel(Integer securityLevel) {
 		this.securityLevel = securityLevel;
 	}
 	
@@ -179,10 +188,10 @@ public class SysUserInfo implements Serializable{
 	}
 	
 	@Column(name = "usr_status")
-	public int getUsrStatus() {
+	public Integer getUsrStatus() {
 		return usrStatus;
 	}
-	public void setUsrStatus(int usrStatus) {
+	public void setUsrStatus(Integer usrStatus) {
 		this.usrStatus = usrStatus;
 	}
 	
@@ -265,6 +274,20 @@ public class SysUserInfo implements Serializable{
 	}
 	public void setIsCheck(String isCheck) {
 		this.isCheck = isCheck;
+	}
+	@Column(name = "idcode")
+	public String getIdcode() {
+		return idcode;
+	}
+	public void setIdcode(String idcode) {
+		this.idcode = idcode;
+	}
+	@Column(name = "birthdate")
+	public String getBirthdate() {
+		return birthdate;
+	}
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
 	
 	

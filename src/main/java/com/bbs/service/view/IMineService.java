@@ -3,13 +3,14 @@ package com.bbs.service.view;
 import java.util.List;
 
 import com.bbs.model.sys.SysUserInfo;
+import com.bbs.model.view.BBSIdeAuthentication;
 import com.bbs.model.view.BBSMessage;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSReply;
 
 public interface IMineService {
 
-	void saveMineReg(SysUserInfo user);
+	String saveMineReg(SysUserInfo user);
 
 	SysUserInfo querySysUserInfo(SysUserInfo user);
 
@@ -30,5 +31,9 @@ public interface IMineService {
 	int queryBBSMessageCount(SysUserInfo bbsUserInfo);
 
 	List<BBSMessage> queryBBSMessageAll(SysUserInfo bbsUserInfo);
+
+	void saveIdeAuthentication(BBSIdeAuthentication bia);
+
+	List<BBSIdeAuthentication> queryBBSIdeAuthenAll(SysUserInfo sysUserInfo);
 
 }
