@@ -114,41 +114,43 @@
    <!-- 根据子版块ID，查询综合或者子版块  -->
    <sql id="queryBBSPostsAllOrBbId">
         <![CDATA[
-           SELECT
-				a.ID,
-				a.BB_ID,
-				a.SMBO_ID,
-				a.TITLE,
-				a.TYP,
-				a.CONT_PREVIEW,
-				a.CONT_REPLY,
-				a.CONT_REWARD,
-				a.CONT_TOP,
-				a.CONT_REC,
-				a.CONT_GOOD,
-				a.CONT_BAD,
-				a.CONT_STATUS,
-				a.REMARK,
-				a.CREATE_USER_ID,
-				a.CREATE_USER_NAME,
-				a.CREATE_DATE,
-				a.UPDATE_USER_ID,
-				a.UPDATE_USER_NAME,
-				a.UPDATE_DATE,
-				a.DEL,
-			  b.PHOTO_PATH as imgPath,
-			  b.security_level as securityLevel,
-			  b.nice_name as niceName,
-			  (select title from bbs_big_board where del=0 and id=a.bb_id limit 1) as bbName,
-		      (select title from bbs_small_board where del=0 and id=a.bb_id limit 1) as smboName
-			FROM
-				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
-			WHERE
-				a.del = 0 and b.del=0
-			    <#if smboId?exists && smboId!=""> AND a.smbo_id=:smboId  </#if>
-			    <#if typ?exists && typ!=""> AND a.typ=:typ  </#if>
-			ORDER BY
-				a.UPDATE_DATE DESC 
+       
+	           SELECT
+					a.ID,
+					a.BB_ID,
+					a.SMBO_ID,
+					a.TITLE,
+					a.TYP,
+					a.CONT_PREVIEW,
+					a.CONT_REPLY,
+					a.CONT_REWARD,
+					a.CONT_TOP,
+					a.CONT_REC,
+					a.CONT_GOOD,
+					a.CONT_BAD,
+					a.CONT_STATUS,
+					a.REMARK,
+					a.CREATE_USER_ID,
+					a.CREATE_USER_NAME,
+					a.CREATE_DATE,
+					a.UPDATE_USER_ID,
+					a.UPDATE_USER_NAME,
+					a.UPDATE_DATE,
+					a.DEL,
+				  b.PHOTO_PATH as imgPath,
+				  b.security_level as securityLevel,
+				  b.nice_name as niceName
+				 
+				FROM
+					bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
+				WHERE
+					a.del = 0 and b.del=0
+				    <#if smboId?exists && smboId!=""> AND a.smbo_id=:smboId  </#if>
+				    <#if typ?exists && typ!=""> AND a.typ=:typ  </#if>
+				ORDER BY
+					a.UPDATE_DATE DESC 
+			
+			
         ]]>
     </sql>
     <!-- 根据子版块ID，查询综合或者子版块  -->

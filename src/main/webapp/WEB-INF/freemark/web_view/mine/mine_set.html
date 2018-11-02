@@ -124,7 +124,7 @@ input,textarea{
 		             <div class="layui-col-md">
 		                   <label class="layui-form-label" >登录邮箱</label>
 						    <div class="layui-input-block">
-						      <input readonly type="text" name="email" required  lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input" value="${userInfo.email?if_exists}" >
+						      <input readonly type="text" name="email" required  lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input" value="${userInfoObj.email?if_exists}" >
 						    </div>
 		             </div>
 	            </div>
@@ -133,7 +133,7 @@ input,textarea{
 		             <div class="layui-col-md">
 		                   <label class="layui-form-label" >昵称</label>
 						    <div class="layui-input-block">
-						      <input readonly type="text" name="niceName" required  lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input"  value="${userInfo.niceName?if_exists}" >
+						      <input readonly type="text" name="niceName" required  lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input"  value="${userInfoObj.niceName?if_exists}" >
 						    </div>
 		             </div>
 	            </div>
@@ -142,15 +142,15 @@ input,textarea{
 		             <div class="layui-col-md7">
 		                   <label class="layui-form-label" >真实姓名</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="uname" required lay-verify="required"  placeholder="请输入真实姓名" autocomplete="off" class="layui-input"  value="${userInfo.uname?if_exists}" >
+						      <input type="text" name="uname" required lay-verify="required"  placeholder="请输入真实姓名" autocomplete="off" class="layui-input"  value="${userInfoObj.uname?if_exists}" >
 						    </div>
 		             </div>
 		             
 		             <div class="layui-col-md5">
 		                    <label class="layui-form-label" >性别</label> 
 						    <div class="layui-input-block">
-						       <input type="radio" name="gender" lay-verify="required"  value="1" <#if (userInfo.gender?if_exists==1) >checked</#if>  title="男">
-                               <input type="radio" name="gender" lay-verify="required"  value="0" <#if (userInfo.gender?if_exists==0) >checked</#if>  title="女">
+						       <input type="radio" name="gender" lay-verify="required"  value="1" <#if (userInfoObj.gender?if_exists==1) >checked</#if>  title="男">
+                               <input type="radio" name="gender" lay-verify="required"  value="0" <#if (userInfoObj.gender?if_exists==0) >checked</#if>  title="女">
 						    </div>
 		             </div>
 	            </div>
@@ -159,14 +159,14 @@ input,textarea{
 		             <div class="layui-col-md7">
 		                   <label class="layui-form-label" >身份证号</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="idcode" required lay-verify="required"  placeholder="请输入身份证" autocomplete="off" class="layui-input"  value="${userInfo.idcode?if_exists}" >
+						      <input type="text" name="idcode" required lay-verify="required"  placeholder="请输入身份证" autocomplete="off" class="layui-input"  value="${userInfoObj.idcode?if_exists}" >
 						    </div>
 		             </div>
 		             
 		             <div class="layui-col-md5">
 		                    <label class="layui-form-label" >出生年月</label> 
 						    <div class="layui-input-block">
-						       <input type="text" name="birthdate" required lay-verify="required"  placeholder="2015-02" autocomplete="off" class="layui-input"  value="${userInfo.birthdate?if_exists}" >
+						       <input type="text" name="birthdate" required lay-verify="required"  placeholder="2015-02" autocomplete="off" class="layui-input"  value="${userInfoObj.birthdate?if_exists}" >
 						    </div>
 		             </div>
 	            </div>
@@ -175,14 +175,14 @@ input,textarea{
 		             <div class="layui-col-md7">
 		                   <label class="layui-form-label" >手机号码</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="tel" required  lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input" value="${userInfo.tel?if_exists}" >
+						      <input type="text" name="tel" required  lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input" value="${userInfoObj.tel?if_exists}" >
 						    </div>
 		             </div>
 		             
 		             <div class="layui-col-md5">
 		                   <label class="layui-form-label" >电话号码</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="phone" required  lay-verify="required" placeholder="请输入电话" autocomplete="off" class="layui-input" value="${userInfo.phone?if_exists}" >
+						      <input type="text" name="phone" required  lay-verify="required" placeholder="请输入电话" autocomplete="off" class="layui-input" value="${userInfoObj.phone?if_exists}" >
 						    </div>
 		             </div>
 	            </div>
@@ -191,14 +191,14 @@ input,textarea{
 		             <div class="layui-col-md7">
 		                   <label class="layui-form-label" >微信号</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="webchat" required  lay-verify="required" placeholder="请输入微信号" autocomplete="off" class="layui-input" value="${userInfo.webchat?if_exists}" >
+						      <input type="text" name="webchat" required  lay-verify="required" placeholder="请输入微信号" autocomplete="off" class="layui-input" value="${userInfoObj.webchat?if_exists}" >
 						    </div>
 		             </div>
 		             
 		             <div class="layui-col-md5">
 		                   <label class="layui-form-label" >QQ号</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="qq" required  lay-verify="required" placeholder="请输入QQ号码" autocomplete="off" class="layui-input" value="${userInfo.qq?if_exists}" >
+						      <input type="text" name="qq" required  lay-verify="required" placeholder="请输入QQ号码" autocomplete="off" class="layui-input" value="${userInfoObj.qq?if_exists}" >
 						    </div>
 		             </div>
 	            </div>
@@ -206,7 +206,7 @@ input,textarea{
 		             <div class="layui-col-md">
 		                   <label class="layui-form-label" >老家哪里</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="address" required  lay-verify="required" placeholder="市/县/街/村" autocomplete="off" class="layui-input" value="${userInfo.address?if_exists}" >
+						      <input type="text" name="address" required  lay-verify="required" placeholder="市/县/街/村" autocomplete="off" class="layui-input" value="${userInfoObj.address?if_exists}" >
 						    </div>
 		             </div>
 	            </div>
@@ -214,7 +214,7 @@ input,textarea{
 		             <div class="layui-col-md">
 		                   <label class="layui-form-label" >现居地址</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="nowAddress" required  lay-verify="required" placeholder="请输入现在居住地" autocomplete="off" class="layui-input" value="${userInfo.nowAddress?if_exists}" >
+						      <input type="text" name="nowAddress" required  lay-verify="required" placeholder="请输入现在居住地" autocomplete="off" class="layui-input" value="${userInfoObj.nowAddress?if_exists}" >
 						    </div>
 		             </div>
 	            </div>
@@ -222,7 +222,7 @@ input,textarea{
 		             <div class="layui-col-md">
 		                   <label class="layui-form-label" >职业</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="job" required  lay-verify="required" placeholder="请输入职业" autocomplete="off" class="layui-input" value="${userInfo.job?if_exists}">
+						      <input type="text" name="job" required  lay-verify="required" placeholder="请输入职业" autocomplete="off" class="layui-input" value="${userInfoObj.job?if_exists}">
 						    </div>
 		             </div>
 	            </div>
@@ -231,7 +231,7 @@ input,textarea{
 		             <div class="layui-form-item layui-form-text">
 		              <label for="L_sign" class="layui-form-label">个性签名</label>
 		              <div class="layui-input-block">
-		                <textarea placeholder="随便写些什么刷下存在感" id="L_sign"  name="remark" autocomplete="off" class="layui-textarea" style="height: 80px;" value="${userInfo.remark?if_exists}">${userInfo.remark?if_exists}</textarea>
+		                <textarea placeholder="随便写些什么刷下存在感" id="L_sign"  name="remark" autocomplete="off" class="layui-textarea" style="height: 80px;" value="${userInfoObj.remark?if_exists}">${userInfoObj.remark?if_exists}</textarea>
 		              </div>
 		            </div>
 		            <input type="hidden" name="id" class="layui-input" value="${bbsUserInfo.id?if_exists}" >
@@ -250,7 +250,7 @@ input,textarea{
 	            <div class="layui-form-item">
 					
 					
-				<#if (userInfo.securityLevel?if_exists>=2)  >
+				<#if (userInfoObj.securityLevel?if_exists>=2)  >
 				         <blockquote class="layui-elem-quote layui-quote-nm" >
 				             <h2  style="color:red;padding:40px 10px;">恭喜您成为官网认证用户.</h2>
 				         </blockquote>
@@ -278,9 +278,9 @@ input,textarea{
 	               </div>
                 </#if>   
                     
-                <#if (userInfo.securityLevel?if_exists==3)  >
+                <#if (userInfoObj.securityLevel?if_exists==3)  >
                          <blockquote class="layui-elem-quote layui-quote-nm" >
-				            <h2 style="color:red;padding:20px 10px;">恭喜您成为官网业主认证用户,欢迎各业主加入社区认证QQ群：645952730 <br/><br/>加群邀请码：【${userInfo.eno?if_exists}】</h2>
+				            <h2 style="color:red;padding:20px 10px;">恭喜您成为官网业主认证用户,欢迎各业主加入社区认证QQ群：645952730 <br/><br/>加群邀请码：【${userInfoObj.eno?if_exists}】</h2>
 				            
 				         </blockquote>
 				         <br/><br/>

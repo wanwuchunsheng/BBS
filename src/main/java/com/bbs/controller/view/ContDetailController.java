@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,7 @@ import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.model.view.BaseParams;
 import com.bbs.service.common.Constants;
 import com.bbs.service.view.IContDetailService;
+import com.ibm.framework.dal.pagination.Pagination;
 
 /**
  * 说明：详细内容页面
@@ -43,9 +46,9 @@ public class ContDetailController {
 	 * @createTime 2018年6月11日22:48:33
 	 * */
 	@RequestMapping("index")
-	public String gotoBBSSmallBoard(HttpSession session, HttpServletRequest request,BBSPosts bean){
+	public String gotoContIndex(HttpSession session, HttpServletRequest request,BBSPosts bean,Pagination pagination){
 		//内容列表数据
-		List<BBSPosts> postsAll=contDetailService.queryBBSPostsAll(bean);
+		List<BBSPosts> postsAll=contDetailService.queryBBSPostsAll(bean,pagination);
 		request.setAttribute("postsAll", postsAll);
 		//当前位置信息数据
 		if(null==bean.getSmboId()){
@@ -60,8 +63,29 @@ public class ContDetailController {
 			}
 		}
 		request.setAttribute("postCommendAll", BaseParams.getPostCommendMap().get("C001"));
+		request.setAttribute("pageObj", pagination);
 		return "/web_view/cont/cont_index";
 	}
+	
+	/**
+	 * 说明：综合区懒加载
+	 * 
+	 * */
+	@RequestMapping("indexPage")
+	@ResponseBody
+	public String gotoContIndexPage(HttpSession session, HttpServletRequest request,BBSPosts bean,Pagination pagination){
+		//内容列表数据
+		List<BBSPosts> postsAll=contDetailService.queryBBSPostsAll(bean,pagination);
+		if(postsAll!=null && postsAll.size()>0){
+			JSONArray jsonArray2 = JSONArray.fromObject(postsAll);//将集合转换为json格式
+			String jsonString=jsonArray2.toString();//将jisn转换为字符串
+			return jsonString;
+		}
+		return "2";//失败
+	}
+	
+	
+	
 	
 	/**
 	 * 说明：预览详细

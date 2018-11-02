@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bbs.model.sys.SysUserInfo;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSReply;
 import com.bbs.model.view.BBSSignin;
 import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.service.view.IContDetailService;
 import com.ibm.framework.dal.client.IPaginationDalClient;
+import com.ibm.framework.dal.pagination.Pagination;
+import com.ibm.framework.dal.pagination.PaginationResult;
 import com.ibm.framework.dal.transaction.template.CallBackTemplate;
 /**
  * 说明：跳转详细页面
@@ -40,8 +43,11 @@ public class ContDetailServiceImpl implements IContDetailService{
 		//2,当bbId为空时，查询所有综合
 	 * */
 	@Override
-	public List<BBSPosts> queryBBSPostsAll(BBSPosts bean) {
-		List<BBSPosts> postsAll=dalClient.queryForList("bbsPosts.queryBBSPostsAllOrBbId", bean, BBSPosts.class);
+	public List<BBSPosts> queryBBSPostsAll(BBSPosts bean,Pagination pagination) {
+		PaginationResult<List<BBSPosts>> result = dalClient.queryForList("bbsPosts.queryBBSPostsAllOrBbId", bean,BBSPosts.class, pagination);
+        
+		//List<BBSPosts> postsAll=dalClient.queryForList("bbsPosts.queryBBSPostsAllOrBbId", bean, BBSPosts.class);
+		List<BBSPosts> postsAll=result.getR();
 		return postsAll;
 	}
 

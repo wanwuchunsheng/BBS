@@ -67,6 +67,7 @@ public class BBSPosts {
     private String smboName;//子版块名称 
     private Integer expPoints;//用户签到经验值
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -295,7 +296,7 @@ public class BBSPosts {
 	public void setExpPoints(Integer expPoints) {
 		this.expPoints = expPoints;
 	}
-    
+
 	
 	
 }

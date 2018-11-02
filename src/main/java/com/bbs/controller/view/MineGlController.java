@@ -230,7 +230,7 @@ public class MineGlController {
 		List<BBSIdeAuthentication> ideAuthenAll=mineService.queryBBSIdeAuthenAll(sysUserInfo);
 		request.setAttribute("ideAuthenAll", ideAuthenAll);
 		session.setAttribute("bbsUserInfo", sysUserInfo);
-		request.setAttribute("userInfo", sysUserInfo);
+		request.setAttribute("userInfoObj", sysUserInfo);
 		return "/web_view/mine/mine_set";
 	}
 	
