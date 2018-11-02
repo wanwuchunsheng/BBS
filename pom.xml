@@ -266,7 +266,23 @@
 		    <artifactId>jdom2</artifactId>
 		    <version>2.0.5</version>
 		</dependency>
-		
+		<!-- kaptcha jar -->
+		<dependency>
+		    <groupId>com.github.penggle</groupId>
+		    <artifactId>kaptcha</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
+		<!-- email jar -->
+		<dependency>
+		   <groupId>com.sun.mail</groupId>
+		   <artifactId>javax.mail</artifactId>
+		   <version>1.5.5</version>
+		</dependency>
+		<dependency>
+		   <groupId>org.apache.commons</groupId>
+		   <artifactId>commons-email</artifactId>
+		   <version>1.4</version>
+		</dependency>
   </dependencies>
   
   <build>
