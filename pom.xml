@@ -273,7 +273,7 @@
 		    <version>2.3.2</version>
 		</dependency>
 		<!-- email jar -->
-		<dependency>
+		<!-- <dependency>
 		   <groupId>com.sun.mail</groupId>
 		   <artifactId>javax.mail</artifactId>
 		   <version>1.5.5</version>
@@ -282,7 +282,15 @@
 		   <groupId>org.apache.commons</groupId>
 		   <artifactId>commons-email</artifactId>
 		   <version>1.4</version>
+		</dependency> -->
+		
+		<!-- Javamail API -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.5</version>
 		</dependency>
+
   </dependencies>
   
   <build>

@@ -62,6 +62,7 @@ public class ContDetailController {
 				}
 			}
 		}
+		request.setAttribute("typ", bean.getTyp());//0-全部 
 		request.setAttribute("postCommendAll", BaseParams.getPostCommendMap().get("C001"));
 		request.setAttribute("pageObj", pagination);
 		return "/web_view/cont/cont_index";

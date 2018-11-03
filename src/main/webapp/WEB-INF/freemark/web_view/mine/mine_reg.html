@@ -52,7 +52,7 @@
 			</li>
             <li>
 			<a href="${futRoot}/que/index" class="">
-				<i class="iconfont icon-tags"></i>问卷
+				<i class="iconfont icon-tags"></i>反馈
 			</a>
 			</li>
 			<li class="newMsg">
@@ -281,7 +281,15 @@ layui.use(['form'], function(){
 $(function(){
 	//获取邮箱验证码
 	$('#btn').click(function () {
-		var count = 10;
+		var email=$("input[name='email']").val();
+		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	    if (!filter.test(email)) {
+		    layer.msg('邮箱不正确!', {icon: 2});
+            return false;
+		}
+		console.info(email+"========");
+		
+		var count = 15;
 		var countdown = setInterval(CountDown, 1000);
 		function CountDown() {
 			$("#btn").attr("disabled", true);
@@ -292,14 +300,6 @@ $(function(){
 			}
 		    count--;
 		}
-		var email=$("input[name='email']").val();
-		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	    if (!filter.test(email)) {
-		    //alert("邮箱不正确!");
-		    layer.msg('邮箱不正确!', {icon: 2});
-            return false;
-		}
-		console.info(email+"========");
         //发送验证码
 		$.ajax({
 		    type : 'post',

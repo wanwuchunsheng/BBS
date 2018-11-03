@@ -41,7 +41,7 @@ public class MailSender {
 
 			// -----------------------构建邮件的核心四要素-----------------------------------
 			// 构建发送者地址
-			Address fromAddres = new InternetAddress("v_wanchanghuang@163.com");//"发送者邮件地址"
+			Address fromAddres = new InternetAddress("317834536@qq.com");//"发送者邮件地址"
 			// 设置发送者邮箱地址
 			msg.setFrom(fromAddres);
 
@@ -51,7 +51,7 @@ public class MailSender {
 
 			// 构建邮件正文和主题
 			// 设置主题
-			msg.setSubject("武汉青山海伦社区系统邮件");//【重要】JavaMail邮件测试
+			msg.setSubject("武汉青山海伦社区注册码");//【重要】JavaMail邮件测试
 			// 设置内容
 			msg.setText(content);//"你好，javaMail邮件测试。"
 			// -----------------------构建邮件的核心四要素-----------------------------------
@@ -59,9 +59,10 @@ public class MailSender {
 			// 设置邮件有那台服务器发送
 			// 创建邮件传输者
 			transport = session.getTransport("smtp");
-			// 连接服务器
-			transport.connect("smtp.163.com","v_wanchanghuang@163.com","wan1989n7y4r");//("smtp.163.com", "发送邮件的邮件地址", "发送邮件的密码");
-
+			// 连接服务器kswlnkrrkcwwcahc
+			//transport.connect("smtp.163.com","v_wanchanghuang@163.com","wan1989n7y4r");//("smtp.163.com", "发送邮件的邮件地址", "发送邮件的密码");
+			transport.connect("smtp.qq.com","317834536@qq.com","kswlnkrrkcwwcahc");
+			
 			// 将邮件的正文添加到发送的服务器中
 			// 发送邮件
 			transport.sendMessage(msg, msg.getAllRecipients());
@@ -81,7 +82,7 @@ public class MailSender {
 	
 	public static void main(String[] args) {
 		MailSender mes=new MailSender();
-		mes.sendMail("1033074035@qq.com", "测试内容");
+		mes.sendMail("1033074035@qq.com", "您好，邮箱验证码【X163F4】，请尽快完成注册验证，谢谢！>>>>>武汉青山海伦社区欢迎您！！！官方网址：http://www.cloudfy.cn");
 	}
 	
 }

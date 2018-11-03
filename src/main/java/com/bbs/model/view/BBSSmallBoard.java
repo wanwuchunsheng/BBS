@@ -21,33 +21,21 @@ public class BBSSmallBoard implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-
     private Integer bbId;
-
     private Integer num;
-
     private String title;
-
     private Integer contPreview;
-
     private String remark;
-
     private Integer createUserId;
-
     private String createUserName;
-
     private Date createDate;
-
     private Integer updateUserId;
-
     private String updateUserName;
-
     private Date updateDate;
-
     private String sbAdmin;
     private String imgPath;
-
     private Integer del;
+    
 
 
     @Id

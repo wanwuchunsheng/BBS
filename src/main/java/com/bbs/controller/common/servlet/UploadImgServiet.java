@@ -102,7 +102,16 @@ public class UploadImgServiet extends HttpServlet {
         	 out.print(str);  //返回url地址
              out.flush();
              out.close();
-        }else if("bbs_ide".equals(docName)){
+        }else if("bbs_bug".equals(docName)){ 
+       	 /**
+       	  * 问题反馈-图片上传
+       	  * 
+       	  * */
+       	 String str="{\"code\": 0 ,\"msg\": \"\"  ,\"data\": {\"src\": \""+imgUrl+"\",\"title\": \"\"}}";
+       	 out.print(str);  //返回url地址
+            out.flush();
+            out.close();
+       }else if("bbs_ide".equals(docName)){
         	/**
         	 * 身份证资料
         	 * 

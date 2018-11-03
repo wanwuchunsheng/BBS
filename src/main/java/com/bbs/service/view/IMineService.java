@@ -36,4 +36,6 @@ public interface IMineService {
 
 	List<BBSIdeAuthentication> queryBBSIdeAuthenAll(SysUserInfo sysUserInfo);
 
+	void saveMessage(BBSMessage bean);
+
 }

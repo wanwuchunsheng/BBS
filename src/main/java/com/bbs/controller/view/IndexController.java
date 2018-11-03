@@ -1,5 +1,6 @@
 package com.bbs.controller.view;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,12 +9,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bbs.model.sys.SysUserInfo;
 import com.bbs.model.view.BBSBigBoard;
+import com.bbs.model.view.BBSMessage;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.model.view.BaseParams;
 import com.bbs.service.view.IIndexService;
+import com.bbs.service.view.IMineService;
 
 /**
  * web_view:前端首页
@@ -25,6 +30,9 @@ public class IndexController {
 	
 	@Autowired
 	IIndexService indexService;
+	
+	@Autowired
+	IMineService mineService;
 	
 	/**
 	 * 说明：index页面
@@ -51,7 +59,33 @@ public class IndexController {
 		return "/web_view/index";
 	}
 
-
+	/**
+	 * 说明：index页面
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("mes")
+	@ResponseBody
+	public String message(HttpSession session, HttpServletRequest request,BBSMessage bean){
+		try {
+			SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
+			if(bbsUserInfo!=null){
+				bean.setTyp(0);
+				bean.setStatus(0);
+				bean.setRecipientId(36);//默认系统管理员
+				bean.setDel(0);
+				bean.setCreateUserId(bbsUserInfo.getId());
+				bean.setCreateDate(new Date());
+				bean.setCreateUserName(bbsUserInfo.getUname());
+				mineService.saveMessage(bean);
+				return "1";
+			}
+			return "2";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "3";
+	}
 	
 	
 }

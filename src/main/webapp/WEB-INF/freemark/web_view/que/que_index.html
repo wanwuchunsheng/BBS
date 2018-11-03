@@ -10,14 +10,6 @@
 
 <script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
 <script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
-<!-- layui 2.0 -->
-<script src="${resRoot}/view/js/layui.all.js" ></script>
-
-<!-- icon-font -->
-<link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
-<!--[if IE 7]>
-<link href="${resRoot}/view/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
-<![endif]-->
 
 <!-- layui 2.0 -->
 <link rel="stylesheet" href="${resRoot}/view/css/layui.css" />
@@ -26,8 +18,15 @@
 <link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
+<!-- icon-font -->
+<link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
+<!--[if IE 7]>
+<link href="${resRoot}/view/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
+<style type="text/css">
 
+</style>
 </head>
 
 <body>
@@ -53,7 +52,7 @@
 			</li>
             <li>
 			<a href="${futRoot}/que/index"  class="nav-this" >
-				<i class="iconfont icon-tags"></i>问卷
+				<i class="iconfont icon-tags"></i>反馈
 			</a>
 			</li>
 			<li class="newMsg">
@@ -100,7 +99,46 @@
 <div class="wrap">
 	<div class="content detail">
 	<div class="fly-panel detail-box fly-art">
-		  <h4 style="color:orange">更多功能，敬请期待!</h4>
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+		  <legend>问题反馈</legend>
+		</fieldset>
+		 
+		<blockquote class="layui-elem-quote layui-quote-nm">
+		       亲爱的海伦业主或即将成为业主的盆友们好：
+		       <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;很高兴我们IT业主经过努力终于推出【海伦社区V1.0版本】 ，在这里我们可以分享生活点滴，记录趣事。发布与社区相关信息，或者发布行业相关广告等，通过相互交流探讨和吐槽，让更多业主彼此了解...
+		       <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初级版本主要对发帖、回帖、注册、登录、资料验证等功能进行完善，其中可能会存在个别BUG，希望在使用中，把遇到的问题及时在下面留言处向我们反馈，
+		       也可以把您认为其他优秀论坛的功能向我们留言，我们会吸取各业主意见综合考虑开发。
+		      小伙伴们，赶紧为我们海伦国际自己的社区献计献策吧O(∩_∩)O
+		  <br><div style="margin-top:10px;margin-right:20px;text-align: right;">——海伦社区</div>
+		</blockquote>
+		<br/>
+		 <#include "ds.html"  />
+		
+		<br/><br/><br/>
+		
+		<!-- 文本框 -->
+		 <form id="ajaxForm" action="" method="post">
+		<fieldset class="layui-elem-field">
+		  <legend>留言</legend>
+		  <div class="layui-field-box">
+		   <textarea class="layui-textarea fly-editor" id="content" style="display: none" name="content" lay-verify="content" >  
+	             
+	       </textarea>
+		  </div>
+		</fieldset>
+		<br/>
+		<div class="layui-form-item">
+			<!-- <label for="L_vercode" class="layui-form-label" style="text-align: left;width: 50px;">验证码</label> -->
+			<div class="layui-input-inline">
+				<input  type="text"  id="imageContent" name="imageContent" required lay-verify="imageContent" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+			
+			</div>
+			<img id="imgObj" alt="验证码"  src="${futRoot}/captcha/getCaptchaImage.jpg"  onclick="changeImg()">
+	    </div>
+	    
+	    </form>
+		<button onclick="replySub()" class="layui-btn layui-btn-normal">发送</button>	
+		<br/>
 	</div>
 	</div>
 </div>
@@ -157,8 +195,116 @@
 	</p>
 </div>
 <!-- footer end -->
+<!-- layui 2.0 -->
+<script src="${resRoot}/view/js/layui.all.js" ></script>
+<script type="text/javascript">
+var layedit=null;
+var layer;
+layui.use(['element','flow','form','layer','layedit'], function(){
+	var element = layui.element;
+	var flow = layui.flow;
+	layedit= layui.layedit;
+	 layer = layui.layer;
 
+	//图片上传
+	   var docName="bbs_bug";//添加帖子，富文本图片保存
+	   layedit.set({
+		   uploadImage: {
+		     url:'${futRoot}/upload?docName='+docName //接口url
+		     ,type: 'post' //默认post 
+		   }
+	   });
+	  
+	  //富文本编辑器自定义工具栏
+      index=  layedit.build('content', {
+            height: 160,
+			tool: [ //自定义工具栏
+			       /* 'strong' //加粗
+			       ,'italic' //斜体
+			       ,'underline' //下划线
+			       ,'del' //删除线
+			       
+			       ,'|' //分割线
+			       
+			       ,'left' //左对齐
+			       ,'center' //居中对齐
+			       ,'right' //右对齐 */
+			       'face' //表情
+			       ,'link' //超链接
+			       ,'image' //插入图片
+			     ]
+      })
 
+});  
+function replySub(){
+	var imageContent=$("input[name='imageContent']").val();
+	if(imageContent.trim()==""){
+		layer.msg('验证码不能为空！！！ ');
+		return false;
+	}
+	//验证码验证
+    var res=false;
+    $.ajax({
+	    type : 'post',
+	    async : false,
+	    url :'${futRoot}/captcha/checkCaptcha',
+	    data : {
+	        "code" : imageContent
+	    },
+	    success : function(data) {
+	       if(data=='false'){
+	    	   res=false;
+		   }else{
+	           res=true;
+			}  
+	    }
+	});
+	if(res){
+		   changeImg();//刷新验证码
+		   layedit.sync(index);
+		   //提交后台处理
+		   $.ajax({
+				url :"${futRoot}/view/mes",
+				type : "post",
+				dataType : "json",
+			    async: false,
+				data : $("#ajaxForm").serialize(),
+				success : function(data) {
+					console.info(data);
+					if(data=='1'){
+						layer.msg('留言成功！感谢您的参与@ ');
+						window.setTimeout(function(){
+							location.reload();
+						},3000) ;
+						return false;
+					}else if(data=='2'){
+						layer.msg('请登录后再留言！！！ ');
+				    }else{
+				    	layer.msg('噢噢，提交失败！！！ ');
+					}
+				}
+			}); 
+			
+	}else{
+		layer.msg('验证码输入错误！！！ ');
+	} 
+    return false;
+
+}
+//单机刷新验证码
+function changeImg() {
+     var imgSrc = $("#imgObj");
+     var src = imgSrc.attr("src");
+     imgSrc.attr("src", chgUrl(src));
+};
+//时间戳   
+//为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳   
+function chgUrl(url) {
+     var timestamp = (new Date()).valueOf();
+     var stamp = $("#timestamp");
+     return url;
+};
+</script>
 
 
 

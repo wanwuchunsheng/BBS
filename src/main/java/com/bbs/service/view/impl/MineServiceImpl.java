@@ -164,6 +164,15 @@ public class MineServiceImpl implements IMineService{
 		// TODO Auto-generated method stub
 		return dalClient.queryForList("message.queryBBSIdeAuthenAll", sysUserInfo,BBSIdeAuthentication.class);
 	}
+
+	/***
+	 * bug反馈留言
+	 * 
+	 * */
+	@Override
+	public void saveMessage(BBSMessage bean) {
+		dalClient.persist(bean);	
+	}
 	
 	
 	
