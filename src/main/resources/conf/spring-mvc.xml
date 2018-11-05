@@ -65,18 +65,18 @@ default-autowire="byName">
 	
 	  <property name="freemarkerVariables">
 		<map>
-			
+			<!-- 
 			<entry key="resRoot" value="/statics/resources" />
 			<entry key="futRoot" value="" />
 			<entry key="realImgPath" value="E:/www2/zhangt-0b44449e649aee1e0164b519f6cd054b/webapp/images/" />
 			<entry key="resultImgPath" value="https://cloudfy.cn/images/" />
-			 
-		<!-- 
+			 --> 
+		 
 			<entry key="resRoot" value="/BBS/statics/resources" />
 			<entry key="futRoot" value="/BBS" />
 			<entry key="realImgPath" value="E:/www2/zhangt-0b44449e649aee1e0164b519f6cd054b/webapp/images/" />
 			<entry key="resultImgPath" value="https://cloudfy.cn/images" />
-			 -->
+			
 		</map>
 	  </property>
   </bean>
