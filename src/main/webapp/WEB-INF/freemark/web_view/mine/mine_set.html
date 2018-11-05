@@ -248,37 +248,8 @@ input,textarea{
             <!-- 官网认证 start -->
             <div class="layui-form layui-form-pane layui-tab-item">
 	            <div class="layui-form-item">
-					
-					
-				<#if (userInfoObj.securityLevel?if_exists>=2)  >
-				         <blockquote class="layui-elem-quote layui-quote-nm" >
-				             <h2  style="color:red;padding:40px 10px;">恭喜您成为官网认证用户.</h2>
-				         </blockquote>
-				         <br/><br/>
-                <#else>
-                  <div class="layui-row layui-col-space15 layui-form-item">
-			            <div class="layui-col-md">
-							<div class="layui-upload">
-							  <button type="button" class="layui-btn" id="test2">个人验证</button> <span style="color:#c2c2c2;">**个人身份证正反面各1张，手持身份证全身照1张</span>
-							  <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-							    预览图：
-							    <div class="layui-upload-list" id="demo2">
-							      <!-- 回显图片 -->
-							      <#if (ideAuthenAll?size > 0)>
-                                  <#list ideAuthenAll as ide>
-                                      <#if ide.typ?if_exists==0 >
-                                      <img src="${resultImgPath}/bbs/bbs_icon/${ide.photoPath?if_exists}" alt="${ide.remark?if_exists}" class="layui-upload-img" />
-                                      </#if>
-                                  </#list>
-                                  </#if>
-							    </div>
-							 </blockquote>
-							</div>
-		                </div>
-	               </div>
-                </#if>   
-                    
-                <#if (userInfoObj.securityLevel?if_exists==3)  >
+				
+				 <#if (userInfoObj.securityLevel?if_exists==3)  >
                          <blockquote class="layui-elem-quote layui-quote-nm" >
 				            <h2 style="color:red;padding:20px 10px;">恭喜您成为官网业主认证用户,欢迎各业主加入社区认证QQ群：645952730 <br/><br/>加群邀请码：【${userInfoObj.eno?if_exists}】</h2>
 				            
@@ -296,7 +267,7 @@ input,textarea{
 							      <#if (ideAuthenAll?size > 0)>
                                   <#list ideAuthenAll as ide>
                                       <#if ide.typ?if_exists==1 >
-                                      <img src="${resultImgPath}/bbs/bbs_icon/${ide.photoPath?if_exists}" alt="${ide.remark?if_exists}" class="layui-upload-img" />
+                                      <img src="${resultImgPath}/bbs/bbs_ide/${ide.photoPath?if_exists}" alt="${ide.remark?if_exists}" class="layui-upload-img" />
                                       </#if>
                                   </#list>
                                   </#if>
@@ -306,6 +277,37 @@ input,textarea{
 			             </div>
 	                </div>
 	             </#if>
+	             
+					
+				<#if (userInfoObj.securityLevel?if_exists>=2)  >
+				         <blockquote class="layui-elem-quote layui-quote-nm" >
+				             <h2  style="color:red;padding:40px 10px;">恭喜您成为官网认证用户.</h2>
+				         </blockquote>
+				         <br/><br/>
+                <#else>
+                  <div class="layui-row layui-col-space15 layui-form-item">
+			            <div class="layui-col-md">
+							<div class="layui-upload">
+							  <button type="button" class="layui-btn" id="test2">实名认证</button> <span style="color:#c2c2c2;">**个人身份证正反面各1张，手持身份证全身照1张</span>
+							  <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+							    预览图：
+							    <div class="layui-upload-list" id="demo2">
+							      <!-- 回显图片 -->
+							      <#if (ideAuthenAll?size > 0)>
+                                  <#list ideAuthenAll as ide>
+                                      <#if ide.typ?if_exists==0 >
+                                      <img src="${resultImgPath}/bbs/bbs_ide/${ide.photoPath?if_exists}" alt="${ide.remark?if_exists}" class="layui-upload-img" />
+                                      </#if>
+                                  </#list>
+                                  </#if>
+							    </div>
+							 </blockquote>
+							</div>
+		                </div>
+	               </div>
+                </#if>   
+                    
+               
                     
                     
 	            </div>
