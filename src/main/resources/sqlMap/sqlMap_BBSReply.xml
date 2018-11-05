@@ -5,7 +5,6 @@
    <sql id="queryBBSReplyAll">
         <![CDATA[
 			SELECT
-			     
 				a.ID,
 				a.BB_ID,
 				a.SMBO_ID,
