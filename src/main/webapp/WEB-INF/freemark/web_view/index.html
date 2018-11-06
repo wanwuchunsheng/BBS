@@ -22,7 +22,18 @@
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
-
+<style type="text/css">
+.textstl {
+    display: inline-block;
+    height: 20px;
+    //line-height: 20px;
+    padding: 2px 5px;
+    background-color: #99cfff;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 4px;
+}
+</style>
 </head>
 <body>
 <!-- heand -->
@@ -120,7 +131,7 @@
 						<dd>
 							<a href="${futRoot}/cont/index?smboId=${small.id?if_exists}">
 								<img class="avatar" src="${resultImgPath}/bbs/bbs_icon/${small.imgPath?if_exists}" />
-								<cite>${small.title?if_exists}</cite>
+								<cite><span class="textstl">${small.title?if_exists}</span></cite>
 								<i>${small.remark?if_exists}</i> 
 							</a>
 						</dd>
@@ -246,7 +257,7 @@
 			<a href="http://www.hong-ye.net/" target="_blank">红叶网</a>
 			<dd>
             <dd>
-			<a href="http://redriver.gxtc.edu.cn/" target="_blank">红水河网</a>
+			<a href="${futRoot}/view/refCache" target="_blank">红水河网</a>
 			<dd>		
         </dl>
 	</div>	

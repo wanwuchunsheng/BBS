@@ -20,9 +20,13 @@ public interface IContDetailService {
 
 	void addBbsReply(BBSReply bean);
 
-	List<BBSReply> queryBBSReplyAll(BBSPosts posts);
+	List<BBSReply> queryBBSReplyAll(BBSPosts posts,Pagination pagination);
 
 	void addsignin(BBSSignin bean);
+
+	List<BBSReply> queryBBSReplyByReplyId(BBSReply bean);
+
+	//Object queryBBSReplyAll(BBSPosts posts, Pagination pagination);
 
 
 }

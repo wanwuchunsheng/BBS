@@ -103,9 +103,12 @@ public class ContDetailServiceImpl implements IContDetailService{
 	 * @author wch
 	 * */
 	@Override
-	public List<BBSReply> queryBBSReplyAll(BBSPosts posts) {
-		// TODO Auto-generated method stub
-		return dalClient.queryForList("bbsReply.queryBBSReplyAll", posts, BBSReply.class);
+	public List<BBSReply> queryBBSReplyAll(BBSPosts bean,Pagination pagination) {
+        PaginationResult<List<BBSReply>> result = dalClient.queryForList("bbsReply.queryBBSReplyAll", bean,BBSReply.class, pagination);
+        
+		//List<BBSReply> replyAll=dalClient.queryForList("bbsReply.queryBBSReplyAll", posts, BBSReply.class);
+		List<BBSReply> replyAll=result.getR();
+		return replyAll;
 	}
 
 	/**
@@ -126,6 +129,17 @@ public class ContDetailServiceImpl implements IContDetailService{
 		});
 		
 		
+	}
+
+	/**
+	 * 说明：帖子详细-回帖留言查询
+	 * @author Administrator
+	 * 
+	 * */
+	@Override
+	public List<BBSReply> queryBBSReplyByReplyId(BBSReply bean) {
+		// TODO Auto-generated method stub
+		return dalClient.queryForList("bbsReply.queryBBSReplyByReplyId", bean, BBSReply.class);
 	}
 
 }
