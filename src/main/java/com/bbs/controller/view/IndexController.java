@@ -1,9 +1,12 @@
 package com.bbs.controller.view;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSSmallBoard;
 import com.bbs.model.view.BaseParams;
 import com.bbs.service.view.IIndexService;
+import com.bbs.service.view.IInitService;
 import com.bbs.service.view.IMineService;
 
 /**
@@ -33,6 +37,11 @@ public class IndexController {
 	
 	@Autowired
 	IMineService mineService;
+	
+	@Autowired
+	IInitService initService;//测试刷新缓存
+	
+	
 	
 	/**
 	 * 说明：index页面
@@ -85,6 +94,34 @@ public class IndexController {
 			e.printStackTrace();
 		}
 		return "3";
+	}
+	
+	
+	/**
+	 * 说明：index页面
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("refCache")
+	@ResponseBody
+	public void refCache(HttpServletRequest request, HttpServletResponse response,BBSMessage bean){
+		initService.queryBBSBigBoardAll();// 查询父版块
+		initService.queryBBSSmallBoardAll();//查询子版块
+		initService.queryPostCommend();//查询基础数据
+		initService.queryPostsNews();//查询站内新闻
+		//失败重定向
+	    PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.println("<html>");    
+		    out.println("<script>");    
+		    out.println("window.open ('"+request.getContextPath()+"/mine/login','_top')");    
+		    out.println("</script>");    
+		    out.println("</html>"); 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

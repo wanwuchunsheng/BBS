@@ -17,14 +17,17 @@
 				a.CREATE_USER_NAME,
 				a.CREATE_USER_ID,
 				a.CREATE_DATE,
+				DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') as createDateStr,
 				a.DEL,
+                (select count(*) from bbs_reply  where a.id=grade_id and del=0 and REPLY_ID not in (0) ) as replyCout,
 			  b.photo_path as imgPath
 			FROM
 				bbs_reply a left join sys_user b on a.CREATE_USER_ID=b.id
 			WHERE
-				a.del = 0 and b.del=0 and a.posts_id=:id
+				a.del = 0 and b.del=0 and REPLY_ID=0
+				and a.posts_id=:id
 			ORDER BY
-				a.create_date asc
+				a.create_date desc
         ]]>
     </sql>
  
@@ -47,6 +50,24 @@
 			update bbs_reply set del=:del where posts_id=:id
         ]]>
     </sql>
+    
+    <!-- 查询回帖留言 -->
+    <sql id="queryBBSReplyByReplyId">
+        <![CDATA[
+			select 
+				a.*,
+				DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') as createDateStr,
+				b.uname,
+				 (select count(*) from bbs_reply  where a.id=reply_id and del=0 and REPLY_ID not in (0) ) as replyCout,
+				b.PHOTO_PATH as imgPath
+				 from bbs_reply a left join sys_user b
+			on a.create_user_id=b.id
+			where a.del=0 and REPLY_ID not in (0)
+				and a.reply_id=:replyId 
+				order by a.create_date asc
+        ]]>
+    </sql>
+    
   
 </sqlMap>
 

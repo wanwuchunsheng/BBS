@@ -131,7 +131,7 @@
 					<img id="shareImg" src="${resultImgPath}/bbs/bbs_icon/${postsObj.imgPath?if_exists}"  />
 					<cite>
 						<i>${postsObj.niceName?if_exists}</i>
-						<em>发布于 ${postsObj.createDate?string("yyyy-MM-dd HH:mm")}</em>
+						<em>发布于 ${postsObj.createDate?string("yyyy-MM-dd HH:mm:ss")}</em>
 					</cite> 
 				</a>
 				<div class="detail-hits" id="LAY_jieAdmin" data-id="12345">
@@ -145,9 +145,15 @@
 			</div>
 			<!-- 内容信息end  -->
 			<div class="cont-more">
-				<button onclick="javascript:layer.msg('功能未开放,敬请期待...')" class="layui-btn layui-btn-normal"><i class="iconfont icon-thumbs-up" title="支持"></i>支持</button>
-				<button onclick="javascript:layer.msg('功能未开放,敬请期待...')" class="layui-btn layui-btn-warm"><i class="iconfont icon-thumbs-down" title="支持"></i>反对</button>
-				<button onclick="javascript:layer.msg('功能未开放,敬请期待...')" class="layui-btn layui-btn-danger"><i class="iconfont icon-star-empty" title="收藏"></i>收藏</button>
+				<button onclick="javascript:layer.msg('功能未开放,敬请期待...')" class="layui-btn layui-btn-normal">
+				     <i class="iconfont icon-thumbs-up" title="支持"></i>&nbsp;支持
+				</button>
+				<button onclick="javascript:layer.msg('功能未开放,敬请期待...')" class="layui-btn layui-btn-warm">
+				     <i class="iconfont icon-thumbs-down" title="支持"></i>&nbsp;反对
+				</button>
+				<button onclick="javascript:layer.msg('功能未开放,敬请期待...')" class="layui-btn layui-btn-danger">
+				     <i class="iconfont icon-star-empty" title="收藏"></i>&nbsp;收藏
+				 </button>
             </div>
 		</div>
 		
@@ -156,105 +162,24 @@
 			<fieldset class="layui-elem-field layui-field-title" style="text-align: center;"><legend>回帖</legend> </fieldset>
 			<ul class="jieda" id="jieda">
 				<!-- 评论 -->
-				<!-- <li data-id="13" id="comment13" data-type="discuz">
-					<div class="detail-about detail-about-reply fly-detail-user">
-						<div class="jieda-comment">
-							<span type="comment" class="comment-btn">
-								<i class="iconfont icon-comment"></i>回复
-							</span> 
-						</div>
-						<div class="jie-user comment-user">
-							<a href="/index.php/Users/member/uid/10.html">
-							<img src="http://www.wailaa.cn/Uploads/Head/10/1514340232.jpg"  onerror="imgErrorType('http://www.wailaa.cn/',this,0);">
-							<cite>
-								<i>愤怒的射手</i>
-							</cite> 
-							</a>
-						</div>
-						<div class="detail-hits">
-							<span>2017-12-27 17:06</span> 
-						</div>
-					</div>
-					<div class="detail-body comment-body jieda-body photos">实用哦</div>
-					回复
-					<div class="replayList replayDetail13"></div>
-				</li>
-				<li data-id="64" id="comment64" data-type="discuz">
-					<div class="detail-about detail-about-reply fly-detail-user">
-						<div class="jieda-comment">
-							<span type="deleteComment" class="comment-btn">
-									<i class="iconfont icon-delete"></i>删除
-							</span>							
-							<span type="comment" class="comment-btn">
-								<i class="iconfont icon-comment"></i>回复
-							</span> 
-						</div>
-						<div class="jie-user comment-user">
-							<a href="/index.php/Users/member/uid/315.html">
-							<img src="http://www.wailaa.cn/Uploads/Head/315/1540280343.jpg"  onerror="imgErrorType('http://www.wailaa.cn/',this,0);">
-							<cite>
-								<i>简单点VS</i>
-							</cite> 
-							</a>
-						</div>
-						<div class="detail-hits">
-							<span>刚刚</span> 
-						</div>
-					</div>
-					<div class="detail-body comment-body jieda-body photos">111</div>
-					回复
-					<div class="replayList replayDetail64">
-						<div class="replyDetail" reply-id="20" id="reply20">
-								<div class="detail-about detail-about-reply fly-detail-user">
-									<div class="jieda-comment jieda-reply-sub">
-										<span type="deleteReply" class="comment-btn" reply-id="20">
-												<i class="iconfont icon-delete"></i>删除
-										</span>										
-										<span type="reply" class="reply-btn" reply-id="20">
-											<i class="iconfont icon-comment"></i>回复
-										</span> 
-									</div>
-									<div class="jie-user reply-user">
-										<a href="/index.php/Users/member/uid/315.html">
-										<img src="http://www.wailaa.cn/Uploads/Head/315/1540280343.jpg"  onerror="imgErrorType('http://www.wailaa.cn/',this,0);">
-										</a>
-										<cite>
-											<a href="/index.php/Users/member/uid/315.html">
-											<i class="replyAuthor">简单点VS</i>
-											</a>
-											<em>刚刚</em>
-											<em class="display">回复：</em>
-												<i class="blue display">
-													<a href="/index.php/Users/member/uid/315.html">简单点VS</a>
-												</i>										
-										</cite>
-									</div>
-								</div>
-								<div class="detail-body reply-body jieda-body photos">
-									222								
-								</div>
-							</div>					
-				</div>
-				</li>	 -->
-				
 				<#if (replyAll?size > 0)>
 		        <#list replyAll as rep>
 				<li data-id="13" id="comment13" data-type="discuz">
 					<div class="detail-about detail-about-reply fly-detail-user">
 						<div class="jieda-comment">
-						<a href="javascript:layer.msg('功能未开放,敬请期待...')">
-							<span type="comment" class="comment-btn layui-hide">
-								<i class="iconfont icon-lightbulb"></i>投诉
-							</span> 
-						</a>
-						<a href="javascript:layer.msg('功能未开放,敬请期待...')">
-							<span type="comment" class="comment-btn">
-								<i class="iconfont icon-comment"></i>回复
-							</span> 
-						</a>
+							<a class="delOnclick_${rep.id?if_exists}" onclick="queryReplyCount( ${rep.id?if_exists},'${rep.createUserName?if_exists}' )">
+								<span type="comment" class="comment-btn">
+									留言  (${rep.replyCout?if_exists}) 
+								</span> 
+							</a>
+							<a href="#reviewInfo" onclick="nowReplay(${rep.id?if_exists},'${rep.createUserName?if_exists}',${ (rep.id?if_exists) })">
+								<span type="comment" class="comment-btn">
+									<i class="iconfont icon-comment"></i>回复
+								</span> 
+							</a>
 						</div>
 						<div class="jie-user comment-user">
-							<a href="javascript:;">
+							<a href="${futRoot}/mine/preview?id=${rep.createUserId?if_exists}" target="_blank">
 							<img src="${resultImgPath}/bbs/bbs_icon/${rep.imgPath?if_exists}" >
 							<cite>
 								<i>${rep.createUserName?if_exists}</i>
@@ -262,42 +187,46 @@
 							</a>
 						</div>
 						<div class="detail-hits">
-							<span>${rep.createDate?string("yyyy-MM-dd HH:mm")}</span> 
+							<span>${rep.createDate?string("yyyy-MM-dd HH:mm:ss")}</span> 
 						</div>
 					</div>
 					<div class="detail-body comment-body jieda-body photos">
                         ${rep.content?if_exists}
                     </div>
 					<!-- 回复 -->
-					<div class="replayList replayDetail13"></div>
+					<div id="selCount_${rep.id?if_exists}" class="replayList replayDetail64"> 
+					    
+				    </div>
 				</li>
 				</#list>
+				<div id="nedv"></div>
+				    <#if (pageObj.currentPage < pageObj.pageCount) >
+					<div class="cont-more">
+					<br/>
+				    <br/>
+					   <a  href="javascript:;" onclick="queryDetailPage(${postsObj.id?if_exists})" class="layui-btn layui-btn-big layui-btn-primary">获取更多>></a>
+				    </div>
+				    </#if>
 		        </#if>	
 			</ul>
-
-			<div class="pager page" id="comment">
-		                
+         </div>
+         <div class="commentBox fly-panel detail-box" style="padding-top: 10;">
+			<div class="pager page" id="comment">         
 		            
 			</div>	
 			<div class="layui-form layui-form-pane commentEditor">
-				<!-- <div class="reviewInfo" id="reviewInfo">
-					<div class="content">good</div>
-					<div class="close cancelReply">X</div>
-				</div> -->
+				<div class="reviewInfo" id="reviewInfo" style="border-radius:25px;display: none;">
+					<div class="content" style="line-height: 24px;color: blue;font-size: 14px;margin-bottom: 3px;">@<font class="toName" style="margin-left:5px;">good</font></div>
+					<div class="close cancelReply" onclick="nowDelReplay()">X</div>
+				</div>
 				<div class="layui-form-item layui-form-text">
 				       <#if (bbsUserInfo)??>
-						<!-- <div class="layui-input-block">
-							<div class="layui-input-block" id="wangEdit">
-			                  
-			                </div>
-			                <textarea id="text1" hidden="hidden" name="content" style="width:100%; height:200px;"></textarea>
-						</div> -->
 						 <form id="ajaxForm" action="" method="post">
 						    <input type="hidden" value="${postsObj.id}" name="postsId"  />
 						    <input type="hidden" value="${postsObj.bbId}" name="bbId"  />
 						    <input type="hidden" value="${postsObj.smboId}" name="smboId"  />
-						    <input type="hidden" value="0" name="replyId"  />
-						    <input type="hidden" value="0" name="gradeId"  />
+						    <input type="hidden" value="0" name="replyId" id="replyId" />
+						    <input type="hidden" value="0" name="gradeId" id="gradeId"  />
 							<!-- 文本框 -->
 							<textarea class="layui-textarea fly-editor" id="content" style="display: none" name="content" lay-verify="content" >  
 						             
@@ -305,7 +234,7 @@
 
 							<div class="cont-right">
 							   <br/>
-							   <button onclick="replySub()" class="layui-btn layui-btn-normal">发送</button>		
+							   <button id="delReplySub" onclick="replySub()" class="layui-btn layui-btn-normal">提交</button>		
 							</div>
 						</form>
 					   <#else>
@@ -383,9 +312,10 @@
 <script type="text/javascript">
 var index=null;
 var layedit=null;
+var layer=null;
    layui.use(['layer', 'form','layedit'], function(){
 	   layedit= layui.layedit;
-	  
+	   layer=layui.layer;
 		//图片上传
 	   var docName="bbs_reply";//添加帖子，富文本图片保存
 	   layedit.set({
@@ -428,22 +358,157 @@ var layedit=null;
    
 	
    function replySub(){
-	   layedit.sync(index);
-	   //提交后台处理
+	  layedit.sync(index);
+	  /* if(layedit.getContent(index).trim()=="" ){
+		  layer.msg("提交内容不能为空...");return false;
+	  }else{ */
+		  //去除onclick
+		  $("#delReplySub").attr("onclick","");
+		   //提交后台处理
+		   $.ajax({
+				url :"${futRoot}/cont/vf/addBbsReply",
+				type : "post",
+				dataType : "json",
+			    async: false,
+				data : $("#ajaxForm").serialize(),
+				success : function(data) {
+					console.info(data);
+					if(data==true){
+						//刷新当前页面 
+						window.location.reload();
+					}else{
+						layer.msg("提交失败...");return false;
+	                    //添加onclick
+	                    $("#delReplySub").attr("onclick","replySub()");
+				    }
+				}
+			}); 
+	 //}
+	  
+   }
+
+  /**
+   留言回复
+  */
+  function nowReplay(id,name,gradeId){
+      //显示@框
+      $("#reviewInfo").css("display","block");
+      //修改@ 姓名及相关属性
+      $(".toName").text(name);
+      //将ID写入隐藏参数
+      $("#replyId").val(id);//父节点（回留言的根节点）
+      $("#gradeId").val(gradeId);//留言等级（方便显示层级关系 ）
+  }
+ /***
+ 取消回复
+ */
+ function nowDelReplay(){
+	//1.隐藏@框
+    $("#reviewInfo").css("display","none");
+    //2.恢复相关属性参数
+    $("#replyId").val("0");
+    $("#gradeId").val("0");
+ }
+
+ /**
+   查看留言 
+ */
+  function queryReplyCount(replyId,toName){
+	  if(replyId!=0){
+		  //清除onclick
+		  $(".delOnclick_"+replyId).attr("onclick","");
+		  $.ajax({
+				url :"${futRoot}/cont/detailCount",
+				type : "post",
+				dataType : "json",
+			    async: false,
+				data : {
+	             "replyId":replyId
+				},
+				success : function(data) {
+					console.info(data);
+					if(data=='2'){
+						$(".cont-more").hide();
+						layer.msg("没有数据啦...");return false;
+					}else if(data=='3'){
+						layer.msg("出现异常啦 ...");return false;
+					}else {
+						//console.info(data);
+						//var cons="";
+						 $.each(data, function(i,val){ 
+							var cons= " <div class=\"replyDetail\" reply-id=\"20\" id=\"reply20\"> " +
+							           " <div class=\"detail-about detail-about-reply fly-detail-user\"> "+
+							           " <div class=\"jieda-comment jieda-reply-sub\">  "+
+							           " <a  class=\"delOnclick_"+val.id+"\"  onclick=\"queryReplyCount( "+val.id+",'"+val.createUserName+"' )\"> "+
+							           " <span type=\"deleteReply\" class=\"comment-btn\" reply-id=\"21\"> 留言  ("+val.replyCout+") </span></a> "+
+							           " <a href=\"#reviewInfo\" onclick=\"nowReplay("+val.id+",'"+val.createUserName+"',"+(val.gradeId)+")  \"> "+
+							           " <span type=\"reply\" class=\"reply-btn\" reply-id=\"21\"> <i class=\"iconfont icon-comment\"></i>回复   </span></a> "+
+								       " </div>  "+
+								       " <div class=\"jie-user reply-user\"> " +
+								       " <a href=\"${futRoot}/mine/preview?id="+val.createUserId+"\" target=\"_blank\" > <img src=\"${resultImgPath}/bbs/bbs_icon/"+val.imgPath+"\"  /> </a>  "+
+								       " <cite> <a href=\"#\"> <i class=\"replyAuthor\">"+val.createUserName+"</i> </a> <em>"+val.createDateStr+"</em> <em class=\"display\">回复：</em>  "+ 
+								       " <i class=\"blue display\"> <a href=\"#\">"+toName+"</a> </i>  "+ 
+								       " </cite> </div> </div>  "+
+								       " <div class=\"detail-body reply-body jieda-body photos\"> "+val.content+" "+ 
+								       " </div></div>" +
+							           " <div id=\"selCount_"+val.id+"\" class=\"replayList replayDetail64\"> </div> ";
+							$("#selCount_"+replyId).append(cons);
+						 }); 
+						 
+					}
+				}
+		  });
+	 }
+	  
+  } 
+
+   /**
+   获取更多
+   
+   */
+   var currentPage=1;
+   function queryDetailPage(id){
+	   currentPage++;
 	   $.ajax({
-			url :"${futRoot}/cont/vf/addBbsReply",
+			url :"${futRoot}/cont/detailPage",
 			type : "post",
 			dataType : "json",
 		    async: false,
-			data : $("#ajaxForm").serialize(),
+			data : {
+               "currentPage":currentPage,
+               "id":id
+			},
 			success : function(data) {
 				console.info(data);
-				if(data==true){
-					//刷新当前页面 
-					window.location.reload();
-				}else{
-                    alert("提交失败!");
-			    }
+				if(data=='2'){
+					$(".cont-more").hide();
+					layer.msg("没有数据啦...");return false;
+				}else if(data=='3'){
+					layer.msg("出现异常啦 ...");return false;
+				}else {
+					//console.info(data);
+					 $.each(data, function(i,val){ 
+						 var cons= " <li data-id=\"13\" id=\"comment13\" data-type=\"discuz\"> " +
+					           " <div class=\"detail-about detail-about-reply fly-detail-user\"> " +
+					           " <div class=\"jieda-comment\"> " +
+					           " <a class=\"delOnclick_"+val.id+"\" onclick=\"queryReplyCount( "+val.id+",'"+val.createUserName+"' )\"> "+
+							   " <span type=\"comment\" class=\"comment-btn\"> "+
+							   " 留言  ("+val.replyCout+") "+
+							   " </span>  </a> "+
+					           " <a href=\"#reviewInfo\" onclick=\"nowReplay("+val.id+",'"+val.createUserName+"',"+(val.id)+")  \"> " +
+					           " <span type=\"comment\" class=\"comment-btn\"> " +
+					           " <i class=\"iconfont icon-comment\"></i>回复  " +
+					           " </span> </a></div> " +
+					           " <div class=\"jie-user comment-user\"><a href=\"${futRoot}/mine/preview?id="+val.createUserId+"\" target=\"_blank\"> " +
+					           " <img src=\"${resultImgPath}/bbs/bbs_icon/"+val.imgPath+"\" > " +
+					           " <cite> <i>"+val.createUserName+"</i> </cite>  </a> </div> " +
+					           " <div class=\"detail-hits\"> <span> "+val.createDateStr+ "</span> </div> </div> " +
+					           " <div class=\"detail-body comment-body jieda-body photos\">"+val.content+" </div></li> "+
+					           " <div id=\"selCount_"+val.id+"\" class=\"replayList replayDetail64\"> </div>";
+						  $("#nedv").append(cons);
+					 });   
+						
+				}
 			}
 		}); 
    }

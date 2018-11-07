@@ -96,11 +96,59 @@ public class ContDetailController {
 	 * @createTime 2018年6月11日22:48:33
 	 * */
 	@RequestMapping("detail")
-	public String gotoContIndex(HttpSession session, HttpServletRequest request,BBSPosts bean){
+	public String gotoContDetail(HttpSession session, HttpServletRequest request,BBSPosts bean,Pagination pagination){
 		BBSPosts posts=contDetailService.queryPostsObjById(bean);
 		request.setAttribute("postsObj", posts);
-		request.setAttribute("replyAll",contDetailService.queryBBSReplyAll(posts) );
+		request.setAttribute("replyAll",contDetailService.queryBBSReplyAll(posts,pagination) );
+		request.setAttribute("pageObj", pagination);
 		return "/web_view/cont/cont_detail";
+	}
+	/**
+	 * 说明：预览回帖-详细(分页)
+	 *   1/通过ID查询对象内容
+	 *   2/查询该对象所有回帖
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("detailPage")
+	@ResponseBody
+	public String queryPostsPage(BBSPosts bean,Pagination pagination){
+		try {
+			List<BBSReply> list=contDetailService.queryBBSReplyAll(bean,pagination);
+			if(list!=null && list.size()>0){
+				JSONArray jsonArray2 = JSONArray.fromObject(list);//将集合转换为json格式
+				String jsonString=jsonArray2.toString();//将jisn转换为字符串
+				return jsonString;
+			}
+			return "2";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "3";
+	}
+	
+	/**
+	 * 说明：预览回帖-详细(分页)
+	 *   1/通过ID查询对象内容
+	 *   2/查询该对象所有回帖
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("detailCount")
+	@ResponseBody
+	public String detailReplyCount(BBSReply bean){
+		try {
+			List<BBSReply> list=contDetailService.queryBBSReplyByReplyId(bean);
+			if(list!=null && list.size()>0){
+				JSONArray jsonArray2 = JSONArray.fromObject(list);//将集合转换为json格式
+				String jsonString=jsonArray2.toString();//将jisn转换为字符串
+				return jsonString;
+			}
+			return "2";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "3";
 	}
 	
 	/**

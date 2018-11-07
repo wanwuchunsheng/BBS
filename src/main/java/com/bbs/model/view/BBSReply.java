@@ -49,6 +49,8 @@ public class BBSReply implements Serializable{
     //
     private String imgPath;//头像路径
     private String replyTitle;//标题
+    private int replyCout;//每条回帖 留言总数
+    private String createDateStr;//
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -176,6 +178,22 @@ public class BBSReply implements Serializable{
 
 	public void setReplyTitle(String replyTitle) {
 		this.replyTitle = replyTitle;
+	}
+
+	public int getReplyCout() {
+		return replyCout;
+	}
+
+	public void setReplyCout(int replyCout) {
+		this.replyCout = replyCout;
+	}
+
+	public String getCreateDateStr() {
+		return createDateStr;
+	}
+
+	public void setCreateDateStr(String createDateStr) {
+		this.createDateStr = createDateStr;
 	}
     
     
