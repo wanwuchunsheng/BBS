@@ -83,6 +83,9 @@ public class MineGlController {
 			user.setDpnum(5);//个人基本资料默认5次修改机会
 			user.setGender(2);//默认性别未知
 			user.setNiceName(user.getUname());//默认昵称和用户名一致， 后期可在个人中心编辑修改
+			Date now = new Date();
+			user.setCreateTime(now);
+			user.setUpdateTime(now);
 			//随机生成邀请码
 			user.setEno(UUID.randomUUID()+StringUtil.getItemId(4));
 			//密码加密
