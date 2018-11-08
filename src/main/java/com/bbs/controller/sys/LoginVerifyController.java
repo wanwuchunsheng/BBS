@@ -3,6 +3,7 @@ package com.bbs.controller.sys;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bbs.controller.common.tools.EncrypMD5;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +64,7 @@ public class LoginVerifyController {
 	public String verifyUser(HttpSession session,HttpServletRequest request, SysUserInfo bean){
 		try {
 			//登录验证
+			bean.setUpwd(EncrypMD5.SHA256(bean.getUpwd()));
 			SysUserInfo userInfo= sysUserService.verifyUser(bean);
 			//存储登录信息
 			session.setAttribute("userInfo", userInfo);
