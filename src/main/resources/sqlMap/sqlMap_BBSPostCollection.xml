@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="coll">
+    
+   
+   <!--  查询基础数据  -->
+   <sql id="queryCollectionByCreateUserId">
+        <![CDATA[
+           select id from bbs_post_collection where create_user_id=:createUserId
+        ]]>
+    </sql>
+   
+    
+</sqlMap>
+
+
+

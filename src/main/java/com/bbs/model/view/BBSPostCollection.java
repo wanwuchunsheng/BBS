@@ -12,7 +12,7 @@ import javax.persistence.Id;
  * 收藏实体类
  * 
  * */
-@Entity(name = "bbs_posts_collection")
+@Entity(name = "bbs_post_collection")
 public class BBSPostCollection implements Serializable{
 	
     /**

@@ -66,6 +66,7 @@ public class BBSPosts {
     private String bbName;//主版块名称
     private String smboName;//子版块名称 
     private Integer expPoints;//用户签到经验值
+    private Integer contColl;//收藏
 
 
     @Id
@@ -295,6 +296,14 @@ public class BBSPosts {
 
 	public void setExpPoints(Integer expPoints) {
 		this.expPoints = expPoints;
+	}
+
+	public Integer getContColl() {
+		return contColl;
+	}
+
+	public void setContColl(Integer contColl) {
+		this.contColl = contColl;
 	}
 
 	

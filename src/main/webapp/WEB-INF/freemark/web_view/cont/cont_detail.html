@@ -143,18 +143,26 @@
 			<div class="detail-body photos">
 				${postsObj.content?if_exists}		
 			</div>
+			<br/>
 			<!-- 内容信息end  -->
 			<div class="cont-more">
-				<button onclick="javascript:layer.msg('功能未开放,敬请期待...')" class="layui-btn layui-btn-normal">
-				     <i class="iconfont icon-thumbs-up" title="支持"></i>&nbsp;支持
+				<button id="contGood" onclick="checkButTyp(${postsObj.id?if_exists},1,'contGood',${postsObj.contGood?if_exists})" class="layui-btn layui-btn-normal">
+				     <i class="iconfont icon-thumbs-up" title="支持"></i>&nbsp;支持&nbsp;&nbsp;+<font class="contGood">${postsObj.contGood?if_exists}</font>	
 				</button>
-				<button onclick="javascript:layer.msg('功能未开放,敬请期待...')" class="layui-btn layui-btn-warm">
-				     <i class="iconfont icon-thumbs-down" title="支持"></i>&nbsp;反对
+				<button id="contBad" onclick="checkButTyp(${postsObj.id?if_exists},2,'contBad',${postsObj.contBad?if_exists} )" class="layui-btn layui-btn-warm">
+				     <i class="iconfont icon-thumbs-down" title="支持"></i>&nbsp;反对&nbsp;&nbsp;+<font class="contBad">${postsObj.contBad?if_exists}	</font>
 				</button>
-				<button onclick="javascript:layer.msg('功能未开放,敬请期待...')" class="layui-btn layui-btn-danger">
-				     <i class="iconfont icon-star-empty" title="收藏"></i>&nbsp;收藏
-				 </button>
+				<#if (bbsUserInfo)??>
+					 <button id="contColl" onclick="checkButTyp(${postsObj.id?if_exists},3,'contColl',${postsObj.contColl?if_exists})" class="layui-btn layui-btn-danger">
+					     <i class="iconfont icon-star-empty" title="收藏"></i>&nbsp;收藏&nbsp;&nbsp;+<font class="contColl">${postsObj.contColl?if_exists}</font>
+					 </button>
+				 <#else>
+				      <button  onclick="layer.msg('未登录')" class="layui-btn layui-btn-danger">
+				      <i class="iconfont icon-star-empty" title="收藏"></i>&nbsp;收藏&nbsp;&nbsp;+${postsObj.contColl?if_exists}
+				      </button>
+				  </#if>
             </div>
+            <br/>
 		</div>
 		
 		<!-- 回帖信息 -->
@@ -167,7 +175,7 @@
 				<li data-id="13" id="comment13" data-type="discuz">
 					<div class="detail-about detail-about-reply fly-detail-user">
 						<div class="jieda-comment">
-							<a class="delOnclick_${rep.id?if_exists}" onclick="queryReplyCount( ${rep.id?if_exists},'${rep.createUserName?if_exists}' )">
+							<a class="delOnclick_${rep.id?if_exists}" onclick="queryReplyCount( ${rep.id?if_exists},'${rep.createUserName?if_exists}',${rep.replyCout?if_exists} )">
 								<span type="comment" class="comment-btn">
 									留言  (${rep.replyCout?if_exists}) 
 								</span> 
@@ -355,7 +363,38 @@ var layer=null;
 		} */
 
    });
+
+   /**
+   点赞，收藏
    
+   */
+   function checkButTyp(id,type,className,num){
+	   //隐藏onclick
+	   $("#"+className).attr("onclick","");
+	   $.ajax({
+			url :"${futRoot}/cont/updatePosts",
+			type : "post",
+			dataType : "json",
+		    async: false,
+			data : {
+               "type":type,
+               "id":id
+			},
+			success : function(data) {//1-成功 2-失败  3-登录
+				console.info(data);
+				if(data=='3'){
+					layer.msg("未登录...");return false;
+				}else if(data=='2'){
+					layer.msg("提交失败...");return false;
+				}else if(data=='4'){
+					layer.msg("已收藏");return false;
+				}else{
+					$("."+className).text(num+1);
+					layer.msg("感谢支持");return false;
+				}
+			}
+		});
+   }
 	
    function replySub(){
 	  layedit.sync(index);
@@ -413,8 +452,8 @@ var layer=null;
  /**
    查看留言 
  */
-  function queryReplyCount(replyId,toName){
-	  if(replyId!=0){
+  function queryReplyCount(replyId,toName,count){
+	  if(replyId!=0 && count!=0){
 		  //清除onclick
 		  $(".delOnclick_"+replyId).attr("onclick","");
 		  $.ajax({
@@ -439,7 +478,7 @@ var layer=null;
 							var cons= " <div class=\"replyDetail\" reply-id=\"20\" id=\"reply20\"> " +
 							           " <div class=\"detail-about detail-about-reply fly-detail-user\"> "+
 							           " <div class=\"jieda-comment jieda-reply-sub\">  "+
-							           " <a  class=\"delOnclick_"+val.id+"\"  onclick=\"queryReplyCount( "+val.id+",'"+val.createUserName+"' )\"> "+
+							           " <a  class=\"delOnclick_"+val.id+"\"  onclick=\"queryReplyCount( "+val.id+",'"+val.createUserName+"',"+val.replyCout+" )\"> "+
 							           " <span type=\"deleteReply\" class=\"comment-btn\" reply-id=\"21\"> 留言  ("+val.replyCout+") </span></a> "+
 							           " <a href=\"#reviewInfo\" onclick=\"nowReplay("+val.id+",'"+val.createUserName+"',"+(val.gradeId)+")  \"> "+
 							           " <span type=\"reply\" class=\"reply-btn\" reply-id=\"21\"> <i class=\"iconfont icon-comment\"></i>回复   </span></a> "+
@@ -482,7 +521,7 @@ var layer=null;
 				console.info(data);
 				if(data=='2'){
 					$(".cont-more").hide();
-					layer.msg("没有数据啦...");return false;
+					//layer.msg("没有数据啦...");return false;
 				}else if(data=='3'){
 					layer.msg("出现异常啦 ...");return false;
 				}else {
@@ -491,7 +530,7 @@ var layer=null;
 						 var cons= " <li data-id=\"13\" id=\"comment13\" data-type=\"discuz\"> " +
 					           " <div class=\"detail-about detail-about-reply fly-detail-user\"> " +
 					           " <div class=\"jieda-comment\"> " +
-					           " <a class=\"delOnclick_"+val.id+"\" onclick=\"queryReplyCount( "+val.id+",'"+val.createUserName+"' )\"> "+
+					           " <a class=\"delOnclick_"+val.id+"\" onclick=\"queryReplyCount( "+val.id+",'"+val.createUserName+"',"+val.replyCout+" )\"> "+
 							   " <span type=\"comment\" class=\"comment-btn\"> "+
 							   " 留言  ("+val.replyCout+") "+
 							   " </span>  </a> "+

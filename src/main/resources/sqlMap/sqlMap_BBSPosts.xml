@@ -102,7 +102,8 @@
 				b.PHOTO_PATH as imgPath,
 				b.security_level as securityLevel,
 				b.nice_name as niceName,
-				b.exp_points
+				b.exp_points,
+				(select count(*) from bbs_post_collection  where posts_id=a.id) as contColl
 			FROM
 				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id 
 			WHERE

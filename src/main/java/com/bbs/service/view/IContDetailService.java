@@ -2,6 +2,7 @@ package com.bbs.service.view;
 
 import java.util.List;
 
+import com.bbs.model.sys.SysUserInfo;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSReply;
 import com.bbs.model.view.BBSSignin;
@@ -25,6 +26,10 @@ public interface IContDetailService {
 	void addsignin(BBSSignin bean);
 
 	List<BBSReply> queryBBSReplyByReplyId(BBSReply bean);
+
+	void updatePostsByCont(BBSPosts bean, Integer type);
+
+	boolean addBBSPostCollection(SysUserInfo bbsUserInfo, BBSPosts bean);
 
 	//Object queryBBSReplyAll(BBSPosts posts, Pagination pagination);
 

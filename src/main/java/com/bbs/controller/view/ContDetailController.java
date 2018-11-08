@@ -85,9 +85,6 @@ public class ContDetailController {
 		return "2";//失败
 	}
 	
-	
-	
-	
 	/**
 	 * 说明：预览详细
 	 *   1/通过ID查询对象内容
@@ -274,4 +271,34 @@ public class ContDetailController {
 	}
 	
 	
+	/**
+	 * 说明：修改帖子 -点赞,返对数量,收藏
+	 *  @param type 1-支持  2-反对   3-收藏
+	 *  @return  string  1：成功   2：失败  3：未登录 4-已被收藏
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("updatePosts")
+	@ResponseBody
+	public String updatePosts(HttpSession session, HttpServletResponse response,HttpServletRequest request,BBSPosts bean,Integer type){
+		try {
+			if(type==1 || type==2){
+				contDetailService.updatePostsByCont(bean,type);
+			}else if(type==3){
+				SysUserInfo bbsUserInfo=(SysUserInfo) session.getAttribute("bbsUserInfo");
+				if(bbsUserInfo!=null){
+					boolean flag=contDetailService.addBBSPostCollection(bbsUserInfo, bean);
+					if(!flag){
+						return "4";
+					}
+				}else{
+					return "3";
+				}
+			}
+			return "1";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    return "2";
+	}
 }

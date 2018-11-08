@@ -1,11 +1,13 @@
 package com.bbs.service.view.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbs.model.sys.SysUserInfo;
+import com.bbs.model.view.BBSPostCollection;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSReply;
 import com.bbs.model.view.BBSSignin;
@@ -140,6 +142,51 @@ public class ContDetailServiceImpl implements IContDetailService{
 	public List<BBSReply> queryBBSReplyByReplyId(BBSReply bean) {
 		// TODO Auto-generated method stub
 		return dalClient.queryForList("bbsReply.queryBBSReplyByReplyId", bean, BBSReply.class);
+	}
+
+	/**
+	 * 说明：帖子详细-回帖留言查询
+	 * 1、通过ID查询最新对象
+	 * 2、判断type  1：赞  2：反对
+	 * @author Administrator
+	 * 
+	 * */
+	@Override
+	public void updatePostsByCont(BBSPosts bean, Integer type) {
+		BBSPosts posts=dalClient.find(BBSPosts.class,bean);
+		BBSPosts ps=new BBSPosts();
+		ps.setId(posts.getId());
+		if(type==1){
+			ps.setContGood(posts.getContGood()+1);
+		}else if(type==2){
+			ps.setContBad(posts.getContBad()+1);
+		}
+		dalClient.dynamicMerge(ps);
+	}
+
+	/**
+	 * 说明：用户收藏
+	 * 1:通过帖子ID ,查询数据
+	 * 2:再将数据复制收藏表
+	 * 
+	 * */
+	@Override
+	public boolean addBBSPostCollection(SysUserInfo bbsUserInfo, BBSPosts bean) {
+		BBSPosts posts=dalClient.find(BBSPosts.class,bean);
+		BBSPostCollection col=new BBSPostCollection();
+		col.setCreateDate(new Date());
+		col.setCreateUserId(bbsUserInfo.getId());
+		col.setCreateUserName(bbsUserInfo.getUname());
+		col.setBbId(posts.getBbId());
+		col.setPostsId(posts.getId());
+		col.setSmboId(posts.getSmboId());
+		//插入之前查询下是否已被当前登录人收藏
+		BBSPostCollection bpc=dalClient.queryForObject("coll.queryCollectionByCreateUserId", col, BBSPostCollection.class);
+		if(bpc==null){
+			dalClient.persist(col);
+			return true;
+		}
+		return false;
 	}
 
 }
