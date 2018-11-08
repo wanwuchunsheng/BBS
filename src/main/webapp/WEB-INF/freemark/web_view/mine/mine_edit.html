@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>海伦社区</title>
+<meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
+<meta name="description" content="武汉青山武东海伦国际业主自己开发的社区，方便业主近距离交流，分享生活。青山武东海伦国际自己的交流区，海伦国际欢迎各业主加入QQ【总】群:645952730"/>
+<meta name="author" content="修改发帖" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+<script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
+<script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
+
+<!-- icon-font -->
+<link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
+<!--[if IE 7]>
+<link href="${resRoot}/view/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!-- layui 2.0 -->
+<link rel="stylesheet" href="${resRoot}/view/css/layui.css" />
+<!-- 自定义 -->
+<link rel="stylesheet" href="${resRoot}/view/css/global.css" />
+<link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
+<link rel="stylesheet" href="${resRoot}/view/css/style.css" />
+<link rel="stylesheet" href="${resRoot}/view/css/common.css" />
+<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor.min.css" />
+<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.css" />
+<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor.css" />
+<link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
+
+<style type="text/css">
+.w-e-toolbar{
+   flex-wrap: wrap;
+}
+.w-e-text{
+  margin-bottom: 100px;
+}
+</style>
+
+</head>
+<body>
+<!-- heand -->
+<div class="header">
+
+  <div class="main">
+		<a class="logo"  href="#" title="海伦社区">
+		  <img class="logo-img" src="${resultImgPath}/bbs/bbs_icon/logo.png"  />
+		</a>
+       
+		<div class="nav" >
+			<ul>
+			<li>
+			<a href="${futRoot}/view/index" >
+				<i class="iconfont icon-desktop"></i>首页
+			</a>
+			</li>
+			
+			<li>
+			<a href="${futRoot}/cont/index" >
+				<i class="iconfont  icon-leaf"></i>综合区
+			</a>
+			</li>
+            <li>
+			<a href="${futRoot}/que/index" class="">
+				<i class="iconfont icon-tags"></i>反馈
+			</a>
+			</li>
+			<li class="newMsg">
+			<a href="${futRoot}/mine/index" class=" layui-hide nav-this">
+				<i class="iconfont icon-user"></i>我的
+			</a>
+            </li>
+            
+			</ul>
+		</div>
+        
+		<div class="nav-user unlogin">
+		  <#if (bbsUserInfo)?? >
+		     <div class="loginuser-span">
+			     <a href="${futRoot}/mine/index">
+			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" />
+			     </a>
+			     <span class="loginuser-signin"> 
+			        <a>${bbsUserInfo.niceName?if_exists}</a>
+			     </span>
+			     <span class="loginuser-signin"> 
+			        <a  href="${futRoot}/mine/logout"><i class="iconfont icon-signin"></i>  注销</a>
+			     </span>
+		     </div>
+		  <#else>
+			   <span>
+					<a href="${futRoot}/mine/login">登入</a>
+					<a href="${futRoot}/mine/reg">注册</a>
+				</span> 
+				<p class="out-login">
+				    <a href="#" class="iconfont icon-comments" title="微信登录"></a>
+					<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
+				</p>
+		  </#if>
+		</div>		
+  </div>
+</div>
+<!-- heand end -->
+
+<div class="layui-container fly-marginTop">
+  <div class="fly-panel" pad20 style="padding-top: 5px;">
+    <div class="layui-form layui-form-pane">
+      <div class="layui-tab layui-tab-brief" lay-filter="user">
+        <ul class="layui-tab-title">
+          <li class="layui-this">修改发帖</li>
+        </ul>
+        <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+          <div class="layui-tab-item layui-show">
+                <!-- form表单  -->
+	             <form action="${futRoot}/mine/vf/saveEditPosts" method="post">
+	              <!-- row end -->
+	              <!-- row start -->
+	              <div class="layui-row layui-col-space15 layui-form-item">
+	                <div class="layui-col-md13">
+	                  <label for="L_title" class="layui-form-label">标题</label>
+	                  <div class="layui-input-block">                           
+	                    <input type="text" id="L_title" name="title" value="${postsObj.title?if_exists}" lay-verify="required" autocomplete="off" class="layui-input" >
+	                  </div>
+	                </div>
+	              </div>
+	              <!-- 隐藏的父版块ID -->
+	              <input type="hidden" name="id"  value="${postsObj.id?if_exists}" class="layui-input">
+	              <!-- row end -->
+	              <!-- 文本编辑器 start -->
+	              <div class="layui-form-item layui-form-text">
+		              <div id="div1" >
+						   ${postsObj.content?if_exists}
+					  </div>
+					  <textarea id="text1" hidden="hidden" name="content"></textarea>
+				  </div>
+				  <br/>
+	              <!-- 文本编辑器end -->
+				  <div class="layui-form-item" >
+					<button class="layui-btn layui-btn-normal" lay-filter="*" lay-submit>提交修改</button>
+					<a href="${futRoot}/mine/index" class="layui-btn layui-btn-normal layui-bg-red">返回</a>
+				  </div>
+	            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<div class="footer">
+	<p>
+		Copyright @ 2018<a href="http://www.cloudyf.cn" id="Cooperation"> 云朵家技术团队</a> 版权所有
+		<a class="display" target="_blank" href="#"><img src="${resultImgPath}/bbs/bbs_icon/ga.png"/>鄂ICP备18018426号-1</a>
+	</p>
+</div>
+<!-- footer end -->
+<!-- layui 2.0 -->
+<script src="${resRoot}/view/js/layui.all.js" ></script>
+<script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor.js"></script>
+<script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.js"></script>
+
+<script type="text/javascript">
+   /** 
+              初始化select控件
+   */
+   layui.use('form', function(){
+	   	var form = layui.form;
+	   	//选择版块，跟父版块隐藏input赋值
+	   	form.on('select(smboId)', function(data){   
+	   	  var val=data.value;
+	   	  //父版块赋值
+	   	  $("#smboId").val(val.split(",")[0]);
+	   	  $("#bbId").val(val.split(",")[1]);
+	    });
+   });
+   
+   var E = window.wangEditor
+   var editor = new E('#div1')
+   var $text1 = $('#text1')
+   editor.customConfig.zIndex = 1
+   editor.customConfig.onchange = function (html) {
+       // 监控变化，同步更新到 textarea
+       $text1.val(html)
+   }
+   editor.customConfig.uploadImgMaxSize = 2 * 1024 * 1024
+   // 限制一次最多上传 10 张图片
+   editor.customConfig.uploadImgMaxLength = 5
+   //自定义超时时间15s
+   editor.customConfig.uploadImgTimeout = 15000
+   //定义保存本地文件夹名称
+   var docName="bbs_editor";//添加帖子，富文本图片保存
+   // 配置服务器端地址
+   editor.customConfig.uploadImgServer = '${futRoot}/upload?docName='+docName
+   editor.customConfig.uploadImgHooks = {
+		    before: function (xhr, editor, files) {
+		        // 图片上传之前触发
+		        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
+		        // 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
+		        // return {
+		        //     prevent: true,
+		        //     msg: '放弃上传'
+		        // }
+		    },
+		    success: function (xhr, editor, result) {
+		        // 图片上传并返回结果，图片插入成功之后触发
+		        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+		    },
+		    fail: function (xhr, editor, result) {
+		        // 图片上传并返回结果，但图片插入错误时触发
+		        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+		    },
+		    error: function (xhr, editor) {
+		        // 图片上传出错时触发
+		        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+		    },
+		    timeout: function (xhr, editor) {
+		        // 图片上传超时时触发
+		        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+		    },
+		    // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+		    // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+		    customInsert: function (insertImg, result, editor) {
+		        // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+		        // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+		        // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+		        var url = result[0].url;
+		        console.info(url);
+		        insertImg(url);
+		    }
+	}
+   editor.create()
+   E.fullscreen.init('#div1')
+   // 初始化 textarea 的值
+   $text1.val(editor.txt.html())
+</script>
+
+
+
+
+</body>
+</html>

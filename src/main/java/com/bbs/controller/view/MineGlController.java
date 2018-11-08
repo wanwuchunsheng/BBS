@@ -1,10 +1,12 @@
 package com.bbs.controller.view;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import com.bbs.model.view.BBSMessage;
 import com.bbs.model.view.BBSPosts;
 import com.bbs.model.view.BBSReply;
 import com.bbs.model.view.BaseParams;
+import com.bbs.service.common.Constants;
 import com.bbs.service.view.IMineService;
 
 /**
@@ -73,7 +76,7 @@ public class MineGlController {
 	public String saveMineReg(HttpServletRequest request, SysUserInfo user){
 		try {
 			//默认设置
-			user.setPhotoPath("common.jpg");//默认头像
+			user.setPhotoPath(Constants.COMMON_ICON);//默认头像
 			user.setDel(0);
 			user.setUsrStatus(0);
 			user.setCreateUserId(0);
@@ -270,6 +273,38 @@ public class MineGlController {
 		mineService.delPosts(bean);
 		gotoContHistory(session, request);
 		return "/web_view/mine/mine_history";
+	}
+	
+	
+	/**
+	 * 说明：编辑帖子-跳转
+	 *  
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/editPosts")
+	public String editPosts(HttpSession session, HttpServletRequest request,BBSPosts bean){
+		request.setAttribute("postsObj",mineService.queryBBSPostsObj(bean));
+		return "/web_view/mine/mine_edit";
+	}
+	
+	
+	@RequestMapping("vf/saveEditPosts")
+	public void saveEditPosts(HttpSession session,HttpServletResponse response, HttpServletRequest request,BBSPosts bean){
+		try {
+			bean.setUpdateDate(new Date());
+			mineService.saveEditPosts(bean);
+			//重定向
+			PrintWriter out = response.getWriter();
+			out.println("<html>");    
+		    out.println("<script>");    
+		    out.println("window.open ('"+request.getContextPath()+"/cont/index','_top')");    
+		    out.println("</script>");    
+		    out.println("</html>");  
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

@@ -173,6 +173,25 @@ public class MineServiceImpl implements IMineService{
 	public void saveMessage(BBSMessage bean) {
 		dalClient.persist(bean);	
 	}
+
+	/**
+	 * 说明：帖子编辑-跳转查询帖子
+	 * 
+	 * */
+	@Override
+	public BBSPosts queryBBSPostsObj(BBSPosts bean) {
+		return dalClient.find(BBSPosts.class, bean);
+	}
+
+	/**
+	 * 说明：帖子编辑-保存
+	 * 
+	 * */
+	@Override
+	public void saveEditPosts(BBSPosts bean) {
+		dalClient.dynamicMerge(bean);
+		
+	}
 	
 	
 	

@@ -24,9 +24,18 @@
 <link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
+<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor.min.css" />
 <link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.css" />
+<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
-
+<script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor.js"></script>
+<script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.js"></script>
+<style type="text/css">
+ .w-e-text{
+  overflow-x:visible;
+  overflow-y:visible;
+  }
+</style>
 </head>
 
 <body>
@@ -139,8 +148,8 @@
 				</div>
 			</div>
 			<!-- 用户信息 end  -->
-			<!-- 内容信息  -->
-			<div class="detail-body photos">
+			<!-- 内容信息  detail-body photos  -->
+			<div class="w-e-text" contenteditable="true">
 				${postsObj.content?if_exists}		
 			</div>
 			<br/>

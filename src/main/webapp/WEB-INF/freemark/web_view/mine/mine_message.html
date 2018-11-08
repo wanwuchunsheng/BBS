@@ -116,11 +116,11 @@
 				    <#if (commendAll?size > 0)>
                     <#list commendAll as cd>
                           <#if cd.code==mes.typ>
-                                                                                      【${cd.title?if_exists}】<span style="padding-left:10px;">${mes.createDate?string("yyyy-MM-dd HH:mm")}</span>
+                                                                                      【${cd.title?if_exists}】<span style="padding-left:10px;"><span style="color:blue;margin-right: 5px; ">${mes.createUserName?if_exists}</span></span>
                           </#if>
                     </#list>
                     </#if>
-				    <span style="color:blue;margin-right: 5px; ">${mes.createUserName?if_exists}</span>来信留言.</h2>
+				    来信留言.<span style="padding-left:10px;">${mes.createDate?string("yyyy-MM-dd HH:mm")}</span></h2>
 				    <div class="layui-colla-content">
 				      <textarea style="border: 0px;background-color: #FFFAFA" id="L_sign"  name="remark" autocomplete="off" class="layui-textarea" style="height: 80px;" >${mes.content?if_exists}</textarea>
 				    </div>

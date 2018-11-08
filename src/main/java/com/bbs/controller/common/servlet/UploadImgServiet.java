@@ -157,11 +157,14 @@ public class UploadImgServiet extends HttpServlet {
         		session.setAttribute("bbsUserInfo", bbsSysUserInfo);
         		//删除旧的服务器本地图片
         		try {
-        			String oldImgUrl = Constants.BBS_SAVE_IMG+docName+"/"+oldFileName;
-            		File delfile = new File(oldImgUrl);
-            		if (delfile.isFile() && delfile.exists()) {
-            			delfile.delete();
-            		}
+        			//公共ICON图片不要删除,删除别人没有修改头像的，都没有ICON啦
+        			if(!Constants.COMMON_ICON.equals(oldFileName)){
+        				String oldImgUrl = Constants.BBS_SAVE_IMG+docName+"/"+oldFileName;
+                		File delfile = new File(oldImgUrl);
+                		if (delfile.isFile() && delfile.exists()) {
+                			delfile.delete();
+                		}
+        			}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

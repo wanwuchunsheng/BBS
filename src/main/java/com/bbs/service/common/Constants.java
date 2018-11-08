@@ -30,6 +30,7 @@ public interface Constants {
     public static final String BBS_REALPATH = "javascript:;";
     public static final String BBS_SAVE_IMG = "E:/www2/zhangt-0b44449e649aee1e0164b519f6cd054b/webapp/images/bbs/";
     public static final String BBS_REQ_IMG="https://cloudfy.cn/images/bbs/";
+    public static final String COMMON_ICON="common.jpg";
     
     
     /**

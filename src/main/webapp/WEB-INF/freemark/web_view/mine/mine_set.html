@@ -249,14 +249,13 @@ input,textarea{
             <div class="layui-form layui-form-pane layui-tab-item">
 	            <div class="layui-form-item">
 				
-				 <#if (userInfoObj.securityLevel?if_exists==3)  >
+				 <#if (userInfoObj.securityLevel?if_exists==2)  >
                          <blockquote class="layui-elem-quote layui-quote-nm" >
 				            <h2 style="color:red;padding:20px 10px;">恭喜您成为官网业主认证用户,欢迎各业主加入社区认证QQ群：645952730 <br/><br/>加群邀请码：【${userInfoObj.eno?if_exists}】</h2>
-				            
 				         </blockquote>
 				         <br/><br/>
 				         
-                <#else>                                            
+                <#elseif (userInfoObj.securityLevel?if_exists!=3)>                                            
                    <div class="layui-row layui-col-space15 layui-form-item">
 			            <div class="layui-col-md">
 		                    <div class="layui-upload">
@@ -279,7 +278,11 @@ input,textarea{
 	             </#if>
 	             
 					
-				<#if (userInfoObj.securityLevel?if_exists>=2)  >
+				<#if (userInfoObj.securityLevel?if_exists>2)  >
+				         <blockquote class="layui-elem-quote layui-quote-nm" >
+				            <h2 style="color:red;padding:20px 10px;">恭喜您成为官网业主认证用户,欢迎各业主加入社区认证QQ群：645952730 <br/><br/>加群邀请码：【${userInfoObj.eno?if_exists}】</h2>
+				         </blockquote>
+				         <br/><br/>
 				         <blockquote class="layui-elem-quote layui-quote-nm" >
 				             <h2  style="color:red;padding:40px 10px;">恭喜您成为官网认证用户.</h2>
 				         </blockquote>
@@ -305,10 +308,7 @@ input,textarea{
 							</div>
 		                </div>
 	               </div>
-                </#if>   
-                    
-               
-                    
+                </#if>  
                     
 	            </div>
             </div>

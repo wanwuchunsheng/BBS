@@ -38,4 +38,8 @@ public interface IMineService {
 
 	void saveMessage(BBSMessage bean);
 
+	BBSPosts queryBBSPostsObj(BBSPosts bean);
+
+	void saveEditPosts(BBSPosts bean);
+
 }

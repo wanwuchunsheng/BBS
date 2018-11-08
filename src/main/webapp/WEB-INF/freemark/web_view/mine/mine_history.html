@@ -115,6 +115,7 @@
 					<a href="${futRoot}/cont/detail?id=${bpa.id?if_exists}&smboId=${bpa.smboId?if_exists}" class="jie-title"  target="_blank">${bpa.title?if_exists}</a> 
 					<i>${bpa.createDate?string("yyyy-MM-dd HH:mm")}</i> 
 					<!-- <a class="mine-edit" href="#">编辑</a>  -->
+					<a href="${futRoot}/mine/vf/editPosts?id=${bpa.id?if_exists}" class="mine-edit layui-bg-green" href="#">编辑</a>
 					<a href="${futRoot}/mine/vf/delPosts?id=${bpa.id?if_exists}" class="mine-edit layui-bg-red" href="#">删除</a>
 					<em>${bpa.contPreview?if_exists}阅/${bpa.contReply?if_exists}答</em> 
 					</li>
