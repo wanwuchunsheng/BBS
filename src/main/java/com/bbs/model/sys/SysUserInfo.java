@@ -12,7 +12,7 @@ import javax.persistence.Id;
  * 用户表
  * 
  * */
-@Entity(name = "sys_user")
+@Entity(name = "bbs_sys_user")
 public class SysUserInfo implements Serializable{
 	
 	/**

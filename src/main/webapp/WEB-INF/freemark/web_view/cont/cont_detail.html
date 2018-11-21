@@ -24,17 +24,71 @@
 <link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
 <link rel="stylesheet" href="${resRoot}/view/css/style.css" />
 <link rel="stylesheet" href="${resRoot}/view/css/common.css" />
-<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor.min.css" />
-<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.css" />
-<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor.css" />
 <link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
-<script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor.js"></script>
-<script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.js"></script>
+
+<!-- <link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor.min.css" />
+<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.css" />
+<link rel="stylesheet" href="${resRoot}/view/wangEditor/wangEditor.css" /> -->
+
+<!-- <script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor.js"></script>
+<script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.js"></script> -->
 <style type="text/css">
- .w-e-text{
-  overflow-x:visible;
-  overflow-y:visible;
-  }
+ 
+ .cont-more-stl{
+	width:100%;
+	height:114px;
+ }
+ .cont-more-stl-ul{
+    display: table;
+	margin:0 auto;
+	height:114px;
+	text-align: center;
+	padding:0;
+ }
+.cont-more-stl li{
+	float: left;
+	width:114px;
+	line-height:114px;
+	color:#fff;
+	vertical-align: middle;
+	cursor:pointer;
+  } 
+ .cont-more-stl li font{
+   position:relative;
+   top:20px;
+   width: 114px;
+   lint-height: 114px;
+   display:block;
+ }
+ .cont-more-stl li font:HOVER{
+   position:relative;
+   top:12px;
+ }
+ .contGoodstl{
+   background:url("../statics/resources/view/img/contGood.png") no-repeat center center;
+ }
+ .contBadstl{
+   background:url("../statics/resources/view/img/contBad.png") no-repeat center center;
+ }
+ .contCollstl{
+   background:url("../statics/resources/view/img/contColl.png") no-repeat center center;
+ }
+ .contGoodstl:hover{
+   width:114px;
+    height: 114px;
+    background-image:url("../statics/resources/view/img/contGoodHover.png") ;
+    background-repeat:no-repeat;
+ } 
+ .contBadstl:hover{
+    width:114px;height: 114px;
+    background-image:url("../statics/resources/view/img/contBadHover.png") ;
+    background-repeat:no-repeat;
+ } 
+ .contCollstl:hover{
+    width:114px;height: 114px;
+    background-image:url("../statics/resources/view/img/contCollHover.png") ;
+    background-repeat:no-repeat;
+ } 
 </style>
 </head>
 
@@ -149,28 +203,23 @@
 			</div>
 			<!-- 用户信息 end  -->
 			<!-- 内容信息  detail-body photos  -->
-			<div class="w-e-text" contenteditable="true">
+			<div class="w-e-text" >
 				${postsObj.content?if_exists}		
 			</div>
 			<br/>
 			<!-- 内容信息end  -->
-			<div class="cont-more">
-				<button id="contGood" onclick="checkButTyp(${postsObj.id?if_exists},1,'contGood',${postsObj.contGood?if_exists})" class="layui-btn layui-btn-normal">
-				     <i class="iconfont icon-thumbs-up" title="支持"></i>&nbsp;支持&nbsp;&nbsp;+<font class="contGood">${postsObj.contGood?if_exists}</font>	
-				</button>
-				<button id="contBad" onclick="checkButTyp(${postsObj.id?if_exists},2,'contBad',${postsObj.contBad?if_exists} )" class="layui-btn layui-btn-warm">
-				     <i class="iconfont icon-thumbs-down" title="支持"></i>&nbsp;反对&nbsp;&nbsp;+<font class="contBad">${postsObj.contBad?if_exists}	</font>
-				</button>
-				<#if (bbsUserInfo)??>
-					 <button id="contColl" onclick="checkButTyp(${postsObj.id?if_exists},3,'contColl',${postsObj.contColl?if_exists})" class="layui-btn layui-btn-danger">
-					     <i class="iconfont icon-star-empty" title="收藏"></i>&nbsp;收藏&nbsp;&nbsp;+<font class="contColl">${postsObj.contColl?if_exists}</font>
-					 </button>
-				 <#else>
-				      <button  onclick="layer.msg('未登录')" class="layui-btn layui-btn-danger">
-				      <i class="iconfont icon-star-empty" title="收藏"></i>&nbsp;收藏&nbsp;&nbsp;+${postsObj.contColl?if_exists}
-				      </button>
-				  </#if>
+			<div class="cont-more-stl layui-main" >
+	           <ul class="cont-more-stl-ul">
+			     <li id="contGood" onclick="checkButTyp(${postsObj.id?if_exists},1,'contGood',${postsObj.contGood?if_exists})" class="contGoodstl"><font  class="contGood">${postsObj.contGood?if_exists}</font></li>
+			     <li id="contBad"  onclick="checkButTyp(${postsObj.id?if_exists},2,'contBad',${postsObj.contBad?if_exists} )" class="contBadstl"><font class="contBad">${postsObj.contBad?if_exists}</font></li>
+			     <#if (bbsUserInfo)??>
+			         <li id="contColl"  onclick="checkButTyp(${postsObj.id?if_exists},3,'contColl',${postsObj.contColl?if_exists})" class="contCollstl"><font class="contColl">${postsObj.contColl?if_exists}</font></li>
+			     <#else>
+			         <li id="contColl"  onclick="layer.msg('未登录')" class="contCollstl"><font class="contColl">${postsObj.contColl?if_exists}</font></li>
+			     </#if>
+			   </ul>
             </div>
+            <br/>
             <br/>
 		</div>
 		
@@ -379,7 +428,7 @@ var layer=null;
    */
    function checkButTyp(id,type,className,num){
 	   //隐藏onclick
-	   $("#"+className).attr("onclick","");
+	   $("#"+className).removeAttr("onclick");
 	   $.ajax({
 			url :"${futRoot}/cont/updatePosts",
 			type : "post",
@@ -407,32 +456,27 @@ var layer=null;
 	
    function replySub(){
 	  layedit.sync(index);
-	  /* if(layedit.getContent(index).trim()=="" ){
-		  layer.msg("提交内容不能为空...");return false;
-	  }else{ */
-		  //去除onclick
-		  $("#delReplySub").attr("onclick","");
-		   //提交后台处理
-		   $.ajax({
-				url :"${futRoot}/cont/vf/addBbsReply",
-				type : "post",
-				dataType : "json",
-			    async: false,
-				data : $("#ajaxForm").serialize(),
-				success : function(data) {
-					console.info(data);
-					if(data==true){
-						//刷新当前页面 
-						window.location.reload();
-					}else{
-						layer.msg("提交失败...");return false;
-	                    //添加onclick
-	                    $("#delReplySub").attr("onclick","replySub()");
-				    }
-				}
-			}); 
-	 //}
-	  
+	  //去除onclick
+	  $("#delReplySub").attr("onclick","");
+	   //提交后台处理
+	   $.ajax({
+			url :"${futRoot}/cont/vf/addBbsReply",
+			type : "post",
+			dataType : "json",
+		    async: false,
+			data : $("#ajaxForm").serialize(),
+			success : function(data) {
+				console.info(data);
+				if(data==true){
+					//刷新当前页面 
+					window.location.reload();
+				}else{
+					layer.msg("提交失败...");return false;
+                    //添加onclick
+                    $("#delReplySub").attr("onclick","replySub()");
+			    }
+			}
+		}); 
    }
 
   /**
@@ -488,14 +532,14 @@ var layer=null;
 							           " <div class=\"detail-about detail-about-reply fly-detail-user\"> "+
 							           " <div class=\"jieda-comment jieda-reply-sub\">  "+
 							           " <a  class=\"delOnclick_"+val.id+"\"  onclick=\"queryReplyCount( "+val.id+",'"+val.createUserName+"',"+val.replyCout+" )\"> "+
-							           " <span type=\"deleteReply\" class=\"comment-btn\" reply-id=\"21\"> 留言  ("+val.replyCout+") </span></a> "+
+							           " <span type=\"deleteReply\" class=\"comment-btn\" reply-id=\"21\"> 留言  (0) </span></a> "+
 							           " <a href=\"#reviewInfo\" onclick=\"nowReplay("+val.id+",'"+val.createUserName+"',"+(val.gradeId)+")  \"> "+
 							           " <span type=\"reply\" class=\"reply-btn\" reply-id=\"21\"> <i class=\"iconfont icon-comment\"></i>回复   </span></a> "+
 								       " </div>  "+
 								       " <div class=\"jie-user reply-user\"> " +
 								       " <a href=\"${futRoot}/mine/preview?id="+val.createUserId+"\" target=\"_blank\" > <img src=\"${resultImgPath}/bbs/bbs_icon/"+val.imgPath+"\"  /> </a>  "+
 								       " <cite> <a href=\"#\"> <i class=\"replyAuthor\">"+val.createUserName+"</i> </a> <em>"+val.createDateStr+"</em> <em class=\"display\">回复：</em>  "+ 
-								       " <i class=\"blue display\"> <a href=\"#\">"+toName+"</a> </i>  "+ 
+								       " <i class=\"blue display\"> <a href=\"#\">@&nbsp;"+toName+"</a> </i>  "+ 
 								       " </cite> </div> </div>  "+
 								       " <div class=\"detail-body reply-body jieda-body photos\"> "+val.content+" "+ 
 								       " </div></div>" +

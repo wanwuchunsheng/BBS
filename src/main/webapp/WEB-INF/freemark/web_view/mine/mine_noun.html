@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>海伦社区</title>
+<meta name="keywords" content="海伦国际 ，海伦社区，社区，BBS，bbs，海伦BBS，武汉，武汉青山，武汉武东， 武东区，青山武东，青山武东社区，青山海伦国际论坛 BBS，青山BBS，BBS社区，武汉BBS社区，武汉社区，武汉BBS，青山海伦，青山海伦国际社区 "/>
+<meta name="description" content="武汉青山武东海伦国际业主自己开发的社区，方便业主近距离交流，分享生活。青山武东海伦国际自己的交流区，海伦国际欢迎各业主加入QQ【总】群:645952730"/>
+<meta name="author" content="业主查询" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<script type="text/jscript" src="${resRoot}/view/js/jquery-1.8.2.min.js" ></script>
+<script type="text/jscript" src="${resRoot}/view/js/common.js"></script>
+<!-- layui 2.0 -->
+<script src="${resRoot}/view/js/layui.all.js" ></script>
+
+<!-- icon-font -->
+<link rel="stylesheet" href="${resRoot}/view/css/font-awesome.min.css" />
+<!--[if IE 7]>
+<link href="${resRoot}/view/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!-- layui 2.0 -->
+<link rel="stylesheet" href="${resRoot}/view/css/layui.css" />
+<!-- 自定义 -->
+<link rel="stylesheet" href="${resRoot}/view/css/global.css" />
+<link rel="stylesheet"  data-href="${resRoot}/view/css/stretch.css" class="fly-style" />
+<link rel="stylesheet" href="${resRoot}/view/css/style.css" />
+<link rel="stylesheet" href="${resRoot}/view/css/common.css" />
+<link rel="shortcut icon" href="${resultImgPath}/bbs/bbs_icon/favicon.ico" />
+</head>
+
+<body>
+<!-- heand -->
+<div class="header">
+  <div class="main">
+		<a class="logo"  href="#" title="海伦社区">
+		  <img class="logo-img" src="${resultImgPath}/bbs/bbs_icon/logo.png"  />
+		</a>
+       
+		<div class="nav" >
+			<ul>
+			<li>
+			<a href="${futRoot}/view/index">
+				<i class="iconfont icon-desktop"></i>首页
+			</a>
+			</li>
+			
+			<li>
+			<a href="${futRoot}/cont/index"  >
+				<i class="iconfont  icon-leaf"></i>综合区
+			</a>
+			</li>
+            <li>
+			<a href="${futRoot}/que/index" class="">
+				<i class="iconfont icon-tags"></i>反馈
+			</a>
+			</li>
+			<li class="newMsg">
+			<a href="${futRoot}/mine/index" class=" layui-hide nav-this">
+				<i class="iconfont icon-user"></i>我的
+			</a>
+            </li>
+            
+			</ul>
+		</div>
+        
+		<div class="nav-user unlogin">
+		  <#if (bbsUserInfo)?? >
+		     <div class="loginuser-span">
+			     <a href="${futRoot}/mine/index">
+			         <img class="fly-list-avatar-img loginuser-img" src="${resultImgPath}/bbs/bbs_icon/${bbsUserInfo.photoPath?if_exists}" />
+			     </a>
+			     <span class="loginuser-signin"> 
+			        <a>${bbsUserInfo.niceName?if_exists}</a>
+			     </span>
+			     <span class="loginuser-signin"> 
+			        <a  href="${futRoot}/mine/logout"><i class="iconfont icon-signin"></i>  注销</a>
+			     </span>
+		     </div>
+		  <#else>
+			   <span>
+					<a href="${futRoot}/mine/login">登入</a>
+					<a href="${futRoot}/mine/reg">注册</a>
+				</span> 
+				<p class="out-login">
+				    <a href="#" class="iconfont icon-comments" title="微信登录"></a>
+					<a href="#" class="iconfont icon-weibo" title="微博登录"></a>
+				</p>
+		  </#if>
+		</div>		
+  </div>
+</div>
+<!-- heand end -->
+
+<!-- content -->
+<div class="main layui-clear">
+<div class="fly-panel fly-panel-user" pad20>
+		<div class="layui-tab layui-tab-brief" lay-filter="user">
+			<ul class="layui-tab-title">
+				<li class="layui-this" lay-id="pass">业主查询</li>
+				<li>
+					<a href="#">帮助</a>
+				</li>
+			</ul>
+			<div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+				<div class="layui-tab-item layui-show">
+					<div class="layui-form layui-form-pane">
+						11111111111111
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- footer -->
+<div class="footer">
+	<p>
+		Copyright @ 2018<a href="http://www.cloudyf.cn" id="Cooperation"> 云朵家技术团队</a> 版权所有
+		<a class="display" target="_blank" href="#"><img src="${resultImgPath}/bbs/bbs_icon/ga.png"/>鄂ICP备18018426号-1</a>
+	</p>
+</div>
+<!-- footer end -->
+
+<script type="text/javascript">
+layui.use(['form','element'], function(){
+	var form = layui.form;
+	var element = layui.element;
+	var layer = layui.layer;
+	//监听提交
+	form.on('submit(demoSub)', function(data){
+		var imageContent=data.field.imageContent;
+		//验证码验证
+	    var res=false;
+	    $.ajax({
+		    type : 'post',
+		    async : false,
+		    url :'${futRoot}/captcha/checkCaptcha',
+		    data : {
+		        "code" : imageContent
+		    },
+		    success : function(data) {
+			    console.info("验证码返回："+data)
+		       if(data=='false'){
+		    	   res=false;
+			   }else{
+		           res=true;
+				}  
+		    }
+		});
+		if(!res){
+			layer.msg('验证码输入错误', {icon: 2});
+			 return false;
+		}else{
+			 //成功提交验证邮箱密码是否匹配
+		     $.ajax({
+				url : "${futRoot}/mine/vfLogin",
+				type : "post",
+				dataType : "json",
+			    async: false,
+				data : $("#ajaxForm").serialize(),
+				success : function(data) {
+					console.info(data);
+					if(data==true){
+	                    window.location.href="${futRoot}/mine/vf/home";
+					}else{
+	                    $("#message").text("用户名密码不对！");
+					}
+				}
+			 }); 
+		}
+		return false;
+	})
+})
+
+//单机刷新验证码
+function changeImg() {
+     var imgSrc = $("#imgObj");
+     var src = imgSrc.attr("src");
+     imgSrc.attr("src", chgUrl(src));
+};
+//时间戳   
+//为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳   
+function chgUrl(url) {
+     var timestamp = (new Date()).valueOf();
+     var stamp = $("#timestamp");
+     return url;
+};
+
+</script>
+
+</body>
+</html>

@@ -301,4 +301,17 @@ public class ContDetailController {
 		}
 	    return "2";
 	}
+	
+	
+	/**
+	 * 说明：跳转发帖页
+	 *   进入拦截器，未登录跳转登录页面
+	 * @author Administrator
+	 * @createTime 2018年6月11日22:48:33
+	 * */
+	@RequestMapping("vf/noun")
+	public String gtoNoun(HttpServletRequest request){
+		
+		return "/web_view/mine/mine_noun";
+	}
 }

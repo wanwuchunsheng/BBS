@@ -30,7 +30,7 @@
 			  b.security_level as securityLevel,
 			  b.nice_name as niceName
 			FROM
-				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
+				bbs_posts a LEFT JOIN bbs_sys_user b on a.create_user_id=b.id
 			WHERE
 				a.del = 0 and b.del=0
 			AND a.cont_top = 1
@@ -68,7 +68,7 @@
 			  b.security_level as securityLevel,
 			  b.nice_name as niceName
 			FROM
-				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
+				bbs_posts a LEFT JOIN bbs_sys_user b on a.create_user_id=b.id
 			WHERE
 				a.del = 0 and b.del=0
 			AND a.typ = 0
@@ -105,7 +105,7 @@
 				b.exp_points,
 				(select count(*) from bbs_post_collection  where posts_id=a.id) as contColl
 			FROM
-				bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id 
+				bbs_posts a LEFT JOIN bbs_sys_user b on a.create_user_id=b.id 
 			WHERE
 				a.del = 0 and b.del=0 and a.id=:id
         ]]>
@@ -143,7 +143,7 @@
 				  b.nice_name as niceName
 				 
 				FROM
-					bbs_posts a LEFT JOIN sys_user b on a.create_user_id=b.id
+					bbs_posts a LEFT JOIN bbs_sys_user b on a.create_user_id=b.id
 				WHERE
 					a.del = 0 and b.del=0
 				    <#if smboId?exists && smboId!=""> AND a.smbo_id=:smboId  </#if>
