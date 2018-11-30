@@ -65,7 +65,7 @@ default-autowire="byName">
 	
 	  <property name="freemarkerVariables">
 		<map>
-		 <!-- 
+		<!-- 
 			<entry key="resRoot" value="/statics/resources" />
 			<entry key="futRoot" value="" />
 			<entry key="realImgPath" value="E:/www2/zhangt-0b44449e649aee1e0164b519f6cd054b/webapp/images/" />

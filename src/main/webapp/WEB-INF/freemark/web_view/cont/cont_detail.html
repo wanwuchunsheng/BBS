@@ -33,7 +33,19 @@
 <!-- <script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor.js"></script>
 <script type="text/javascript" src="${resRoot}/view/wangEditor/wangEditor-fullscreen-plugin.js"></script> -->
 <style type="text/css">
- 
+.w-e-text {
+    padding: 10px 10px;
+    overflow:hidden;
+}
+.w-e-text blockquote {
+    display: block;
+    border-left: 8px solid #d0e5f2;
+    padding: 5px 10px;
+    margin: 10px 0;
+    line-height: 1.4;
+    font-size: 100%;
+    background-color: #f1f1f1;
+}
  .cont-more-stl{
 	width:100%;
 	height:114px;
@@ -206,7 +218,7 @@
 			<div class="w-e-text" >
 				${postsObj.content?if_exists}		
 			</div>
-			<br/>
+			
 			<!-- 内容信息end  -->
 			<div class="cont-more-stl layui-main" >
 	           <ul class="cont-more-stl-ul">
@@ -219,63 +231,65 @@
 			     </#if>
 			   </ul>
             </div>
-            <br/>
-            <br/>
 		</div>
 		
 		<!-- 回帖信息 -->
+		
+			
+		<!-- 评论start -->
+		<#if (replyAll?size > 0)>
 		<div class="commentBox fly-panel detail-box" style="padding-top: 0;">
-			<fieldset class="layui-elem-field layui-field-title" style="text-align: center;"><legend>回帖</legend> </fieldset>
-			<ul class="jieda" id="jieda">
-				<!-- 评论 -->
-				<#if (replyAll?size > 0)>
-		        <#list replyAll as rep>
-				<li data-id="13" id="comment13" data-type="discuz">
-					<div class="detail-about detail-about-reply fly-detail-user">
-						<div class="jieda-comment">
-							<a class="delOnclick_${rep.id?if_exists}" onclick="queryReplyCount( ${rep.id?if_exists},'${rep.createUserName?if_exists}',${rep.replyCout?if_exists} )">
-								<span type="comment" class="comment-btn">
-									留言  (${rep.replyCout?if_exists}) 
-								</span> 
-							</a>
-							<a href="#reviewInfo" onclick="nowReplay(${rep.id?if_exists},'${rep.createUserName?if_exists}',${ (rep.id?if_exists) })">
-								<span type="comment" class="comment-btn">
-									<i class="iconfont icon-comment"></i>回复
-								</span> 
-							</a>
-						</div>
-						<div class="jie-user comment-user">
-							<a href="${futRoot}/mine/preview?id=${rep.createUserId?if_exists}" target="_blank">
-							<img src="${resultImgPath}/bbs/bbs_icon/${rep.imgPath?if_exists}" >
-							<cite>
-								<i>${rep.createUserName?if_exists}</i>
-							</cite> 
-							</a>
-						</div>
-						<div class="detail-hits">
-							<span>${rep.createDate?string("yyyy-MM-dd HH:mm:ss")}</span> 
-						</div>
-					</div>
-					<div class="detail-body comment-body jieda-body photos">
-                        ${rep.content?if_exists}
-                    </div>
-					<!-- 回复 -->
-					<div id="selCount_${rep.id?if_exists}" class="replayList replayDetail64"> 
-					    
-				    </div>
-				</li>
-				</#list>
-				<div id="nedv"></div>
-				    <#if (pageObj.currentPage < pageObj.pageCount) >
-					<div class="cont-more">
-					<br/>
-				    <br/>
-					   <a  href="javascript:;" onclick="queryDetailPage(${postsObj.id?if_exists})" class="layui-btn layui-btn-big layui-btn-primary">获取更多>></a>
-				    </div>
-				    </#if>
-		        </#if>	
-			</ul>
-         </div>
+		<fieldset class="layui-elem-field layui-field-title" style="text-align: center;"><legend>回帖</legend> </fieldset>
+	    <ul class="jieda" id="jieda">
+        <#list replyAll as rep>
+		<li data-id="13" id="comment13" data-type="discuz">
+			<div class="detail-about detail-about-reply fly-detail-user">
+				<div class="jieda-comment">
+					<a class="delOnclick_${rep.id?if_exists}" onclick="queryReplyCount( ${rep.id?if_exists},'${rep.createUserName?if_exists}',${rep.replyCout?if_exists} )">
+						<span type="comment" class="comment-btn">
+							留言  (${rep.replyCout?if_exists}) 
+						</span> 
+					</a>
+					<a href="#reviewInfo" onclick="nowReplay(${rep.id?if_exists},'${rep.createUserName?if_exists}',${ (rep.id?if_exists) })">
+						<span type="comment" class="comment-btn">
+							<i class="iconfont icon-comment"></i>回复
+						</span> 
+					</a>
+				</div>
+				<div class="jie-user comment-user">
+					<a href="${futRoot}/mine/preview?id=${rep.createUserId?if_exists}" target="_blank">
+					<img src="${resultImgPath}/bbs/bbs_icon/${rep.imgPath?if_exists}" >
+					<cite>
+						<i>${rep.createUserName?if_exists}</i>
+					</cite> 
+					</a>
+				</div>
+				<div class="detail-hits">
+					<span>${rep.createDate?string("yyyy-MM-dd HH:mm:ss")}</span> 
+				</div>
+			</div>
+			<div class="detail-body comment-body jieda-body photos">
+                      ${rep.content?if_exists}
+                  </div>
+			<!-- 回复 -->
+			<div id="selCount_${rep.id?if_exists}" class="replayList replayDetail64"> 
+			    
+		    </div>
+		</li>
+		</#list>
+		<div id="nedv"></div>
+		    <#if (pageObj.currentPage < pageObj.pageCount) >
+			<div class="cont-more">
+			<br/>
+		    <br/>
+			   <a  href="javascript:;" onclick="queryDetailPage(${postsObj.id?if_exists})" class="layui-btn layui-btn-big layui-btn-primary">获取更多>></a>
+		    </div>
+		    </#if>
+		</ul>
+		</div>
+        </#if>	
+        <!-- 评论end -->
+         
          <div class="commentBox fly-panel detail-box" style="padding-top: 10;">
 			<div class="pager page" id="comment">         
 		            
