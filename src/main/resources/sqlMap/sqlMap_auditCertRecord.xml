@@ -19,7 +19,7 @@
     <sql id="queryListAll">
         <![CDATA[
             select r.*,u.uname from sys_authentication_record r
-            LEFT JOIN sys_user u ON u.id = r.user
+            LEFT JOIN bbs_sys_user u ON u.id = r.user
             where 1=1
             <#if updateUserId?exists && updateUserId!=""> AND r.update_user_id= :updateUserId </#if>
             <#if user?exists && user!=""> AND u.uname like concat('%',:uname,'%')  </#if>

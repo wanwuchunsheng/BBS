@@ -122,7 +122,7 @@ public class CaptchaController {
 	   System.out.println("生产邮箱验证码："+emailCode);
 	   MailSender mes=new MailSender();
 	   //发送邮箱
-	   mes.sendMail(email, "您好，邮箱验证码【"+emailCode+"】，请尽快完成注册验证，谢谢！武汉青山海伦社区欢迎您！！！官方网址：http://www.cloudfy.cn");
+	   mes.sendMail(email, "您好，邮箱验证码【"+emailCode+"】，请尽快完成注册验证，谢谢！武汉青山海伦社区欢迎您！！！官方网址：https://cloudfy.cn");
        return emailCode;
    }
 	
