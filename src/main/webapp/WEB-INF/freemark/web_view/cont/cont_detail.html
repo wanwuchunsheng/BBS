@@ -38,12 +38,57 @@
 }
 .content{
   margin-right: 0px;
-}
+} 
  .w-e-text{
   overflow-x:visible;
   overflow-y:visible; 
   }
+@media screen and (max-width:450px){
+    .main{
+	 width:100%;
+	} 
+	.detail-about{
+	  margin-right:10px;
+	}
+	/* .content{
+	  margin-right: 351px;
+	}  */
+ } 
+ @media screen and (max-width:768px){
+    .main{
+	 width:100%;
+	} 
+	.detail-about{
+	  margin-right:5px;
+	}
+ }
+ @media screen and (max-width:1079px){
+     .main{
+	 width:100%;
+	}
+	.detail-about{
+	  margin-right:5px;
+	}
+ }
  
+ .action-tyf>div {
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+.action-tyf a {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    border: #ddd 1px solid;
+    background: url(http://static.tianyaui.com/global/bbs/web/static/images/bbs_tyf_805e9bf.png);
+    border-radius: 50%;
+}
+
+.action-tyf a.zan {
+    background-position: 0 -60px;
+}
 </style>
 </head>
 
@@ -158,70 +203,72 @@
 			</div>
 			<!-- 用户信息 end  -->
 			<!-- 内容信息  detail-body photos  -->
+			<br/>
 			<div class="w-e-text" contenteditable="false">
 				${postsObj.content?if_exists}		
 			</div>
 			<br/>
 			<!-- 内容信息end  -->
 			
-			<!-- <div class="cont-more">
+			<div class="cont-more">
 				<div class="action-tyf">
 					<div class="action-tyf-shang">
 						<a href="javascript:void(0)" class="shang"></a>
 						<p><em class="s_0"><span class="shang_num">0</span>人</em>打赏</p>
 					</div>
-					<div class="action-tyf-zan">
-						<a href="javascript:void(0)" class="zan" title="点赞赚天涯分"></a>
-						<p><em class="z_33" style="display: inline;"><span class="shang_zan" data-number="33">33</span>人</em> 点赞</p>
+					<div onclick="checkButTyp(${postsObj.id?if_exists},1,'contGood')" id="contGood" class="action-tyf-zan">
+						<a href="javascript:void(0)" class="zan" title=""></a>
+						<p ><em class="z_33" style="display: inline;"><span class="shang_zan" data-number="33">${postsObj.contGood?if_exists}</span>人</em> 点赞</p>
 					</div>
 				</div>
-            </div> -->
+            </div> 
             <br/>
 		</div>
 		
-		<!-- 回帖信息 -->
-		<div class="commentBox fly-panel detail-box" style="padding-top: 0;">
-			<fieldset class="layui-elem-field layui-field-title" style="text-align: center;"><legend>回帖</legend> </fieldset>
-			<ul class="jieda" id="jieda">
+		
 				<!-- 评论 -->
 				<#if (replyAll?size > 0)>
-		        <#list replyAll as rep>
-				<li data-id="13" id="comment13" data-type="discuz">
-					<div class="detail-about detail-about-reply fly-detail-user">
-						<div class="jieda-comment">
-							<a class="delOnclick_${rep.id?if_exists}" onclick="queryReplyCount( ${rep.id?if_exists},'${rep.createUserName?if_exists}',${rep.replyCout?if_exists} )">
-								<span type="comment" class="comment-btn">
-									留言  (${rep.replyCout?if_exists}) 
-								</span> 
-							</a>
-							<a href="#reviewInfo" onclick="nowReplay(${rep.id?if_exists},'${rep.createUserName?if_exists}',${ (rep.id?if_exists) })">
-								<span type="comment" class="comment-btn">
-									<i class="iconfont icon-comment"></i>回复
-								</span> 
-							</a>
+				<!-- 回帖信息 -->
+				<div class="commentBox fly-panel detail-box" style="padding-top: 0;">
+					<fieldset class="layui-elem-field layui-field-title" style="text-align: center;"><legend>回帖</legend> </fieldset>
+					<ul class="jieda" id="jieda">
+			        <#list replyAll as rep>
+					<li data-id="13" id="comment13" data-type="discuz">
+						<div class="detail-about detail-about-reply fly-detail-user">
+							<div class="jieda-comment">
+								<a class="delOnclick_${rep.id?if_exists}" onclick="queryReplyCount( ${rep.id?if_exists},'${rep.createUserName?if_exists}',${rep.replyCout?if_exists} )">
+									<span type="comment" class="comment-btn">
+										留言  (${rep.replyCout?if_exists}) 
+									</span> 
+								</a>
+								<a href="#reviewInfo" onclick="nowReplay(${rep.id?if_exists},'${rep.createUserName?if_exists}',${ (rep.id?if_exists) })">
+									<span type="comment" class="comment-btn">
+										<i class="iconfont icon-comment"></i>回复
+									</span> 
+								</a>
+							</div>
+							<div class="jie-user comment-user">
+								<a href="${futRoot}/mine/preview?id=${rep.createUserId?if_exists}" target="_blank">
+								<img src="${resultImgPath}/bbs/bbs_icon/${rep.imgPath?if_exists}" >
+								<cite>
+									<i>${rep.createUserName?if_exists}</i>
+								</cite> 
+								</a>
+							</div>
+							<div class="detail-hits">
+								<span>${rep.createDate?string("yyyy-MM-dd HH:mm:ss")}</span> 
+							</div>
 						</div>
-						<div class="jie-user comment-user">
-							<a href="${futRoot}/mine/preview?id=${rep.createUserId?if_exists}" target="_blank">
-							<img src="${resultImgPath}/bbs/bbs_icon/${rep.imgPath?if_exists}" >
-							<cite>
-								<i>${rep.createUserName?if_exists}</i>
-							</cite> 
-							</a>
-						</div>
-						<div class="detail-hits">
-							<span>${rep.createDate?string("yyyy-MM-dd HH:mm:ss")}</span> 
-						</div>
-					</div>
-					<div class="detail-body comment-body jieda-body photos">
-                        ${rep.content?if_exists}
-                    </div>
-					<!-- 回复 -->
-					<div id="selCount_${rep.id?if_exists}" class="replayList replayDetail64"> 
-					    
-				    </div>
-				</li>
-				</#list>
-				<div id="nedv"></div>
+						<div class="detail-body comment-body jieda-body photos">
+	                        ${rep.content?if_exists}
+	                    </div>
+						<!-- 回复 -->
+						<div id="selCount_${rep.id?if_exists}" class="replayList replayDetail64"> 
+						    
+					    </div>
+					</li>
+					</#list>
+					<div id="nedv"></div>
 				    <#if (pageObj.currentPage < pageObj.pageCount) >
 					<div class="cont-more">
 					<br/>
@@ -229,9 +276,10 @@
 					   <a  href="javascript:;" onclick="queryDetailPage(${postsObj.id?if_exists})" class="layui-btn layui-btn-big layui-btn-primary">获取更多>></a>
 				    </div>
 				    </#if>
+				    </ul>
+                 </div>
 		        </#if>	
-			</ul>
-         </div>
+			
          <div class="commentBox fly-panel detail-box" style="padding-top: 10;">
 			<div class="pager page" id="comment">         
 		            
@@ -277,14 +325,12 @@
 <!-- 左边内容end -->
 
 
-
 </div>
 <!-- content  end  -->
 
 <!-- footer -->
 <div class="footer">
 	<p>
-
 		Copyright @ 2018<a href="#" id="Cooperation"> 云朵家技术团队</a> 版权所有
 		<a class="display" target="_blank" href="#"><img src="${resultImgPath}/bbs/bbs_icon/ga.png"/>鄂ICP备18018426号-1</a>
 	</p>
@@ -346,8 +392,8 @@ var layer=null;
    
    */
    function checkButTyp(id,type,className,num){
-	   //隐藏onclick
-	   $("#"+className).attr("onclick","");
+	   /* //隐藏onclick
+	   $("#"+className).attr("onclick",""); */
 	   $.ajax({
 			url :"${futRoot}/cont/updatePosts",
 			type : "post",
@@ -366,7 +412,7 @@ var layer=null;
 				}else if(data=='4'){
 					layer.msg("已收藏");return false;
 				}else{
-					$("."+className).text(num+1);
+					$(".shang_zan").text(parseInt($(".shang_zan").text())+1);
 					layer.msg("感谢支持");return false;
 				}
 			}
