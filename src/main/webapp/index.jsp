@@ -10,6 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
   <title>首页</title>
+  <meta name="baidu-site-verification" content="Kz1C4T16v6" />
 </head>
 <script>
    //跳转后端

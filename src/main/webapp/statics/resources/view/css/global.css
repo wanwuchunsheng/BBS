@@ -289,7 +289,7 @@ body .fly-user-main{position: relative; width: 1085px; min-height: 600px;}
 .detail-about .jie-user{position:relative;}
 .detail-about .jie-user cite{top: -3px; left: 56px; width: 460px; color: #4f99cf; font-size: 14px;}
 .detail-about .jie-user cite i{width:auto; max-width:130px; padding-right:10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; float:left; }
-.detail-about .jie-user cite em{padding-left:5px; color:#999; cursor:default; font-size:12px; font-style: normal; float:left;}
+.detail-about .jie-user cite em{/* padding-left:5px; */ color:#999; cursor:default; font-size:12px; font-style: normal; float:left;}
 .detail-about .jie-user img{position: relative; display: block; margin: 0; top: 0; border-radius: 50%;}
 .detail-hits{position:absolute; left: 71px; bottom: 15px; font-size: 0;}
 .detail-hits span{margin-top: 0; font-size: 12px;}
