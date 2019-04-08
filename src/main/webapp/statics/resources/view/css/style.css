@@ -385,7 +385,7 @@ body .fly-user-main{ width:auto; }
 
 .fly-list-hint i{ padding: 0 0px 0 4px;}
 
-.check-code{ padding-top:12px; float:left;}
+.check-code{ /* padding-top:12px; */ float:left;}
 
 .fly-user-main>.layui-nav{ position:fixed; top:15px;}
 
