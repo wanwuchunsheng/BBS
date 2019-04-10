@@ -11,7 +11,7 @@
     <!-- 查询左侧菜单 -->
     <sql id="querySysResource">
         <![CDATA[
-            select * from sys_resource where del=0 order by seq asc
+            select * from bbs_sys_resource where del=0 order by seq asc
         ]]>
     </sql>
     
