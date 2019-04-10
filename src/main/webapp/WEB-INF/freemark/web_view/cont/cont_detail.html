@@ -42,31 +42,30 @@
   overflow-x:visible;
   overflow-y:visible; 
   }
-@media screen and (max-width:450px){
+@media screen and (max-width:1059px){
     .main{
 	 width:100%;
-	} 
-	.detail-about{
-	  margin-right:10px;
 	}
-	/* .content{
-	  margin-right: 351px;
-	}  */
+	.fly-panel{
+	  margin-right:20px;
+	}
+	
  } 
  @media screen and (max-width:768px){
-    .main{
-	 width:100%;
-	} 
-	.detail-about{
-	  margin-right:5px;
-	}
- }
- @media screen and (max-width:1079px){
      .main{
 	 width:100%;
 	}
-	.detail-about{
-	  margin-right:5px;
+	.fly-panel{
+	  margin-right:20px;
+	}
+ } 
+ @media screen and (max-width:450px){
+
+    .main{
+	 width:100%;
+	}
+	.fly-panel{
+	  margin-right:20px;
 	}
  }
  
@@ -163,16 +162,21 @@
 		<div class="fly-panel detail-box fly-art">
 			<!-- 标题 -->
 			<h1 id="getLocation">${postsObj.title?if_exists}
-			    <#if (postsObj.contStatus==0) >
-					   <#if (postsObj.contRec==1) >
-	                      <i class="layui-btn layui-btn-xs layui-bg-red">加精</i>
-	                   <#elseif (postsObj.contReward>0) >
-	                      <i class="layui-btn layui-btn-xs layui-bg-orange">悬赏</i>
-	                   <#elseif (postsObj.contReply>100) >
-	                      <i class="layui-btn layui-btn-xs layui-bg-blue">围观 </i>
-	                   </#if>
-                 <#elseif (postsObj.contStatus==1) >
-                          <i class="layui-btn layui-btn-xs layui-bg-gray">已结</i>
+			    
+                 <#if (postsObj.contRec==1) >
+                    <i class="layui-btn layui-btn-xs fly-badge-vip">加精</i>
+                 </#if>
+                 <#if (postsObj.contReward>0) >
+                    <i class="layui-btn layui-btn-xs layui-bg-orange">悬赏</i>
+                 </#if>
+                 <#if (postsObj.contReply>10) >
+                    <i class="layui-btn layui-btn-xs layui-bg-blue">围观 </i>
+                 </#if>
+                 <#if (postsObj.contGood >20) >
+                    <i class="layui-btn layui-btn-xs layui-bg-red"> &nbsp;赞&nbsp; </i>
+                 </#if>
+                 <#if (postsObj.contStatus==1) >
+                       <i class="layui-btn layui-btn-xs layui-bg-gray">已结</i>
                  </#if>
 			</h1> 
 			<!-- 标题 end-->

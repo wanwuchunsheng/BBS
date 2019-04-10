@@ -34,6 +34,7 @@
     color: #fff;
     border-radius: 4px;
 }
+
 </style>
 </head>
 <body>
@@ -113,12 +114,12 @@
 				</div>
 				 -->
                 <div>
-				   <a href="#" target="_blank" title="绿色生活倡导者"> <img  src="${resultImgPath}/bbs/bbs_img/1516285759.jpg"  /> </a>
+				   <a href="#" target="_blank" title=""> <img  src="${resultImgPath}/bbs/bbs_img/1516285759.jpg"  /> </a>
 				</div>
 				
 				
                 <div>
-				   <a href="#" target="_blank" title="美食"> <img  src="${resultImgPath}/bbs/bbs_img/1516080895.jpg"  /> </a>
+				   <a href="#" target="_blank" title=""> <img  src="${resultImgPath}/bbs/bbs_img/1516080895.jpg"  /> </a>
 				</div>	
 				
             </div>
@@ -163,18 +164,22 @@
 							<h2 class="fly-tip">
 								<a href="${futRoot}/cont/detail?id=${spt.id?if_exists}&smboId=${spt.smboId?if_exists}" target="_blank">
 									${spt.title?if_exists}
-								</a>
-								<#if (spt.contStatus==0) >
-									 <#if (spt.contRec==1) >
+									<#if (spt.contRec==1) >
 		                                <i class="layui-badge-ico layui-badge fly-badge-vip">加精</i>
-		                             <#elseif (spt.contReward>0) >
+		                             </#if>
+		                             <#if (spt.contReward>0) >
 		                                <i class="layui-badge-ico layui-badge layui-bg-orange">悬赏</i>
-		                             <#elseif (spt.contReply>100) >
+		                             </#if>
+		                             <#if (spt.contReply>10) >
 		                                <i class="layui-badge-ico layui-badge layui-bg-blue">围观 </i>
 		                             </#if>
-	                            <#elseif (spt.contStatus==1) >
-	                                   <i class="layui-badge-ico layui-badge layui-bg-gray">已结</i>
-	                            </#if>
+		                             <#if (spt.contGood >20) >
+		                                <i class="layui-badge-ico layui-badge layui-bg-red">&nbsp;赞&nbsp; </i>
+		                             </#if>
+		                             <#if (spt.contStatus==1) >
+		                                   <i class="layui-badge-ico layui-badge layui-bg-gray">已结</i>
+		                             </#if>
+	                             </a>
 							</h2> 
 							<p class="fly-list-li-p" >
 							    <#if (spt.securityLevel>1) >
